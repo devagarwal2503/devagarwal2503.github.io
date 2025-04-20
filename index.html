@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev Agarwal | Data Analyst Portfolio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at top left, #0f172a, #1e293b);
+        color: #f8fafc;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .floating-contact {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #3b82f6;
+        color: white;
+        border-radius: 9999px;
+        padding: 12px 16px;
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+        font-weight: 600;
+        z-index: 50;
+        transition: transform 0.3s ease;
+      }
+      .floating-contact:hover {
+        transform: scale(1.05);
+      }
+      .zoomed-image {
+        object-fit: cover;
+        transform: scale(1.5); /* Adjust scale to your preference */
+        transition: transform 0.3s ease; /* Smooth zoom transition */
+      }
+
+      .zoomed-image:hover {
+        transform: scale(1.2); /* Optional: add hover effect for more zoom */
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- HEADER -->
+    <header
+      class="bg-black bg-opacity-90 backdrop-blur-md shadow-lg border-b border-blue-800 py-6 sticky top-0 z-50"
+    >
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-400">Dev Agarwal</h1>
+        <nav class="space-x-6 text-sm font-semibold">
+          <a href="#projects" class="hover:text-blue-400 transition"
+            >Projects</a
+          >
+          <a href="#skills" class="hover:text-blue-400 transition">Skills</a>
+          <a href="#about" class="hover:text-blue-400 transition">About</a>
+          <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section
+      class="max-w-7xl mx-auto mt-16 px-4 text-center"
+      data-aos="fade-up"
+    >
+      <img
+        src="profile_1.jpg"
+        alt="Dev Agarwal"
+        class="w-40 h-40 mx-auto rounded-full border-4 border-blue-500 mb-4 object-cover"
+      />
+      <h2 class="text-5xl font-bold text-white mb-2">Hi, I'm Dev 👋</h2>
+      <div class="text-blue-300 text-xl h-10">
+        <span id="typed-role"></span>
+      </div>
+      <p class="text-blue-200 mt-4 max-w-2xl mx-auto">
+        Data Analyst with a software background & a coach’s mindset — focused on
+        storytelling with data, using
+        <strong class="text-white"
+          >Python, SQL, Excel, Tableau & Power BI</strong
+        >.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <span
+          class="px-4 py-2 bg-blue-600 rounded-full text-sm font-semibold hover:scale-105 transform transition"
+          >📘 Exploring Real-World Data with Python</span
+        >
+        <span
+          class="px-4 py-2 bg-green-600 rounded-full text-sm font-semibold hover:scale-105 transform transition"
+          >📊 Latest Project: Phone Usage Tracker</span
+        >
+        <span
+          class="px-4 py-2 bg-indigo-600 rounded-full text-sm font-semibold hover:scale-105 transform transition"
+          >🚀 Open to Work: Data Analyst Roles</span
+        >
+      </div>
+      <a
+        href="Dev_Agarwal_Date_Analyst_Resume.pdf"
+        download
+        class="inline-block mt-8 px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105"
+        >📄 Download Resume</a
+      >
+    </section>
+    <!-- PROJECTS -->
+    <section
+      id="projects"
+      class="max-w-7xl mx-auto mt-20 px-4"
+      data-aos="fade-up"
+    >
+      <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
+        📁 Featured Projects
+      </h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div
+          class="glass-card rounded-xl p-6 hover:shadow-2xl transition duration-300"
+        >
+          <div
+            class="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded"
+          >
+            Working On
+          </div>
+          <h4 class="text-xl font-semibold mb-2 text-white">
+            📊 Phone Usage Analysis
+          </h4>
+          <p class="text-gray-400 mb-2">
+            Tracked and visualized screen time behavior using Python and Excel
+            to understand daily app usage patterns.
+          </p>
+          <span class="text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded"
+            >Excel</span
+          >
+          <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded"
+            >Python</span
+          >
+        </div>
+        <div
+          class="glass-card rounded-xl p-6 hover:shadow-2xl transition duration-300"
+        >
+          <h4 class="text-xl font-semibold mb-2 text-white">💬 Divine Chats</h4>
+          <p class="text-gray-400 mb-2">
+            Real-time chat app built with PHP and MySQL, featuring secure login
+            and message threading. My first full-stack project.
+          </p>
+          <a
+            href="https://github.com/devagarwal2503/Divine-Chats"
+            class="text-blue-400 text-sm underline"
+            target="_blank"
+            >View on GitHub</a
+          >
+        </div>
+        <div
+          class="glass-card rounded-xl p-6 relative hover:shadow-2xl transition duration-300"
+        >
+          <div
+            class="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded"
+          >
+            Coming Soon
+          </div>
+          <h4 class="text-xl font-semibold mb-2 text-white">
+            🛒 E-commerce SQL Case Study
+          </h4>
+          <p class="text-gray-400 mb-2">
+            Analyzed customer trends and top-performing products using complex
+            joins and window functions in SQL.
+          </p>
+          <span class="text-xs bg-purple-200 text-purple-900 px-2 py-1 rounded"
+            >SQL</span
+          >
+        </div>
+        <div
+          class="glass-card rounded-xl p-6 relative hover:shadow-2xl transition duration-300"
+        >
+          <div
+            class="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded"
+          >
+            Coming Soon
+          </div>
+          <h4 class="text-xl font-semibold mb-2 text-white">
+            📈 Power BI Sales Dashboard
+          </h4>
+          <p class="text-gray-400 mb-2">
+            Dynamic sales dashboard with regional filters and trend KPIs for
+            stakeholders. Launching soon.
+          </p>
+          <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded"
+            >Power BI</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section
+      id="skills"
+      class="max-w-7xl mx-auto mt-20 px-4"
+      data-aos="fade-up"
+    >
+      <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
+        🧠 Skills & Tools
+      </h3>
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 text-center mb-10">
+        <!-- Python -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+            class="w-10 h-10 mb-2"
+            alt="Python"
+          />
+          <span>Python</span>
+        </div>
+        <!-- SQL -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+            class="w-10 h-10 mb-2"
+            alt="SQL"
+          />
+          <span>SQL</span>
+        </div>
+        <!-- Excel -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png"
+            class="w-10 h-10 mb-2"
+            alt="Excel"
+          />
+          <span>Excel</span>
+        </div>
+        <!-- Power BI -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://img.icons8.com/color/48/000000/power-bi.png"
+            class="w-10 h-10 mb-2"
+            alt="Power BI"
+          />
+          <span>Power BI</span>
+        </div>
+        <!-- Tableau -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://img.icons8.com/color/48/000000/tableau-software.png"
+            class="w-10 h-10 mb-2"
+            alt="Tableau"
+          />
+          <span>Tableau</span>
+        </div>
+        <!-- GitHub -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+            class="w-10 h-10 mb-2 bg-white rounded-full"
+            alt="GitHub"
+          />
+          <span>Git & GitHub</span>
+        </div>
+        <!-- Jupyter -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"
+            class="w-10 h-10 mb-2"
+            alt="Jupyter"
+          />
+          <span>Jupyter</span>
+        </div>
+        <!-- VS Code -->
+        <div
+          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+            class="w-10 h-10 mb-2"
+            alt="VS Code"
+          />
+          <span>VS Code</span>
+        </div>
+      </div>
+
+      <h4 class="text-2xl font-semibold mb-4">💡 What Describes Me</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="glass-card p-4 text-center">
+          🔍 Data-driven Decision Maker
+        </div>
+        <div class="glass-card p-4 text-center">
+          🧠 Analytical & Insight-Oriented
+        </div>
+        <div class="glass-card p-4 text-center">💬 Clear Communicator</div>
+        <div class="glass-card p-4 text-center">
+          🏸 Discipline from Coaching
+        </div>
+        <div class="glass-card p-4 text-center">
+          🚀 Self-Learner & Growth-Focused
+        </div>
+        <div class="glass-card p-4 text-center">🤝 Team Collaborator</div>
+      </div>
+    </section>
+
+    <!-- LINKEDIN POSTS -->
+    <section
+      id="linkedin"
+      class="max-w-7xl mx-auto mt-20 px-4"
+      data-aos="fade-up"
+    >
+      <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
+        🔗 Recent from LinkedIn
+      </h3>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div
+          class="glass-card p-6 rounded-xl shadow hover:shadow-xl transition"
+        >
+          <h4 class="text-xl font-semibold text-white mb-2">
+            📌 Starting My Data Journey
+          </h4>
+          <p class="text-blue-200 text-sm mb-4">
+            Shared my story of transitioning from software to data and why I'm
+            all in on analytics.
+          </p>
+          <a
+            href="https://www.linkedin.com/in/devagarwal2503/"
+            target="_blank"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded"
+            >Read on LinkedIn</a
+          >
+        </div>
+        <div
+          class="glass-card p-6 rounded-xl shadow hover:shadow-xl transition"
+        >
+          <h4 class="text-xl font-semibold text-white mb-2">
+            💡 How I Built My First Dashboard
+          </h4>
+          <p class="text-blue-200 text-sm mb-4">
+            Quick behind-the-scenes of how I approached Power BI and what I
+            learned from analyzing sales data.
+          </p>
+          <a
+            href="https://www.linkedin.com/in/devagarwal2503/"
+            target="_blank"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded"
+            >Read on LinkedIn</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section
+      id="about"
+      class="max-w-5xl mx-auto mt-20 px-6 text-left"
+      data-aos="fade-up"
+    >
+      <h3 class="text-4xl font-bold mb-6 border-b pb-2 border-gray-600">
+        🎯 About Me
+      </h3>
+      <p class="text-blue-100 text-lg leading-relaxed">
+        I'm Dev Agarwal — a former software developer turned aspiring data
+        analyst. With over 3 years of experience as a badminton coach, I’ve
+        developed the ability to see patterns, lead with discipline, and work in
+        high-pressure environments — skills I now apply to data.
+        <br /><br />
+        Currently, I’m pursuing a Data Science program at IIT Guwahati in
+        collaboration with Masai School, learning to solve real-world problems
+        with tools like Python, SQL, Excel, Power BI, and Tableau.
+      </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section
+      id="contact"
+      class="max-w-4xl mx-auto mt-20 px-6 mb-20 text-center"
+      data-aos="fade-up"
+    >
+      <h3 class="text-4xl font-bold mb-6 border-b pb-2 border-gray-600">
+        📬 Contact
+      </h3>
+      <p class="text-blue-200 mb-6">
+        Let’s connect or collaborate — reach out below 👇
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="mailto:agarwaldev626@gmail.com"
+          class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md shadow"
+          >📧 Email Me</a
+        >
+        <a
+          href="https://linkedin.com/in/devagarwal2503"
+          target="_blank"
+          class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-md shadow"
+          >🔗 LinkedIn</a
+        >
+        <a
+          href="https://github.com/devagarwal2503"
+          target="_blank"
+          class="bg-gray-800 hover:bg-gray-900 text-white px-5 py-2 rounded-md shadow"
+          >🐙 GitHub</a
+        >
+      </div>
+    </section>
+
+    <!-- LET'S TALK BUTTON -->
+    <a href="#contact" class="floating-contact">📬 Let's Talk</a>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-sm text-blue-400 mt-20 p-6">
+      © 2025 Dev Agarwal. Built with ❤️.
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+      AOS.init();
+      var typed = new Typed("#typed-role", {
+        strings: [
+          "Aspiring Data Analyst",
+          "Python Enthusiast",
+          "SQL Problem Solver",
+          "Dashboard Builder",
+        ],
+        typeSpeed: 40,
+        backSpeed: 30,
+        loop: true,
+      });
+    </script>
+  </body>
+</html>
