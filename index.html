@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favcon.png">
+    <link rel="icon" type="image/x-icon" href="favcon.png" />
     <title>Dev Agarwal | Data Analyst Portfolio</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -46,14 +46,10 @@
       .floating-contact:hover {
         transform: scale(1.05);
       }
-      .zoomed-image {
-        object-fit: cover;
-        transform: scale(1.5); /* Adjust scale to your preference */
-        transition: transform 0.3s ease; /* Smooth zoom transition */
-      }
 
-      .zoomed-image:hover {
-        transform: scale(1.2); /* Optional: add hover effect for more zoom */
+      .logo {
+        height: 60px;
+        width: auto;
       }
     </style>
   </head>
@@ -63,8 +59,24 @@
       class="bg-black bg-opacity-90 backdrop-blur-md shadow-lg border-b border-blue-800 py-6 sticky top-0 z-50"
     >
       <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-blue-400">Dev Agarwal</h1>
-        <nav class="space-x-6 text-sm font-semibold">
+        <div class="flex items-center gap-3">
+          <!-- <img src="favcon.png" alt="Dev Logo" class="h-10 w-10" /> -->
+          <h1 class="text-2xl font-bold text-blue-400">Dev Agarwal</h1>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="text-white md:hidden focus:outline-none"
+          id="menu-toggle"
+        >
+          ☰
+        </button>
+
+        <!-- Navigation -->
+        <nav
+          class="hidden md:flex space-x-6 text-sm font-semibold"
+          id="nav-menu"
+        >
           <a href="#projects" class="hover:text-blue-400 transition"
             >Projects</a
           >
@@ -78,7 +90,8 @@
     <!-- HERO -->
     <section
       class="max-w-7xl mx-auto mt-16 px-4 text-center"
-      data-aos="fade-up"
+       
+      data-aos-anchor-placement="top-bottom"
     >
       <img
         src="profile_1.jpg"
@@ -121,7 +134,8 @@
     <section
       id="projects"
       class="max-w-7xl mx-auto mt-20 px-4"
-      data-aos="fade-up"
+       
+      data-aos-anchor-placement="top-bottom"
     >
       <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
         📁 Featured Projects
@@ -209,102 +223,154 @@
     <section
       id="skills"
       class="max-w-7xl mx-auto mt-20 px-4"
-      data-aos="fade-up"
+       
     >
       <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
         🧠 Skills & Tools
       </h3>
-      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 text-center mb-10">
-        <!-- Python -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-            class="w-10 h-10 mb-2"
-            alt="Python"
-          />
-          <span>Python</span>
+
+      <!-- Skill Groups -->
+      <div class="mb-12 grid md:grid-cols-2 gap-10">
+        <!-- Group 1: Data Tools -->
+        <div>
+          <h4 class="text-2xl font-semibold mb-4">
+            📊 Data Analysis & BI Tools
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png"
+                class="w-10 h-10 mb-2"
+                alt="Excel"
+              />
+              <span>Excel</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/color/48/000000/power-bi.png"
+                class="w-10 h-10 mb-2"
+                alt="Power BI"
+              />
+              <span>Power BI</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/color/48/000000/tableau-software.png"
+                class="w-10 h-10 mb-2"
+                alt="Tableau"
+              />
+              <span>Tableau</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/color/48/google-sheets.png"
+                class="w-10 h-10 mb-2"
+                alt="Google Sheets"
+              />
+              <span>Google Sheets</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/fluency/48/000000/google-data-studio.png"
+                class="w-10 h-10 mb-2"
+                alt="Data Studio"
+              />
+              <span>Data Studio</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/fluency/48/microsoft-office-2019.png"
+                class="w-10 h-10 mb-2"
+                alt="MS Office"
+              />
+              <span>MS Office</span>
+            </div>
+          </div>
         </div>
-        <!-- SQL -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-            class="w-10 h-10 mb-2"
-            alt="SQL"
-          />
-          <span>SQL</span>
-        </div>
-        <!-- Excel -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png"
-            class="w-10 h-10 mb-2"
-            alt="Excel"
-          />
-          <span>Excel</span>
-        </div>
-        <!-- Power BI -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://img.icons8.com/color/48/000000/power-bi.png"
-            class="w-10 h-10 mb-2"
-            alt="Power BI"
-          />
-          <span>Power BI</span>
-        </div>
-        <!-- Tableau -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://img.icons8.com/color/48/000000/tableau-software.png"
-            class="w-10 h-10 mb-2"
-            alt="Tableau"
-          />
-          <span>Tableau</span>
-        </div>
-        <!-- GitHub -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-            class="w-10 h-10 mb-2 bg-white rounded-full"
-            alt="GitHub"
-          />
-          <span>Git & GitHub</span>
-        </div>
-        <!-- Jupyter -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg"
-            class="w-10 h-10 mb-2"
-            alt="Jupyter"
-          />
-          <span>Jupyter</span>
-        </div>
-        <!-- VS Code -->
-        <div
-          class="glass-card p-4 hover:scale-105 transition flex flex-col items-center"
-        >
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
-            class="w-10 h-10 mb-2"
-            alt="VS Code"
-          />
-          <span>VS Code</span>
+
+        <!-- Group 2: Programming & Libraries -->
+        <div>
+          <h4 class="text-2xl font-semibold mb-4">
+            📈 Programming & Libraries
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                class="w-10 h-10 mb-2"
+                alt="Python"
+              />
+              <span>Python</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                class="w-10 h-10 mb-2"
+                alt="SQL"
+              />
+              <span>SQL</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                class="w-10 h-10 mb-2"
+                alt="NumPy"
+              />
+              <span>NumPy</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                class="w-10 h-10 mb-2"
+                alt="pandas"
+              />
+              <span>pandas</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart--v1.png"
+                class="w-10 h-10 mb-2"
+                alt="Matplotlib"
+              />
+              <span>Matplotlib</span>
+            </div>
+            <div
+              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
+            >
+              <img
+                src="https://img.icons8.com/ios-filled/50/ffffff/line-chart--v1.png"
+                class="w-10 h-10 mb-2"
+                alt="Seaborn"
+              />
+              <span>Seaborn</span>
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- Soft Skills -->
       <h4 class="text-2xl font-semibold mb-4">💡 What Describes Me</h4>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div class="glass-card p-4 text-center">
@@ -328,7 +394,7 @@
     <section
       id="linkedin"
       class="max-w-7xl mx-auto mt-20 px-4"
-      data-aos="fade-up"
+       
     >
       <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
         🔗 Recent from LinkedIn
@@ -374,29 +440,38 @@
     <!-- ABOUT -->
     <section
       id="about"
-      class="max-w-5xl mx-auto mt-20 px-6 text-left"
-      data-aos="fade-up"
+      class="max-w-7xl mx-auto mt-20 px-4"
+       
+      data-aos-anchor-placement="top-bottom"
     >
       <h3 class="text-4xl font-bold mb-6 border-b pb-2 border-gray-600">
         🎯 About Me
       </h3>
-      <p class="text-blue-100 text-lg leading-relaxed">
-        I'm Dev Agarwal — a former software developer turned aspiring data
-        analyst. With over 3 years of experience as a badminton coach, I’ve
-        developed the ability to see patterns, lead with discipline, and work in
-        high-pressure environments — skills I now apply to data.
+      <p class="text-blue-100 text-lg leading-relaxed tracking-wide space-y-4">
+        I'm <strong class="text-white">Dev Agarwal</strong> — a former software
+        developer turned aspiring data analyst. With over 3 years of experience
+        as a badminton coach, I’ve developed the ability to see patterns, lead
+        with discipline, and work in high-pressure environments — skills I now
+        apply to data.
+      </p>
+      <br />
+      <p class="text-blue-100 text-lg leading-relaxed tracking-wide space-y-4">
+        I'm currently pursuing a
+        <strong class="text-white">Data Science program at IIT Guwahati</strong>
+        in collaboration with Masai School, where I’m learning to solve
+        real-world business problems with tools like Python, SQL, Excel, Power
+        BI, and Tableau.
         <br /><br />
-        Currently, I’m pursuing a Data Science program at IIT Guwahati in
-        collaboration with Masai School, learning to solve real-world problems
-        with tools like Python, SQL, Excel, Power BI, and Tableau.
+        My goal? To turn raw data into meaningful insights — and grow with every
+        dataset I touch.
       </p>
     </section>
 
     <!-- CONTACT -->
     <section
       id="contact"
-      class="max-w-4xl mx-auto mt-20 px-6 mb-20 text-center"
-      data-aos="fade-up"
+      class="max-w-7xl mx-auto mt-20 px-4"
+       
     >
       <h3 class="text-4xl font-bold mb-6 border-b pb-2 border-gray-600">
         📬 Contact
@@ -404,7 +479,7 @@
       <p class="text-blue-200 mb-6">
         Let’s connect or collaborate — reach out below 👇
       </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <div class="flex flex-col sm:flex-row justify-left gap-4">
         <a
           href="mailto:agarwaldev626@gmail.com"
           class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md shadow"
@@ -435,7 +510,12 @@
 
     <!-- SCRIPTS -->
     <script>
-      AOS.init();
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 80,
+        easing: "ease-out",
+      });
       var typed = new Typed("#typed-role", {
         strings: [
           "Aspiring Data Analyst",
@@ -446,6 +526,22 @@
         typeSpeed: 40,
         backSpeed: 30,
         loop: true,
+      });
+
+      const toggleBtn = document.getElementById("menu-toggle");
+      const navMenu = document.getElementById("nav-menu");
+
+      toggleBtn.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+        navMenu.classList.toggle("flex");
+        navMenu.classList.toggle("flex-col");
+        navMenu.classList.toggle("absolute");
+        navMenu.classList.toggle("top-20");
+        navMenu.classList.toggle("right-4");
+        navMenu.classList.toggle("bg-black");
+        navMenu.classList.toggle("p-4");
+        navMenu.classList.toggle("rounded");
+        navMenu.classList.toggle("space-y-2");
       });
     </script>
   </body>
