@@ -1,545 +1,424 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="favcon.png" />
-    <title>Dev Agarwal | Data Analyst Portfolio</title>
+    <title>Dev Agarwal | Software Engineer</title>
+    <meta name="title" content="Dev Agarwal | Software Engineer" />
+    <meta
+      name="description"
+      content="Software Engineer specializing in Flutter & Python. Building robust, global-scale digital solutions."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://devagarwal2503.github.io/" />
+    <meta property="og:title" content="Dev Agarwal | Software Engineer" />
+    <meta
+      property="og:description"
+      content="Software Engineer specializing in Flutter & Python. Ready for global opportunities."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/devagarwal2503/your-repo/main/og-preview.png"
+    />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://devagarwal2503.github.io/" />
+    <meta property="twitter:title" content="Dev Agarwal | Software Engineer" />
+    <meta
+      property="twitter:description"
+      content="Software Engineer specializing in Flutter & Python. Ready for global opportunities."
+    />
+    <meta
+      property="twitter:image"
+      content="https://raw.githubusercontent.com/devagarwal2503/your-repo/main/og-preview.png"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background: radial-gradient(circle at top left, #0f172a, #1e293b);
-        color: #f8fafc;
-      }
-      .glass-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .floating-contact {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #3b82f6;
-        color: white;
-        border-radius: 9999px;
-        padding: 12px 16px;
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-        font-weight: 600;
-        z-index: 50;
-        transition: transform 0.3s ease;
-      }
-      .floating-contact:hover {
-        transform: scale(1.05);
+      :root {
+        --primary: #3b82f6;
+        --accent: #10b981;
+        --bg: #030712;
       }
 
-      .logo {
-        height: 60px;
-        width: auto;
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        background-color: var(--bg);
+        /* Atmospheric Background with consistent light source */
+        background-image:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(59, 130, 246, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(59, 130, 246, 0.08) 0%,
+            transparent 50%
+          ),
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          100% 100%,
+          50px 50px,
+          50px 50px;
+        color: #e2e8f0;
+        scroll-behavior: smooth;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      header {
+        background: rgba(3, 7, 18, 0.85);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      }
+
+      /* Unified Module Styling (Terminal & Cards) */
+      .glass-module {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .glass-module:hover {
+        border-color: var(--primary);
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+        background: rgba(15, 23, 42, 0.8);
+      }
+
+      .terminal-header {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 12px 15px;
+        display: flex;
+        gap: 6px;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .red {
+        background: #ff5f56;
+      }
+      .yellow {
+        background: #ffbd2e;
+      }
+      .green {
+        background: #27c93f;
+      }
+
+      .hero-fixed-height {
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+      }
+
+      .profile-frame {
+        border: 2px solid rgba(59, 130, 246, 0.4);
+        padding: 4px;
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+      }
+
+      .glow-text {
+        text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+      }
+
+      /* Animated section divider */
+      .section-divider {
+        width: 2px;
+        height: 100px;
+        background: linear-gradient(to bottom, var(--primary), transparent);
+        margin: 40px auto;
       }
     </style>
   </head>
   <body class="overflow-x-hidden">
-    <!-- HEADER -->
-    <header
-      class="bg-black bg-opacity-90 backdrop-blur-md shadow-lg border-b border-blue-800 py-6 sticky top-0 z-50"
-    >
-      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <!-- <img src="favcon.png" alt="Dev Logo" class="h-10 w-10" /> -->
-          <h1 class="text-2xl font-bold text-blue-400">Dev Agarwal</h1>
-        </div>
-
-        <!-- Mobile Menu Toggle -->
-        <button
-          class="text-white md:hidden focus:outline-none"
-          id="menu-toggle"
-        >
-          ☰
-        </button>
-
-        <!-- Navigation -->
-        <nav
-          class="hidden md:flex space-x-6 text-sm font-semibold"
-          id="nav-menu"
-        >
-          <a href="#projects" class="hover:text-blue-400 transition"
-            >Projects</a
+    <header class="py-4 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span class="text-blue-500 font-bold mono text-xl tracking-tighter"
+            >&lt;dev_agarwal/&gt;</span
           >
-          <a href="#skills" class="hover:text-blue-400 transition">Skills</a>
-          <a href="#about" class="hover:text-blue-400 transition">About</a>
-          <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
+        </div>
+        <nav
+          class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-slate-400"
+        >
+          <a href="#projects" class="hover:text-blue-400 transition">/Work</a>
+          <a href="#skills" class="hover:text-blue-400 transition">/Stack</a>
+          <a href="#contact" class="hover:text-blue-400 transition">/Contact</a>
         </nav>
       </div>
     </header>
 
-    <!-- HERO -->
-    <section
-      class="max-w-7xl mx-auto mt-16 px-4 text-center"
-      data-aos-anchor-placement="top-bottom"
-    >
-      <img
-        src="Passport_Photo.png"
-        alt="Dev Agarwal"
-        class="w-40 h-40 mx-auto rounded-full border-4 border-blue-500 mb-4 object-cover"
-        
-      />
-      <h2 class="text-5xl font-bold text-white mb-2">Hi, I'm Dev 👋</h2>
-      <div class="text-blue-300 text-xl h-10">
-        <span id="typed-role"></span>
+    <section class="max-w-6xl mx-auto mt-20 px-6">
+      <div class="glass-module overflow-hidden">
+        <div class="terminal-header">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+          <span class="mono text-xs text-slate-500 ml-4"
+            >zsh — session: dev@agarwal</span
+          >
+        </div>
+
+        <div
+          class="p-8 md:p-12 flex flex-col md:flex-row items-center md:items-start gap-10"
+        >
+          <div class="shrink-0">
+            <div class="profile-frame rounded-lg">
+              <img
+                src="Passport_Photo.png"
+                alt="Dev Agarwal"
+                class="w-40 h-40 md:w-52 md:h-52 rounded object-cover opacity-95 grayscale hover:grayscale-0 transition duration-500"
+              />
+            </div>
+            <p
+              class="mono text-[10px] text-center mt-2 text-slate-500 uppercase tracking-widest"
+            >
+              Image_Resource_01
+            </p>
+          </div>
+
+          <div class="flex-1">
+            <p class="mono text-blue-400 mb-4">>>> whoami</p>
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            >
+              Dev Agarwal. <br />
+              <span class="hero-fixed-height">
+                <span id="typed-role" class="text-blue-500 glow-text"></span>
+              </span>
+            </h1>
+            <p
+              class="text-slate-400 text-lg md:text-xl max-w-2xl mb-8 mono leading-relaxed"
+            >
+              # Software Engineer specializing in Flutter & Python.<br />
+              # Building robust, end-to-end digital solutions.
+            </p>
+            <div class="flex flex-wrap gap-6">
+              <a
+                href="#projects"
+                class="text-white font-bold border-b-2 border-blue-600 pb-1 hover:text-blue-400 transition"
+                >Explore Projects</a
+              >
+              <a
+                href="Dev_Agarwal_Software_Developer_Resume.pdf"
+                class="text-slate-400 font-bold hover:text-white transition uppercase text-sm tracking-widest"
+                >Download_CV.pdf</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="text-blue-200 mt-4 max-w-2xl mx-auto">
-        Data Analyst with a software background & a coach’s mindset — focused on
-        turning data into clear, actionable insights.
-      </p>
-      <p class="text-blue-200 mt-4 max-w-2xl mx-auto">
-        <strong class="text-white"
-          >SQL, Excel, Python, Tableau & Power BI</strong
-        >
-      </p>
-      <div class="mt-6 flex flex-wrap justify-center gap-4">
-        <span
-          class="px-4 py-2 bg-blue-600 rounded-full text-sm font-semibold hover:scale-105 transform transition"
-          >📘 Exploring Real-World Data with Python</span
-        >
-        <span
-          class="px-4 py-2 bg-green-600 rounded-full text-sm font-semibold hover:scale-105 transform transition"
-          >📊 Latest Project: Revenue Leakage & Customer Retention
-          Analysis</span
-        >
-        <span
-          class="px-4 py-2 bg-indigo-600 rounded-full text-sm font-semibold hover:scale-105 transform transition"
-          >🚀 Open to Work: Data Analyst Roles</span
-        >
-      </div>
-      <a
-        href="Dev_Agarwal_Date_Analyst_Resume.pdf"
-        download
-        class="inline-block mt-8 px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105"
-        >📄 Download Resume</a
-      >
     </section>
-    <!-- PROJECTS -->
-    <section
-      id="projects"
-      class="max-w-7xl mx-auto mt-20 px-4"
-      data-aos-anchor-placement="top-bottom"
-    >
-      <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
-        📁 Featured Projects
-      </h3>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div
-          class="glass-card rounded-xl p-6 relative hover:shadow-2xl transition duration-300"
-        >
-          <h4 class="text-xl font-semibold mb-2 text-white">
-            🛒 Revenue Leakage & Customer Retention Analysis
+
+    <div class="section-divider"></div>
+
+    <section id="projects" class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 text-white">
+        <span class="text-blue-500 mono">01.</span> Recent_Deployments
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="glass-module rounded-xl p-8 hover:-translate-y-2">
+          <h4 class="text-blue-400 mono text-sm mb-2">
+            // Professional Experience
           </h4>
-          <p class="text-gray-400 mb-2">
-            An end-to-end analysis focused on identifying revenue leakage and
-            retention gaps across customer segments using transactional data.
+          <h3 class="text-2xl font-bold mb-4 text-white">HuHoKa HRMS</h3>
+          <p class="text-slate-400 mb-8 leading-relaxed">
+            Engineered the core mobile architecture for an enterprise HRMS
+            platform at Centralogic. Focused on high-performance state
+            management and REST API security.
           </p>
-          <span class="text-xs bg-purple-200 text-purple-900 px-2 py-1 rounded"
-            >SQL</span
-          >
-          <span class="text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded"
-            >Excel</span
-          >
-          <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded"
-            >Python (pandas)</span
-          >
-          <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded"
-            >Power BI</span
-          >
-        </div>
-        <div
-          class="glass-card rounded-xl p-6 relative hover:shadow-2xl transition duration-300"
-        >
-          <h4 class="text-xl font-semibold mb-2 text-white">
-            📈 Customer Churn & Cohort Analysis
-          </h4>
-          <p class="text-gray-400 mb-2">
-            A data-driven study to understand customer churn patterns and
-            cohort-level retention behavior to support informed retention
-            decisions.
-          </p>
-          <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded"
-            >SQL</span
-          >
-          <span class="text-xs bg-yellow-200 text-yellow-900 px-2 py-1 rounded"
-            >Excel</span
-          >
-          <span class="text-xs bg-purple-200 text-purple-900 px-2 py-1 rounded"
-            >Python (pandas)</span
-          >
-        </div>
-        <div
-          class="glass-card rounded-xl p-6 hover:shadow-2xl transition duration-300"
-        >
-          <h4 class="text-xl font-semibold mb-2 text-white">💬 Divine Chats</h4>
-          <p class="text-gray-400 mb-2">
-            Real-time chat app built with PHP and MySQL, featuring secure login
-            and message threading. My first full-stack project.
-          </p>
-          <a
-            href="https://github.com/devagarwal2503/Divine-Chats"
-            class="text-blue-400 text-sm underline"
-            target="_blank"
-            >View on GitHub</a
-          >
-        </div>
-        <div
-          class="glass-card rounded-xl p-6 hover:shadow-2xl transition duration-300"
-        >
           <div
-            class="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded"
+            class="flex gap-4 text-xs mono text-slate-500 font-bold uppercase"
           >
-            Working On
+            <span
+              class="border border-blue-500/30 px-2 py-1 rounded bg-blue-500/5 text-blue-400"
+              >Flutter</span
+            >
+            <span
+              class="border border-blue-500/30 px-2 py-1 rounded bg-blue-500/5 text-blue-400"
+              >Dart</span
+            >
+            <span
+              class="border border-blue-500/30 px-2 py-1 rounded bg-blue-500/5 text-blue-400"
+              >REST_API</span
+            >
           </div>
-          <h4 class="text-xl font-semibold mb-2 text-white">
-            📊 Phone Usage Analysis
+        </div>
+
+        <div class="glass-module rounded-xl p-8 hover:-translate-y-2">
+          <h4 class="text-emerald-400 mono text-sm mb-2">
+            // Full Stack Engine
           </h4>
-          <p class="text-gray-400 mb-2">
-            Tracked and visualized screen time behavior using Python and Excel
-            to understand daily app usage patterns.
+          <h3 class="text-2xl font-bold mb-4 text-white">Divine Chats</h3>
+          <p class="text-slate-400 mb-8 leading-relaxed">
+            Real-time chat infrastructure built with a custom PHP/MySQL backend.
+            Optimized database normalization for low-latency messaging.
           </p>
-          <span class="text-xs bg-blue-200 text-blue-900 px-2 py-1 rounded"
-            >Excel</span
+          <div
+            class="flex gap-4 text-xs mono text-slate-500 font-bold uppercase"
           >
-          <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded"
-            >Python</span
-          >
+            <span
+              class="border border-emerald-500/30 px-2 py-1 rounded bg-emerald-500/5 text-emerald-400"
+              >PHP</span
+            >
+            <span
+              class="border border-emerald-500/30 px-2 py-1 rounded bg-emerald-500/5 text-emerald-400"
+              >MySQL</span
+            >
+            <span
+              class="border border-emerald-500/30 px-2 py-1 rounded bg-emerald-500/5 text-emerald-400"
+              >Socket.io</span
+            >
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="max-w-7xl mx-auto mt-20 px-4">
-      <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
-        🧠 Skills & Tools
-      </h3>
+    <div class="section-divider"></div>
 
-      <!-- Skill Groups -->
-      <div class="mb-12 grid md:grid-cols-2 gap-10">
-        <!-- Group 1: Data Tools -->
-        <div>
-          <h4 class="text-2xl font-semibold mb-4">
-            📊 Data Analysis & BI Tools
-          </h4>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png"
-                class="w-10 h-10 mb-2"
-                alt="Excel"
-              />
-              <span>Excel</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/color/48/000000/power-bi.png"
-                class="w-10 h-10 mb-2"
-                alt="Power BI"
-              />
-              <span>Power BI</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/color/48/000000/tableau-software.png"
-                class="w-10 h-10 mb-2"
-                alt="Tableau"
-              />
-              <span>Tableau</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/color/48/google-sheets.png"
-                class="w-10 h-10 mb-2"
-                alt="Google Sheets"
-              />
-              <span>Google Sheets</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/fluency/48/000000/google-data-studio.png"
-                class="w-10 h-10 mb-2"
-                alt="Data Studio"
-              />
-              <span>Data Studio</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/fluency/48/microsoft-office-2019.png"
-                class="w-10 h-10 mb-2"
-                alt="MS Office"
-              />
-              <span>MS Office</span>
-            </div>
-          </div>
-        </div>
+    <section id="skills" class="max-w-7xl mx-auto px-6 mb-20">
+      <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 text-white">
+        <span class="text-blue-500 mono">02.</span> Technical_Manifesto
+      </h2>
 
-        <!-- Group 2: Programming & Libraries -->
-        <div>
-          <h4 class="text-2xl font-semibold mb-4">
-            📈 Programming & Libraries
-          </h4>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                class="w-10 h-10 mb-2"
-                alt="Python"
-              />
-              <span>Python</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                class="w-10 h-10 mb-2"
-                alt="SQL"
-              />
-              <span>SQL</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
-                class="w-10 h-10 mb-2"
-                alt="NumPy"
-              />
-              <span>NumPy</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
-                class="w-10 h-10 mb-2"
-                alt="pandas"
-              />
-              <span>pandas</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart--v1.png"
-                class="w-10 h-10 mb-2"
-                alt="Matplotlib"
-              />
-              <span>Matplotlib</span>
-            </div>
-            <div
-              class="glass-card p-4 text-center flex flex-col items-center hover:scale-105 transition"
-            >
-              <img
-                src="https://img.icons8.com/ios-filled/50/ffffff/line-chart--v1.png"
-                class="w-10 h-10 mb-2"
-                alt="Seaborn"
-              />
-              <span>Seaborn</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Soft Skills -->
-      <h4 class="text-2xl font-semibold mb-4">💡 What Describes Me</h4>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div class="glass-card p-4 text-center">
-          🔍 Data-driven Decision Maker
-        </div>
-        <div class="glass-card p-4 text-center">
-          🧠 Analytical & Insight-Oriented
-        </div>
-        <div class="glass-card p-4 text-center">💬 Clear Communicator</div>
-        <div class="glass-card p-4 text-center">
-          🏸 Discipline from Coaching
-        </div>
-        <div class="glass-card p-4 text-center">
-          🚀 Self-Learner & Growth-Focused
-        </div>
-        <div class="glass-card p-4 text-center">🤝 Team Collaborator</div>
-      </div>
-    </section>
-
-    <!-- LINKEDIN POSTS -->
-    <section id="linkedin" class="max-w-7xl mx-auto mt-20 px-4">
-      <h3 class="text-4xl font-bold mb-8 border-b pb-2 border-gray-600">
-        🔗 Recent from LinkedIn
-      </h3>
-      <div class="grid sm:grid-cols-2 gap-6">
-        <div
-          class="glass-card p-6 rounded-xl shadow hover:shadow-xl transition"
-        >
-          <h4 class="text-xl font-semibold text-white mb-2">
-            📌 Small SQL details break big reports.
-          </h4>
-          <p class="text-blue-200 text-sm mb-4">
-            I used to think COUNT(*) and COUNT(column_name) were basically the
-            same thing. I thought they just "counted the rows." <br />
-            But I learned the hard way that they handle NULL values completely
-            differently.
-          </p>
-          <a
-            href="https://www.linkedin.com/in/devagarwal2503/"
-            target="_blank"
-            class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded"
-            >Read on LinkedIn</a
-          >
+      <div class="grid lg:grid-cols-2 gap-12 glass-module p-10 rounded-2xl">
+        <div class="mono text-sm md:text-base leading-loose">
+          <span class="text-purple-400">const</span>
+          <span class="text-blue-400">skills</span> = {<br />
+          &nbsp;&nbsp;<span class="text-yellow-400">languages:</span> [<span
+            class="text-emerald-400"
+            >"Python", "Dart", "C++", "SQL", "PHP", "JS"</span
+          >],<br />
+          &nbsp;&nbsp;<span class="text-yellow-400">frameworks:</span> [<span
+            class="text-emerald-400"
+            >"Flutter", "Tailwind", "REST_APIs"</span
+          >],<br />
+          &nbsp;&nbsp;<span class="text-yellow-400">databases:</span> [<span
+            class="text-emerald-400"
+            >"MySQL", "PostgreSQL", "Firebase"</span
+          >],<br />
+          &nbsp;&nbsp;<span class="text-yellow-400">tools:</span> [<span
+            class="text-emerald-400"
+            >"Git", "Docker", "GCP", "Postman", "Linux"</span
+          >]<br />
+          };
         </div>
         <div
-          class="glass-card p-6 rounded-xl shadow hover:shadow-xl transition"
+          class="flex flex-wrap gap-8 items-center justify-center grayscale opacity-80"
         >
-          <h4 class="text-xl font-semibold text-white mb-2">
-            💡 Quick SQL learning from today
-          </h4>
-          <p class="text-blue-200 text-sm mb-4">
-            CTEs are amazing for readability. <br />
-            But I learned they’re not always the right choice.
-          </p>
-          <a
-            href="https://www.linkedin.com/in/devagarwal2503/"
-            target="_blank"
-            class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded"
-            >Read on LinkedIn</a
-          >
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+            class="w-12 h-12 hover:opacity-100 hover:grayscale-0 transition duration-300"
+            title="Python"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg"
+            class="w-12 h-12 hover:opacity-100 hover:grayscale-0 transition duration-300"
+            title="Flutter"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+            class="w-12 h-12 hover:opacity-100 hover:grayscale-0 transition duration-300"
+            title="MySQL"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+            class="w-12 h-12 hover:opacity-100 hover:grayscale-0 transition duration-300"
+            title="PHP"
+          />
+          <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+            class="w-12 h-12 hover:opacity-100 hover:grayscale-0 transition duration-300"
+            title="Git"
+          />
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section
-      id="about"
-      class="max-w-7xl mx-auto mt-20 px-4"
-      data-aos-anchor-placement="top-bottom"
+    <section id="contact" class="max-w-4xl mx-auto my-40 px-6 text-center">
+      <div class="glass-module p-12 rounded-2xl relative overflow-hidden">
+        <h3 class="text-5xl font-bold mb-8 italic glow-text text-white">
+          Let's build.
+        </h3>
+        <p class="text-slate-400 mb-12 mono text-lg leading-relaxed">
+          Open to impactful opportunities
+          <span class="text-blue-400 font-bold">Worldwide</span>.<br />
+          I am ready to relocate and bring value to any part of the globe.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+          <a
+            href="mailto:agarwaldev626@gmail.com"
+            class="px-8 py-4 bg-blue-600 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30 text-white"
+          >
+            Email_Me
+          </a>
+          <a
+            href="https://linkedin.com/in/devagarwal2503"
+            target="_blank"
+            class="px-8 py-4 border border-blue-500/50 rounded-lg font-bold hover:bg-blue-500/10 transition text-white"
+          >
+            LinkedIn_Profile
+          </a>
+          <a
+            href="https://github.com/devagarwal2503"
+            target="_blank"
+            class="px-8 py-4 border border-slate-600/50 rounded-lg font-bold hover:bg-slate-700/20 transition text-white"
+          >
+            GitHub_Repos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="contact" class="max-w-4xl mx-auto my-40 px-6 text-center">
+      <h3 class="text-5xl font-bold mb-8 italic glow-text text-white">Let's build.</h3>
+      <p class="text-slate-400 mb-12 mono text-lg">Available for new opportunities in Pune & Remote.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-8">
+        <a href="mailto:agarwaldev626@gmail.com" class="px-10 py-4 bg-blue-600 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">Email_Me</a>
+        <a href="https://linkedin.com/in/devagarwal2503" target="_blank" class="px-10 py-4 border border-blue-500/50 rounded-lg font-bold hover:bg-blue-500/10 transition text-white">LinkedIn_Profile</a>
+      </div>
+    </section> -->
+
+    <footer
+      class="py-12 text-center text-xs text-slate-600 mono tracking-widest border-t border-slate-900 bg-slate-950/50"
     >
-      <h3 class="text-4xl font-bold mb-6 border-b pb-2 border-gray-600">
-        🎯 About Me
-      </h3>
-      <p class="text-blue-100 text-lg leading-relaxed tracking-wide space-y-4">
-        I'm <strong class="text-white">Dev Agarwal</strong> — a data analyst
-        with a background in software development.<br /><br />
-        With over 3 years of experience as a badminton coach, I’ve developed a
-        strong habit of identifying patterns, staying consistent, and working
-        through pressure — skills that translate directly into analyzing data
-        and solving complex problems.
-      </p>
-      <br />
-      <p class="text-blue-100 text-lg leading-relaxed tracking-wide space-y-4">
-        I'm currently pursuing a
-        <strong class="text-white">Data Science program at IIT Guwahati</strong>
-        in collaboration with Masai School, where I work on real-world business
-        problems using Python, SQL, Excel, Power BI, and Tableau.
-        <br /><br />
-        My focus is on transforming raw data into meaningful insights through
-        analysis, visualization, and structured problem-solving — and growing
-        with every dataset I work on.
-      </p>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="max-w-7xl mx-auto mt-20 px-4">
-      <h3 class="text-4xl font-bold mb-6 border-b pb-2 border-gray-600">
-        📬 Contact
-      </h3>
-      <p class="text-blue-200 mb-6">
-        Let’s connect or collaborate — reach out below 👇
-      </p>
-      <div class="flex flex-col sm:flex-row justify-left gap-4">
-        <a
-          href="mailto:agarwaldev626@gmail.com"
-          class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md shadow"
-          >📧 Email Me</a
-        >
-        <a
-          href="https://linkedin.com/in/devagarwal2503"
-          target="_blank"
-          class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-md shadow"
-          >🔗 LinkedIn</a
-        >
-        <a
-          href="https://github.com/devagarwal2503"
-          target="_blank"
-          class="bg-gray-800 hover:bg-gray-900 text-white px-5 py-2 rounded-md shadow"
-          >🐙 GitHub</a
-        >
-      </div>
-    </section>
-
-    <!-- LET'S TALK BUTTON -->
-    <a href="#contact" class="floating-contact">📬 Let's Talk</a>
-
-    <!-- FOOTER -->
-    <footer class="text-center text-sm text-blue-400 mt-20 p-6">
-      © 2025 Dev Agarwal. Built with ❤️.
+      SYSTEM.STATUS: ACTIVE // DEV AGARWAL // 2026
     </footer>
 
-    <!-- SCRIPTS -->
     <script>
-      AOS.init({
-        duration: 800,
-        once: true,
-        offset: 80,
-        easing: "ease-out",
-      });
-      var typed = new Typed("#typed-role", {
+      new Typed("#typed-role", {
         strings: [
-          "Data Analyst",
-          "SQL And KPI Analysis",
-          "Dashboard And Reporting",
-          "Business-Focused Insights",
+          "Cross-Platform Architect.",
+          "Full-Stack Developer.",
+          "Problem Solver.",
+          "Clean Code Advocate.",
         ],
-        typeSpeed: 40,
+        typeSpeed: 50,
         backSpeed: 30,
         loop: true,
-      });
-
-      const toggleBtn = document.getElementById("menu-toggle");
-      const navMenu = document.getElementById("nav-menu");
-
-      toggleBtn.addEventListener("click", () => {
-        navMenu.classList.toggle("hidden");
-        navMenu.classList.toggle("flex");
-        navMenu.classList.toggle("flex-col");
-        navMenu.classList.toggle("absolute");
-        navMenu.classList.toggle("top-20");
-        navMenu.classList.toggle("right-4");
-        navMenu.classList.toggle("bg-black");
-        navMenu.classList.toggle("p-4");
-        navMenu.classList.toggle("rounded");
-        navMenu.classList.toggle("space-y-2");
       });
     </script>
   </body>
