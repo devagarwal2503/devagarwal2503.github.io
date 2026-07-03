@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Dev_Agarwal_Resume.pdf
+
+Sitemap: https://devagarwal2503.github.io/sitemap.xml

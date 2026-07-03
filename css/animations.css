@@ -1,0 +1,151 @@
+/* =========================================================
+   ANIMATIONS & MOTION SYSTEM
+   GPU-accelerated, scroll-triggered, purposeful motion.
+   All animations use only transform + opacity.
+   ========================================================= */
+
+/* ── Reveal System (IntersectionObserver) ────────────────── */
+/* Default: visible. JS adds .js-animations class to <html>
+   which opts-in to the animated state. This ensures
+   content is always readable without JS or on file:// protocol. */
+.js-animations .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-slower) var(--ease-out-expo),
+    transform var(--duration-slower) var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+.js-animations .reveal.reveal--left {
+  transform: translateX(-24px);
+}
+
+.js-animations .reveal.reveal--right {
+  transform: translateX(24px);
+}
+
+.js-animations .reveal.reveal--scale {
+  transform: scale(0.95) translateY(12px);
+}
+
+.js-animations .reveal.is-visible,
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger delays — applied to children (only when JS enabled) */
+.js-animations .stagger > * { transition-delay: 0ms; }
+.js-animations .stagger > *:nth-child(1)  { transition-delay: 0ms; }
+.js-animations .stagger > *:nth-child(2)  { transition-delay: 80ms; }
+.js-animations .stagger > *:nth-child(3)  { transition-delay: 160ms; }
+.js-animations .stagger > *:nth-child(4)  { transition-delay: 240ms; }
+.js-animations .stagger > *:nth-child(5)  { transition-delay: 320ms; }
+.js-animations .stagger > *:nth-child(6)  { transition-delay: 400ms; }
+.js-animations .stagger > *:nth-child(7)  { transition-delay: 480ms; }
+.js-animations .stagger > *:nth-child(8)  { transition-delay: 560ms; }
+
+/* ── Hero Entrance Sequence ──────────────────────────────── */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroEntrance var(--duration-slower) var(--ease-out-expo) forwards;
+}
+
+.hero-animate--d1 { animation-delay: 100ms; }
+.hero-animate--d2 { animation-delay: 200ms; }
+.hero-animate--d3 { animation-delay: 340ms; }
+.hero-animate--d4 { animation-delay: 480ms; }
+.hero-animate--d5 { animation-delay: 600ms; }
+
+@keyframes heroEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Marquee ─────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Pulse (availability badge) ──────────────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-green);
+  flex-shrink: 0;
+}
+
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-green);
+  animation: pulse-ring 2s var(--ease-out-expo) infinite;
+}
+
+/* ── Gradient text ───────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text--accent {
+  background: linear-gradient(135deg, var(--color-accent-hover) 0%, var(--color-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Count-up number animation ───────────────────────────── */
+.count-up {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Line draw (timeline) ────────────────────────────────── */
+@keyframes drawLine {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+.timeline-line-animated {
+  transform-origin: top;
+  animation: drawLine 1s var(--ease-out-expo) forwards;
+}
+
+/* ── Shimmer loading state ───────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Float subtle ────────────────────────────────────────── */
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
