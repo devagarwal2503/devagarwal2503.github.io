@@ -28,8 +28,8 @@
     <meta name="twitter:description" content="Software Engineer with strong Flutter & full-stack expertise. 2 years. 3 shipped products. 500+ concurrent users." />
     <meta name="twitter:image"       content="https://devagarwal2503.github.io/assets/og-image.jpg" />
 
-    <!-- ── Favicon (inline SVG — zero HTTP request) ──────── -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><text x='16' y='22' font-family='monospace' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>D</text></svg>" />
+    <!-- ── Favicon (inline SVG) ─────────────────────────── -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300f0ff'/><text x='16' y='22' font-family='monospace' font-size='18' font-weight='bold' fill='black' text-anchor='middle'>D</text></svg>" />
 
     <!-- ── Font Preconnect ───────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,6 +62,9 @@
   </head>
 
   <body>
+    <!-- ── CRT Scanline beam and overlays ────────────────── -->
+    <div class="scan-beam" aria-hidden="true"></div>
+
     <!-- ── Skip Link (Accessibility) ────────────────────── -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -69,810 +72,1142 @@
     <div class="cursor-dot"  aria-hidden="true"></div>
     <div class="cursor-ring" aria-hidden="true"></div>
 
-    <!-- ════════════════════════════════════════════════════
-         NAVIGATION
-         ════════════════════════════════════════════════════ -->
-    <header role="banner">
-      <nav class="nav" aria-label="Main navigation">
-        <div class="container">
-          <div class="nav__inner">
-
-            <!-- Logo -->
-            <a href="#" class="nav__logo" aria-label="Dev Agarwal — home">
-              dev<span>.</span>agarwal
-            </a>
-
-            <!-- Desktop links -->
-            <ul class="nav__links" role="list">
-              <li><a href="#experience" class="nav__link">Experience</a></li>
-              <li><a href="#work"       class="nav__link">Work</a></li>
-              <li><a href="#about"      class="nav__link">About</a></li>
-              <li><a href="#stack"      class="nav__link">Stack</a></li>
-              <li><a href="#contact"    class="nav__link">Contact</a></li>
-            </ul>
-
-            <!-- Desktop CTA -->
-            <a href="Dev_Agarwal_Resume.pdf"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="nav__cta"
-               aria-label="Download resume PDF">
-              Resume
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-
-            <!-- Mobile hamburger -->
-            <button class="nav__hamburger"
-                    aria-label="Toggle navigation menu"
-                    aria-expanded="false"
-                    aria-controls="mobile-menu">
-              <span class="nav__hamburger-line"></span>
-              <span class="nav__hamburger-line"></span>
-              <span class="nav__hamburger-line"></span>
-            </button>
-          </div>
+    <!-- ── System Boot Diagnostics Screen ────────────────── -->
+    <div class="boot-screen" id="boot-screen" aria-live="polite">
+      <div class="boot-console">
+        <svg class="boot-scanner-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="var(--color-accent)" stroke-width="1" stroke-dasharray="6 6" />
+          <circle cx="50" cy="50" r="30" stroke="var(--color-accent)" stroke-width="0.75" />
+          <circle cx="50" cy="50" r="15" stroke="var(--color-accent)" stroke-width="0.5" stroke-dasharray="2 2" />
+          <line x1="50" y1="5" x2="50" y2="95" stroke="rgba(0, 240, 255, 0.2)" stroke-width="0.5" />
+          <line x1="5" y1="50" x2="95" y2="50" stroke="rgba(0, 240, 255, 0.2)" stroke-width="0.5" />
+          <line x1="50" y1="50" x2="80" y2="20" stroke="var(--color-accent)" stroke-width="1.5" id="radar-hand" />
+        </svg>
+        <div style="text-align: center; font-size: 10px; font-weight: bold; color: var(--color-accent); text-transform: uppercase; letter-spacing: 2px;">
+          SYSTEM INITIALIZATION &amp; DIAGNOSTICS
         </div>
-
-        <!-- Mobile overlay menu -->
-        <div id="mobile-menu" class="nav__mobile" role="dialog" aria-label="Navigation menu">
-          <a href="#experience" class="nav__mobile-link">Experience</a>
-          <a href="#work"       class="nav__mobile-link">Work</a>
-          <a href="#about"      class="nav__mobile-link">About</a>
-          <a href="#stack"      class="nav__mobile-link">Stack</a>
-          <a href="#contact"    class="nav__mobile-link">Contact</a>
+        <div class="boot-logs" id="boot-logs">
+          <!-- Populated dynamically via JS -->
         </div>
-      </nav>
-    </header>
+        <div class="boot-progress-bar">
+          <div class="boot-progress-fill" id="boot-progress-fill"></div>
+        </div>
+        <button class="btn-boot-enter" id="btn-boot-enter">
+          [ ACCESS SYSTEM CORE ]
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Grid Blueprint backdrop guides ────────────────── -->
+    <div class="grid-blueprint" aria-hidden="true">
+      <div class="grid-blueprint__line" data-line="1"></div>
+      <div class="grid-blueprint__line" data-line="2"></div>
+      <div class="grid-blueprint__line" data-line="3"></div>
+      <div class="grid-blueprint__line" data-line="4"></div>
+      <div class="grid-blueprint__line" data-line="5"></div>
+      <div class="grid-blueprint__line" data-line="6"></div>
+    </div>
 
     <!-- ════════════════════════════════════════════════════
-         MAIN CONTENT
+         CONSOLE SPA SHELL
          ════════════════════════════════════════════════════ -->
-    <main id="main">
+    <div class="console-shell" id="console-shell" style="display: none;">
+      <!-- Interactive background telemetry canvas -->
+      <canvas id="canvas-telemetry" style="position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.22;" aria-hidden="true"></canvas>
+      
+      <header role="banner">
+        <nav class="nav" aria-label="Main navigation">
+          <div class="container">
+            <div class="nav__inner">
 
-      <!-- ──────────────────────────────────────────────────
-           HERO
-           ────────────────────────────────────────────────── -->
-      <section class="hero section" aria-labelledby="hero-name">
-        <div class="container">
-
-          <!-- Availability badge -->
-          <div class="hero__availability hero-animate hero-animate--d1"
-               aria-label="Currently available for opportunities">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            Available for opportunities
-          </div>
-
-          <!-- Name -->
-          <h1 class="hero__name hero-animate hero-animate--d2" id="hero-name">
-            Dev Agarwal
-          </h1>
-
-          <!-- Tagline -->
-          <p class="hero__tagline hero-animate hero-animate--d3">
-            Software Engineer with strong Flutter &amp; full-stack expertise.<br />
-            I build software that ships — not demos.
-          </p>
-
-          <!-- Metrics -->
-          <div class="hero__metrics hero-animate hero-animate--d4">
-            <span class="hero__metric"><strong>2 yrs</strong> professional experience</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>3</strong> production systems shipped</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>500+</strong> concurrent users supported</span>
-          </div>
-
-          <!-- Actions -->
-          <div class="hero__actions hero-animate hero-animate--d5">
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.3">
-              <a href="#work" class="btn btn--primary btn--lg" id="hero-cta-work">
-                View my work
-                <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <!-- Logo -->
+              <a href="#" class="nav__logo" aria-label="Dev Agarwal — home">
+                DEV<span>.</span>AGARWAL
               </a>
-            </div>
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.25">
+
+              <!-- Desktop tabs -->
+              <ul class="nav__links" role="list">
+                <li><a href="#about"      class="nav__link is-active" data-tab="about"><svg class="nav-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:5px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ABOUT</a></li>
+                <li><a href="#experience" class="nav__link" data-tab="experience"><svg class="nav-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:5px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>EXPERIENCE</a></li>
+                <li><a href="#work"       class="nav__link" data-tab="work"><svg class="nav-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:5px;"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>PROJECTS</a></li>
+                <li><a href="#stack"      class="nav__link" data-tab="stack"><svg class="nav-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:5px;"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>SKILLS</a></li>
+                <li><a href="#contact"    class="nav__link" data-tab="contact"><svg class="nav-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:5px;"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>CONTACT</a></li>
+              </ul>
+
+              <!-- Desktop CTA -->
               <a href="Dev_Agarwal_Resume.pdf"
                  target="_blank"
                  rel="noopener noreferrer"
-                 class="btn btn--ghost btn--lg"
-                 id="hero-cta-resume">
-                Download resume
-                <svg class="btn__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1.5 12.5H12.5M7 1.5V9.5M7 9.5L4 6.5M7 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                 class="nav__cta"
+                 aria-label="Download resume PDF">
+                MANIFEST
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>
+
+              <!-- Mobile hamburger -->
+              <button class="nav__hamburger"
+                      aria-label="Toggle navigation menu"
+                      aria-expanded="false"
+                      aria-controls="mobile-menu">
+                <span class="nav__hamburger-line"></span>
+                <span class="nav__hamburger-line"></span>
+                <span class="nav__hamburger-line"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile overlay menu -->
+          <div id="mobile-menu" class="nav__mobile" role="dialog" aria-label="Navigation menu">
+            <a href="#about"      class="nav__mobile-link is-active" data-tab="about"><svg class="nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:6px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ABOUT</a>
+            <a href="#experience" class="nav__mobile-link" data-tab="experience"><svg class="nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:6px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>EXPERIENCE</a>
+            <a href="#work"       class="nav__mobile-link" data-tab="work"><svg class="nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:6px;"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>PROJECTS</a>
+            <a href="#stack"      class="nav__mobile-link" data-tab="stack"><svg class="nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:6px;"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>SKILLS</a>
+            <a href="#contact"    class="nav__mobile-link" data-tab="contact"><svg class="nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline-block; vertical-align:-1px; margin-right:6px;"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>CONTACT</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Viewport area hosting active screens -->
+      <main id="main" class="console-panel-viewport">
+
+        <!-- ──────────────────────────────────────────────────
+             DEPT-01 // COCKPIT (Dossier & Yield Metrics)
+             ────────────────────────────────────────────────── -->
+        <div id="tab-about" class="console-screen is-active">
+          <div class="container screen-scroll-container">
+            
+            <div class="section-header reveal is-visible">
+              <p class="section-label">ABOUT // PERSONNEL OFFICERS COCKPIT</p>
+              <h2 class="section-title">Personnel Dossier &amp; Yield Stats</h2>
+              <p class="section-subtitle">Structural overview &amp; verified specifications // level 5 clearance verified.</p>
+            </div>
+
+            <div class="dashboard-grid reveal is-visible">
+              
+              <!-- Left Column: Identity Card and Biography Shell Log -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                
+                <!-- Card 1: Identity Badge Card -->
+                <div class="dashboard-panel" style="padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-4);">
+                  <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                  
+                  <div class="dashboard-panel__header" style="margin-bottom: var(--space-3);">
+                    <span>01 // IDENTITY ACCESS BADGE</span>
+                    <span style="color: var(--color-green); font-weight: bold;">[ PASSED // SEC-LEVEL 5 ]</span>
+                  </div>
+
+                  <div style="display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: flex-start;">
+                    
+                    <!-- Profile Photo Wrap -->
+                    <div class="dossier-photo-wrap" style="flex-shrink: 0; width: 140px; height: 170px; border: 1px solid var(--color-border); position: relative; overflow: hidden; background: #000;">
+                      <div class="photo-scanline" aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(0, 240, 255, 0.4); animation: scanline-photo 4s linear infinite;"></div>
+                      <img
+                        src="assets/photo.webp"
+                        alt="Dev Agarwal, Flutter engineer"
+                        style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: contrast(1.1) brightness(0.9);"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <!-- Meta Data Details -->
+                    <div class="dossier-meta" style="flex: 1; display: flex; flex-direction: column; gap: var(--space-2); font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-secondary);">
+                      <div>IDENTIFIER: <span style="color: #fff; font-weight: bold;">DEV AGARWAL</span></div>
+                      <div>ASSIGNMENT: <span style="color: var(--color-accent);">FLUTTER &amp; CROSS-PLATFORM DEV</span></div>
+                      <div>ROTATION LOC: <span style="color: #fff;">PUNE, MAHARASHTRA, IN</span></div>
+                      <div>CLEARANCE: <span style="color: var(--color-accent);">OMEGA CODE SEC-V</span></div>
+                      <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px;">
+                        <span style="display: inline-block; width: 6px; height: 6px; background: var(--color-green); border-radius: 50%; box-shadow: 0 0 8px var(--color-green);"></span>
+                        <span style="color: var(--color-green); font-size: var(--text-xs); font-weight: bold; letter-spacing: 1px;">SYSTEM STATUS: ONLINE / SECURE</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Badge Vector Barcode -->
+                  <svg width="100%" height="24" viewBox="0 0 100 24" fill="currentColor" style="opacity: 0.22; color: var(--color-accent); margin-top: var(--space-2);">
+                    <rect x="0" width="2" height="24"/><rect x="3" width="1" height="24"/><rect x="5" width="4" height="24"/><rect x="10" width="2" height="24"/><rect x="13" width="1" height="24"/><rect x="15" width="3" height="24"/><rect x="19" width="1" height="24"/><rect x="21" width="2" height="24"/><rect x="24" width="4" height="24"/><rect x="29" width="2" height="24"/><rect x="32" width="1" height="24"/><rect x="34" width="3" height="24"/><rect x="38" width="1" height="24"/><rect x="40" width="2" height="24"/><rect x="43" width="4" height="24"/><rect x="48" width="1" height="24"/><rect x="50" width="2" height="24"/><rect x="53" width="3" height="24"/><rect x="57" width="1" height="24"/><rect x="59" width="4" height="24"/><rect x="64" width="2" height="24"/><rect x="67" width="1" height="24"/><rect x="69" width="3" height="24"/><rect x="73" width="1" height="24"/><rect x="75" width="2" height="24"/><rect x="78" width="4" height="24"/><rect x="83" width="2" height="24"/><rect x="86" width="1" height="24"/><rect x="88" width="3" height="24"/><rect x="92" width="1" height="24"/><rect x="94" width="4" height="24"/>
+                  </svg>
+                </div>
+
+                <!-- Card 2: Narrative biography Console shell Log -->
+                <div class="dashboard-panel" style="padding: var(--space-4);">
+                  <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                  
+                  <div class="dashboard-panel__header" style="margin-bottom: var(--space-3);">
+                    <span>02 // OPERATIONAL LOG READOUT</span>
+                    <span style="color: var(--color-accent);">AGARWAL_DEV_DOSSIER.log</span>
+                  </div>
+
+                  <div style="font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.7; color: var(--color-text-secondary);">
+                    <div style="margin-bottom: var(--space-2); color: var(--color-text-muted);">// Initiating narrative diagnostic readout... [OK]</div>
+                    
+                    <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span style="color: var(--color-text-muted); width: 20px; flex-shrink: 0; text-align: right;">01</span>
+                      <span>I build software that ships. Not prototypes, not tutorials. <strong>Production systems</strong> used by real teams handling active load.</span>
+                    </div>
+
+                    <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span style="color: var(--color-text-muted); width: 20px; flex-shrink: 0; text-align: right;">02</span>
+                      <span>At Centralogic, I engineered a comprehensive Leave Management module that optimized operations and cut HR processing effort by <strong>40%</strong>.</span>
+                    </div>
+
+                    <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span style="color: var(--color-text-muted); width: 20px; flex-shrink: 0; text-align: right;">03</span>
+                      <span>Promoted from Intern to Trainee in one month at Vishwaguru because I focused entirely on shipping features, not excuses.</span>
+                    </div>
+
+                    <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span style="color: var(--color-text-muted); width: 20px; flex-shrink: 0; text-align: right;">04</span>
+                      <span>Coached badminton at competitive levels for 6 years, running regional/state tournaments for <strong>100+ active participants</strong>.</span>
+                    </div>
+
+                    <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-2);">
+                      <span style="color: var(--color-text-muted); width: 20px; flex-shrink: 0; text-align: right;">05</span>
+                      <span>Expanding expertise into AI pipelines, automated n8n workflows, and full stack web architectures to maintain wide technical flexibility.</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Right Column: Performance Yield Metrics -->
+              <div class="dashboard-panel" style="padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-4);">
+                <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                
+                <div class="dashboard-panel__header" style="margin-bottom: var(--space-2);">
+                  <span>03 // PERFORMANCE YIELD METRICS</span>
+                  <span class="text-accent">DIAGNOSTICS NOMINAL</span>
+                </div>
+
+                <!-- Live circular diagnostics monitor -->
+                <div style="border: 1px solid var(--color-border); padding: var(--space-4); background: rgba(0, 240, 255, 0.01); display: flex; justify-content: center; position: relative;">
+                  <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                  <svg width="100%" height="110" viewBox="0 0 350 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="55" r="40" stroke="var(--color-accent)" stroke-width="1" stroke-dasharray="4 4" />
+                    <circle cx="60" cy="55" r="28" stroke="var(--color-accent)" stroke-width="0.75" />
+                    <path d="M 60 25 L 60 55 L 85 70" stroke="var(--color-accent)" stroke-width="1.5" />
+                    
+                    <!-- Sine Wave Cycle -->
+                    <path d="M 120 55 Q 140 25 160 55 T 200 55 T 240 55" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="2 2" />
+                    
+                    <!-- Data readouts -->
+                    <rect x="255" y="15" width="80" height="80" rx="2" fill="var(--color-bg-elevated)" stroke="var(--color-border)" />
+                    <text x="295" y="32" fill="var(--color-accent)" font-size="7.5" font-family="monospace" text-anchor="middle" font-weight="bold">CORE: ACTIVE</text>
+                    <text x="295" y="47" fill="#fff" font-size="7.5" font-family="monospace" text-anchor="middle">BUFFER: 100%</text>
+                    <text x="295" y="62" fill="#fff" font-size="7.5" font-family="monospace" text-anchor="middle">LOAD: NOMINAL</text>
+                    <text x="295" y="77" fill="var(--color-green)" font-size="7" font-family="monospace" text-anchor="middle">INTEGRITY 100%</text>
+                  </svg>
+                </div>
+
+                <div class="yield-metrics" style="display: flex; flex-direction: column; gap: var(--space-4);">
+                  <!-- Metric 1: Experience -->
+                  <div class="yield-metric__block">
+                    <div class="yield-metric__title" style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--text-sm); margin-bottom: var(--space-1);">
+                      <span>PROFESSIONAL SERVICE</span>
+                      <span style="color: var(--color-accent);">2+ YRS</span>
+                    </div>
+                    <div class="yield-metric__bar" style="--metric-fill: 85%; height: 6px; background: rgba(255,255,255,0.05); position: relative;">
+                      <div class="yield-metric__bar-fill" style="width: 85%; height: 100%; background: var(--color-accent); box-shadow: 0 0 8px var(--color-accent);"></div>
+                    </div>
+                    <p class="yield-metric__footer" style="font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-1) 0 0 0;">
+                      Executing production level code across mobile and full stack frameworks.
+                    </p>
+                  </div>
+
+                  <!-- Metric 2: Shipped -->
+                  <div class="yield-metric__block">
+                    <div class="yield-metric__title" style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--text-sm); margin-bottom: var(--space-1);">
+                      <span>PRODUCTION SHIPPED</span>
+                      <span style="color: var(--color-accent);">3 SYSTEMS</span>
+                    </div>
+                    <div class="yield-metric__bar" style="--metric-fill: 100%; height: 6px; background: rgba(255,255,255,0.05); position: relative;">
+                      <div class="yield-metric__bar-fill" style="width: 100%; height: 100%; background: var(--color-accent); box-shadow: 0 0 8px var(--color-accent);"></div>
+                    </div>
+                    <p class="yield-metric__footer" style="font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-1) 0 0 0;">
+                      Completed design, validation, testing, and deployment cycles for 3 commercial platforms.
+                    </p>
+                  </div>
+
+                  <!-- Metric 3: Concurrent Users -->
+                  <div class="yield-metric__block">
+                    <div class="yield-metric__title" style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--text-sm); margin-bottom: var(--space-1);">
+                      <span>PEAK CONCURRENT LOAD</span>
+                      <span style="color: var(--color-accent);">500+ USERS</span>
+                    </div>
+                    <div class="yield-metric__bar" style="--metric-fill: 90%; height: 6px; background: rgba(255,255,255,0.05); position: relative;">
+                      <div class="yield-metric__bar-fill" style="width: 90%; height: 100%; background: var(--color-accent); box-shadow: 0 0 8px var(--color-accent);"></div>
+                    </div>
+                    <p class="yield-metric__footer" style="font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-1) 0 0 0;">
+                      Engineered candidate assessment pipeline scale tested to handle 500+ live simultaneous sessions.
+                    </p>
+                  </div>
+
+                  <!-- Metric 4: Badminton -->
+                  <div class="yield-metric__block">
+                    <div class="yield-metric__title" style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: var(--text-sm); margin-bottom: var(--space-1);">
+                      <span>COACHING &amp; COORD</span>
+                      <span style="color: var(--color-accent);">6 YRS</span>
+                    </div>
+                    <div class="yield-metric__bar" style="--metric-fill: 75%; height: 6px; background: rgba(255,255,255,0.05); position: relative;">
+                      <div class="yield-metric__bar-fill" style="width: 75%; height: 100%; background: var(--color-accent); box-shadow: 0 0 8px var(--color-accent);"></div>
+                    </div>
+                    <p class="yield-metric__footer" style="font-family: var(--font-sans); font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-1) 0 0 0;">
+                       Badminton coaching at competitive levels, leading tournaments of 100+ participants.
+                    </p>
+                  </div>
+
+                  <!-- Download PDF CTA -->
+                  <a href="Dev_Agarwal_Resume.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="btn-tech"
+                     style="margin-top: var(--space-4); justify-content: center; width: 100%; text-align: center; display: inline-flex; align-items: center; border: 1px solid var(--color-accent); padding: var(--space-3) var(--space-6); background: var(--color-accent-dim); color: var(--color-accent); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; text-decoration: none; cursor: pointer; transition: all var(--duration-fast);"
+                     aria-label="Download resume PDF">
+                    [ EXTRACT FULL DOSSIER &rarr; ]
+                  </a>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-
-        <!-- Scroll indicator -->
-        <div class="hero__scroll" aria-hidden="true">
-          <span>scroll</span>
-          <div class="hero__scroll-line"></div>
-        </div>
-      </section>
-
-      <!-- ──────────────────────────────────────────────────
-           MARQUEE — TECH STRIP
-           ────────────────────────────────────────────────── -->
-      <div class="marquee-section" aria-hidden="true">
-        <div class="marquee-inner marquee-track">
-          <!-- Repeated twice for seamless loop -->
-          <div class="marquee-item">Flutter<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Dart<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Firebase<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Supabase<span class="marquee-dot"></span></div>
-          <div class="marquee-item">BLoC<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Provider<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Riverpod<span class="marquee-dot"></span></div>
-          <div class="marquee-item">REST APIs<span class="marquee-dot"></span></div>
-          <div class="marquee-item">React<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Node.js<span class="marquee-dot"></span></div>
-          <div class="marquee-item">MongoDB<span class="marquee-dot"></span></div>
-          <div class="marquee-item">n8n<span class="marquee-dot"></span></div>
-          <div class="marquee-item">LLM APIs<span class="marquee-dot"></span></div>
-          <div class="marquee-item">RAG<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Docker<span class="marquee-dot"></span></div>
-          <div class="marquee-item">GCP<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Git<span class="marquee-dot"></span></div>
-          <!-- Duplicate for infinite scroll -->
-          <div class="marquee-item">Flutter<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Dart<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Firebase<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Supabase<span class="marquee-dot"></span></div>
-          <div class="marquee-item">BLoC<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Provider<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Riverpod<span class="marquee-dot"></span></div>
-          <div class="marquee-item">REST APIs<span class="marquee-dot"></span></div>
-          <div class="marquee-item">React<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Node.js<span class="marquee-dot"></span></div>
-          <div class="marquee-item">MongoDB<span class="marquee-dot"></span></div>
-          <div class="marquee-item">n8n<span class="marquee-dot"></span></div>
-          <div class="marquee-item">LLM APIs<span class="marquee-dot"></span></div>
-          <div class="marquee-item">RAG<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Docker<span class="marquee-dot"></span></div>
-          <div class="marquee-item">GCP<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Git<span class="marquee-dot"></span></div>
-        </div>
-      </div>
-
-      <!-- ──────────────────────────────────────────────────
-           EXPERIENCE
-           ────────────────────────────────────────────────── -->
-      <section id="experience" class="section" aria-labelledby="experience-title">
-        <div class="container">
-          <div class="section-header reveal">
-            <p class="section-label">Experience</p>
-            <h2 class="section-title" id="experience-title">Where I've shipped</h2>
-            <p class="section-subtitle">
-              Nearly 2 years across two companies — writing production code, not tutorials.
-            </p>
-          </div>
-
-          <div class="timeline stagger">
-
-            <!-- Vishwaguru — Trainee -->
-            <article class="timeline-item reveal">
-              <div class="timeline-node" aria-hidden="true"></div>
-              <p class="timeline-period">Apr 2026 – Jun 2026</p>
-              <h3 class="timeline-company">Vishwaguru Infotech</h3>
-              <p class="timeline-role">Flutter Developer Trainee</p>
-              <span class="badge badge--green timeline-badge">
-                ↑ Promoted from intern in 30 days
-              </span>
-              <ul class="timeline-achievements" role="list">
-                <li class="timeline-achievement">
-                  Promoted from intern to trainee within one month for <strong>consistently shipping production-ready feature modules</strong>.
-                </li>
-                <li class="timeline-achievement">
-                  Engineered responsive UI components with Flutter widgets and Material Design, matching product design specs precisely.
-                </li>
-                <li class="timeline-achievement">
-                  Integrated REST APIs to enable dynamic data rendering across core app features.
-                </li>
-                <li class="timeline-achievement">
-                  Partnered with senior engineers on sprint planning, code reviews, and bug triage.
-                </li>
-              </ul>
-            </article>
-
-            <!-- Vishwaguru — Intern -->
-            <article class="timeline-item reveal">
-              <div class="timeline-node" aria-hidden="true"></div>
-              <p class="timeline-period">Feb 2026 – Mar 2026</p>
-              <h3 class="timeline-company">Vishwaguru Infotech</h3>
-              <p class="timeline-role">Flutter Developer Intern</p>
-              <ul class="timeline-achievements" role="list">
-                <li class="timeline-achievement">
-                  Built a <strong>full-featured e-commerce app</strong> — onboarding, auth, catalogue, cart, payment — in Flutter and Dart.
-                </li>
-                <li class="timeline-achievement">
-                  Implemented Firebase Authentication and integrated Razorpay SDK for secure login and payment simulation.
-                </li>
-                <li class="timeline-achievement">
-                  Designed advanced scrollable UI with <strong>Flutter Slivers</strong>; added adaptive light/dark theming and l10n localization.
-                </li>
-                <li class="timeline-achievement">
-                  Architected a clean API layer using structured JSON parsing; migrated backend to Supabase.
-                </li>
-              </ul>
-            </article>
-
-            <!-- Centralogic -->
-            <article class="timeline-item reveal">
-              <div class="timeline-node" aria-hidden="true"></div>
-              <p class="timeline-period">Mar 2023 – Apr 2024</p>
-              <h3 class="timeline-company">Centralogic Pvt Ltd</h3>
-              <p class="timeline-role">Flutter Developer</p>
-              <ul class="timeline-achievements" role="list">
-                <li class="timeline-achievement">
-                  Delivered a <strong>Leave Management module</strong> for a production HRMS platform with multi-level approvals —
-                  reducing manual HR processing effort by <strong>40%</strong>.
-                </li>
-                <li class="timeline-achievement">
-                  Engineered a secure candidate assessment platform with anti-cheat mechanisms,
-                  supporting <strong>500+ concurrent users</strong>.
-                </li>
-                <li class="timeline-achievement">
-                  Integrated <strong>15+ REST APIs</strong> into a hospitality booking application for real-time reservation sync.
-                </li>
-                <li class="timeline-achievement">
-                  Maintained code quality through Git version control, peer code reviews, and Agile sprint delivery.
-                </li>
-              </ul>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- ──────────────────────────────────────────────────
-           WORK / PROJECTS
-           ────────────────────────────────────────────────── -->
-      <section id="work" class="section" aria-labelledby="work-title">
-        <div class="container">
-          <div class="section-header reveal">
-            <p class="section-label">Projects</p>
-            <h2 class="section-title" id="work-title">Things I've built</h2>
-            <p class="section-subtitle">
-              End-to-end systems with real users, real constraints, and real decisions.
-            </p>
-          </div>
-
-          <!-- Featured: HRMS -->
-          <article class="card card--featured reveal" aria-labelledby="proj-hrms-title">
-            <div class="card__content">
-              <p class="card__eyebrow">Featured · Centralogic Pvt Ltd</p>
-              <h3 class="card__title" id="proj-hrms-title">
-                HRMS Leave Management &amp;<br />Assessment Platform
-              </h3>
-              <p class="card__description">
-                A production HRMS module handling multi-level leave approvals and a concurrent candidate
-                assessment system — not a side project. This ran in a live enterprise environment,
-                processed real HR decisions, and served over 500 simultaneous users.
-                Anti-cheat mechanisms, optimized API response handling, and Agile delivery cycles.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--accent">Flutter</span>
-                <span class="badge badge--accent">Dart</span>
-                <span class="badge badge--accent">REST APIs</span>
-                <span class="badge badge--accent">BLoC</span>
-                <span class="badge badge--default">HRMS</span>
-                <span class="badge badge--default">Agile</span>
-              </div>
-              <div class="card__links">
-                <span class="badge badge--violet">Enterprise — NDA</span>
-              </div>
+<!-- ──────────────────────────────────────────────────
+             DEPT-02 // TIMELINE (Work Operations Log)
+             ────────────────────────────────────────────────── -->
+        <div id="tab-experience" class="console-screen">
+          <div class="container screen-scroll-container">
+            
+            <div class="section-header reveal">
+              <p class="section-label">DEPT-02 // TIMELINE OF OPERATIONS</p>
+              <h2 class="section-title">Timeline of Operations</h2>
+              <p class="section-subtitle">Chronological deployment logs across commercial and trainee systems.</p>
             </div>
-            <div class="card__visual" aria-hidden="true">
-              <!-- Visual: abstract representation of the HRMS dashboard -->
-              <svg width="100%" height="100%" viewBox="0 0 480 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="480" height="300" fill="#0d0d1a"/>
-                <!-- Nav bar -->
-                <rect x="0" y="0" width="480" height="40" fill="#13131f" rx="0"/>
-                <circle cx="20" cy="20" r="6" fill="#6366f1" opacity="0.6"/>
-                <rect x="34" y="17" width="60" height="6" rx="3" fill="#475569"/>
-                <rect x="370" y="15" width="50" height="10" rx="5" fill="#6366f1" opacity="0.8"/>
-                <!-- Stats row -->
-                <rect x="20" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="32" y="68" width="40" height="8" rx="4" fill="#6366f1" opacity="0.4"/>
-                <text x="32" y="106" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="monospace">40%</text>
-                <rect x="32" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <rect x="136" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="148" y="68" width="40" height="8" rx="4" fill="#a78bfa" opacity="0.4"/>
-                <text x="148" y="106" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="monospace">500+</text>
-                <rect x="148" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <rect x="252" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="264" y="68" width="40" height="8" rx="4" fill="#34d399" opacity="0.4"/>
-                <text x="264" y="106" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="monospace">15+</text>
-                <rect x="264" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <!-- Table rows -->
-                <rect x="20" y="138" width="440" height="28" rx="4" fill="#13131f"/>
-                <rect x="32" y="148" width="80" height="8" rx="4" fill="#475569"/>
-                <rect x="200" y="148" width="50" height="8" rx="4" fill="#475569"/>
-                <rect x="370" y="145" width="60" height="14" rx="7" fill="#34d399" opacity="0.2"/>
-                <rect x="382" y="149" width="36" height="6" rx="3" fill="#34d399" opacity="0.7"/>
-                <rect x="20" y="174" width="440" height="28" rx="4" fill="#13131f" opacity="0.5"/>
-                <rect x="32" y="184" width="70" height="8" rx="4" fill="#2d3748"/>
-                <rect x="200" y="184" width="50" height="8" rx="4" fill="#2d3748"/>
-                <rect x="370" y="181" width="60" height="14" rx="7" fill="#6366f1" opacity="0.15"/>
-                <rect x="382" y="185" width="36" height="6" rx="3" fill="#6366f1" opacity="0.5"/>
-                <rect x="20" y="210" width="440" height="28" rx="4" fill="#13131f" opacity="0.3"/>
-                <rect x="32" y="220" width="90" height="8" rx="4" fill="#1e2535"/>
-                <rect x="200" y="220" width="50" height="8" rx="4" fill="#1e2535"/>
-                <rect x="370" y="217" width="60" height="14" rx="7" fill="#fbbf24" opacity="0.1"/>
-                <rect x="382" y="221" width="36" height="6" rx="3" fill="#fbbf24" opacity="0.4"/>
-                <!-- Accent line at bottom -->
-                <rect x="0" y="296" width="480" height="4" fill="url(#grad)"/>
-                <defs>
-                  <linearGradient id="grad" x1="0" y1="0" x2="480" y2="0">
-                    <stop offset="0%" stop-color="#6366f1"/>
-                    <stop offset="100%" stop-color="#a78bfa"/>
-                  </linearGradient>
-                </defs>
+
+            <!-- Operations Trajectory Flowchart Diagram -->
+            <div class="reveal" style="border: 1px solid var(--color-border); padding: var(--space-4); background: rgba(0, 240, 255, 0.01); margin-bottom: var(--space-6); display: flex; justify-content: center; position: relative;">
+              <svg width="100%" height="100" viewBox="0 0 800 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 800px; width: 100%;">
+                <rect width="800" height="100" fill="#000" opacity="0.2" />
+                <path d="M 0 50 L 800 50" stroke="rgba(0, 240, 255, 0.15)" stroke-width="1" stroke-dasharray="4 4" />
+                
+                <!-- Step 1: Intern -->
+                <rect x="20" y="20" width="180" height="60" rx="3" fill="var(--color-bg-elevated)" stroke="var(--color-accent)" stroke-width="1" />
+                <text x="110" y="45" fill="#fff" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">VISHWAGURU INTERN</text>
+                <text x="110" y="60" fill="var(--color-accent)" font-size="8" font-family="monospace" text-anchor="middle">FEB 2026 - MAR 2026</text>
+                
+                <!-- Flow Arrow 1 -->
+                <path d="M 200 50 L 290 50" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <path d="M 285 46 L 290 50 L 285 54" stroke="var(--color-accent)" stroke-width="1.5" />
+                <rect x="210" y="34" width="70" height="12" rx="2" fill="rgba(0,255,157,0.1)" stroke="var(--color-green)" stroke-width="0.5" />
+                <text x="245" y="42" fill="var(--color-green)" font-size="6.5" font-family="monospace" text-anchor="middle" font-weight="bold">PROMOTED IN 30D</text>
+
+                <!-- Step 2: Trainee -->
+                <rect x="300" y="20" width="180" height="60" rx="3" fill="var(--color-bg-elevated)" stroke="var(--color-accent)" stroke-width="1" />
+                <text x="390" y="45" fill="#fff" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">DEVELOPER TRAINEE</text>
+                <text x="390" y="60" fill="var(--color-accent)" font-size="8" font-family="monospace" text-anchor="middle">APR 2026 - JUN 2026</text>
+
+                <!-- Flow Arrow 2 -->
+                <path d="M 480 50 L 590 50" stroke="var(--color-accent)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <path d="M 585 46 L 590 50 L 585 54" stroke="var(--color-accent)" stroke-width="1.5" />
+                <rect x="495" y="34" width="80" height="12" rx="2" fill="rgba(0,240,255,0.08)" stroke="var(--color-accent)" stroke-width="0.5" />
+                <text x="535" y="42" fill="var(--color-accent)" font-size="6.5" font-family="monospace" text-anchor="middle" font-weight="bold">AGILE SPRINTS</text>
+
+                <!-- Step 3: Centralogic -->
+                <rect x="600" y="20" width="180" height="60" rx="3" fill="var(--color-bg-elevated)" stroke="var(--color-accent)" stroke-width="1.5" />
+                <text x="690" y="45" fill="#fff" font-size="9" font-family="monospace" text-anchor="middle" font-weight="bold">CENTRALOGIC DEV</text>
+                <text x="690" y="60" fill="var(--color-green)" font-size="8" font-family="monospace" text-anchor="middle">MAR 2023 - APR 2024</text>
               </svg>
             </div>
-          </article>
 
-          <!-- Project grid -->
-          <div class="projects-grid stagger">
-
-            <!-- E-Commerce Mobile -->
-            <article class="card reveal" aria-labelledby="proj-ecom-title">
-              <p class="card__eyebrow">Flutter · Firebase · Supabase</p>
-              <h3 class="card__title" id="proj-ecom-title">E-Commerce Mobile App</h3>
-              <p class="card__description">
-                End-to-end commerce app covering onboarding, Firebase Auth, product listings, cart,
-                and Razorpay payment flows. Advanced Slivers UI, adaptive theming,
-                l10n localization, and a clean Supabase-backed API layer.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--accent">Flutter</span>
-                <span class="badge badge--accent">Firebase</span>
-                <span class="badge badge--accent">Supabase</span>
-                <span class="badge badge--default">Razorpay</span>
-                <span class="badge badge--default">Slivers</span>
-              </div>
-              <div class="card__links">
-                <a href="https://github.com/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="card__link"
-                   aria-label="View E-Commerce Mobile App on GitHub">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
-                  </svg>
-                  GitHub
-                </a>
-              </div>
-            </article>
-
-            <!-- MERN E-Commerce -->
-            <article class="card reveal" aria-labelledby="proj-mern-title">
-              <p class="card__eyebrow">React · Node.js · MongoDB · Stripe</p>
-              <h3 class="card__title" id="proj-mern-title">Full-Stack E-Commerce Platform</h3>
-              <p class="card__description">
-                MERN stack storefront with React frontend, Node/Express REST APIs,
-                MongoDB data layer, and dual payment gateway integration (Stripe + Razorpay).
-                Admin dashboard for product, inventory, and order management. Deployed on Vercel.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--violet">React</span>
-                <span class="badge badge--violet">Node.js</span>
-                <span class="badge badge--violet">MongoDB</span>
-                <span class="badge badge--default">Stripe</span>
-                <span class="badge badge--default">Vercel</span>
-              </div>
-              <div class="card__links">
-                <a href="https://github.com/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="card__link"
-                   aria-label="View MERN E-Commerce Platform on GitHub">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
-                  </svg>
-                  GitHub
-                </a>
-              </div>
-            </article>
-
-            <!-- Divine Chats -->
-            <article class="card reveal" aria-labelledby="proj-chats-title">
-              <p class="card__eyebrow">Flutter · Dart · REST APIs</p>
-              <h3 class="card__title" id="proj-chats-title">Divine Chats — Real-Time Chat</h3>
-              <p class="card__description">
-                Cross-platform chat app with secure authentication, async REST API messaging,
-                and local caching for smooth performance on low-connectivity networks.
-                Originally built as a PHP/MySQL web app, then fully rebuilt in Flutter.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--accent">Flutter</span>
-                <span class="badge badge--accent">Dart</span>
-                <span class="badge badge--default">REST APIs</span>
-                <span class="badge badge--default">PHP / MySQL</span>
-              </div>
-              <div class="card__links">
-                <a href="https://github.com/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="card__link"
-                   aria-label="View Divine Chats on GitHub">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
-                  </svg>
-                  GitHub
-                </a>
-                <span class="badge badge--default">2023</span>
-              </div>
-            </article>
-
-            <!-- AI Automation -->
-            <article class="card reveal" aria-labelledby="proj-ai-title">
-              <p class="card__eyebrow">n8n · LLM APIs · RAG</p>
-              <h3 class="card__title" id="proj-ai-title">AI Automation Agents</h3>
-              <p class="card__description">
-                Email summarization pipeline using LLM APIs to process inboxes and generate
-                concise summaries. Automated outreach reply workflows using n8n.
-                Currently building RAG-based agents for knowledge retrieval and conversational automation.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--violet">n8n</span>
-                <span class="badge badge--violet">LLM APIs</span>
-                <span class="badge badge--violet">RAG</span>
-                <span class="badge badge--default">Workflow Automation</span>
-              </div>
-              <div class="card__links">
-                <span class="badge badge--amber">In Progress</span>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- ──────────────────────────────────────────────────
-           ABOUT
-           ────────────────────────────────────────────────── -->
-      <section id="about" class="section" aria-labelledby="about-title">
-        <div class="container">
-          <div class="section-header reveal">
-            <p class="section-label">About</p>
-            <h2 class="section-title" id="about-title">The person behind the code</h2>
-          </div>
-
-          <div class="about-grid">
-            <!-- Left: photo + stats -->
-            <div class="reveal reveal--left">
-              <div class="about-photo-wrap">
-                <img
-                  src="assets/photo.webp"
-                  alt="Dev Agarwal, Flutter and cross-platform mobile engineer based in Pune"
-                  class="about-photo"
-                  width="280"
-                  height="350"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="about-stats">
-                <div class="about-stat">
-                  <div class="about-stat__number">
-                    <span data-count="2">0</span>
-                    <span class="about-stat__suffix">+</span>
+            <div class="ops-table reveal">
+              
+              <!-- Vishwaguru Trainee -->
+              <div class="ops-row"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                <div class="ops-date">APR 2026 &ndash;<br>JUN 2026</div>
+                <div class="ops-content">
+                  <div class="ops-company">VISHWAGURU INFOTECH</div>
+                  <div class="ops-role">Flutter Developer Trainee</div>
+                  <span class="badge badge--green" style="margin-bottom: var(--space-2); display: inline-flex;">
+                    ↑ Promoted from intern in 30 days
+                  </span>
+                  <div class="ops-achievements">
+                    <div class="ops-achievement">Promoted from intern to trainee within one month for <strong>consistently shipping production-ready feature modules</strong>.</div>
+                    <div class="ops-achievement">Engineered responsive UI components with Flutter widgets and Material Design, matching product design specs precisely.</div>
+                    <div class="ops-achievement">Integrated REST APIs to enable dynamic data rendering across core app features.</div>
+                    <div class="ops-achievement">Partnered with senior engineers on sprint planning, code reviews, and bug triage.</div>
                   </div>
-                  <p class="about-stat__label">Years experience</p>
-                </div>
-                <div class="about-stat">
-                  <div class="about-stat__number">
-                    <span data-count="3">0</span>
-                  </div>
-                  <p class="about-stat__label">Products shipped</p>
-                </div>
-                <div class="about-stat">
-                  <div class="about-stat__number">
-                    <span data-count="500">0</span>
-                    <span class="about-stat__suffix">+</span>
-                  </div>
-                  <p class="about-stat__label">Concurrent users</p>
-                </div>
-                <div class="about-stat">
-                  <div class="about-stat__number">
-                    <span data-count="6">0</span>
-                  </div>
-                  <p class="about-stat__label">Yrs coaching</p>
                 </div>
               </div>
-            </div>
 
-            <!-- Right: narrative -->
-            <div class="about-narrative reveal reveal--right">
-              <p>I build software that ships.</p>
-              <p>
-                Not prototypes. Not tutorials.
-                <em>Production systems</em> used by real teams, handling real load.
-                At Centralogic, I delivered a Leave Management module that cut
-                HR processing effort by <strong>40%</strong> — in a team that
-                moved fast and expected the same from me.
-              </p>
-              <p>
-                I was promoted from intern to trainee within one month at Vishwaguru
-                because I shipped working features, not excuses. That's the standard
-                I hold myself to.
-              </p>
-              <p>
-                Outside engineering, I coached badminton at the competitive level
-                for six years, running tournaments for <strong>100+ participants</strong>.
-                You learn more about communication, execution under pressure, and
-                managing different personalities on a court than in most
-                corporate training programs.
-              </p>
-              <p>
-                I'm currently expanding into AI automation and full-stack web —
-                because the engineers who stay relevant don't specialize into corners.
-                They build a stack they can reason across.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ──────────────────────────────────────────────────
-           TECH STACK — BENTO GRID
-           ────────────────────────────────────────────────── -->
-      <section id="stack" class="section" aria-labelledby="stack-title">
-        <div class="container">
-          <div class="section-header reveal">
-            <p class="section-label">Tech Stack</p>
-            <h2 class="section-title" id="stack-title">What I work with</h2>
-            <p class="section-subtitle">
-              Tools and technologies I've used in production — not just tutorials.
-            </p>
-          </div>
-
-          <div class="bento-grid stagger">
-
-            <!-- Mobile -->
-            <div class="bento-tile reveal">
-              <p class="bento-tile__label">Mobile</p>
-              <p class="bento-tile__title">Flutter Ecosystem</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">Flutter</span>
-                <span class="bento-skill">Dart</span>
-                <span class="bento-skill">Android</span>
-                <span class="bento-skill">iOS</span>
-                <span class="bento-skill">Material Design</span>
-                <span class="bento-skill">Flutter Slivers</span>
-                <span class="bento-skill">Custom Widgets</span>
-                <span class="bento-skill">Adaptive Theming</span>
-                <span class="bento-skill">l10n</span>
+              <!-- Vishwaguru Intern -->
+              <div class="ops-row"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                <div class="ops-date">FEB 2026 &ndash;<br>MAR 2026</div>
+                <div class="ops-content">
+                  <div class="ops-company">VISHWAGURU INFOTECH</div>
+                  <div class="ops-role">Flutter Developer Intern</div>
+                  <div class="ops-achievements">
+                    <div class="ops-achievement">Built a <strong>full-featured e-commerce app</strong> — onboarding, auth, catalogue, cart, payment — in Flutter and Dart.</div>
+                    <div class="ops-achievement">Implemented Firebase Authentication and integrated Razorpay SDK for secure login and payment simulation.</div>
+                    <div class="ops-achievement">Designed advanced scrollable UI with <strong>Flutter Slivers</strong>; added adaptive light/dark theming and l10n localization.</div>
+                    <div class="ops-achievement">Architected a clean API layer using structured JSON parsing; migrated backend to Supabase.</div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <!-- State Management -->
-            <div class="bento-tile reveal">
-              <p class="bento-tile__label">State Management</p>
-              <p class="bento-tile__title">Architecture Patterns</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">BLoC</span>
-                <span class="bento-skill">Provider</span>
-                <span class="bento-skill">Riverpod</span>
-                <span class="bento-skill">GetX</span>
-                <span class="bento-skill">Clean Architecture</span>
+              <!-- Centralogic -->
+              <div class="ops-row"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                <div class="ops-date">MAR 2023 &ndash;<br>APR 2024</div>
+                <div class="ops-content">
+                  <div class="ops-company">CENTRALOGIC PVT LTD</div>
+                  <div class="ops-role">Flutter Developer</div>
+                  <div class="ops-achievements">
+                    <div class="ops-achievement">Delivered a <strong>Leave Management module</strong> for a production HRMS platform with multi-level approvals — reducing manual HR processing effort by <strong>40%</strong>.</div>
+                    <div class="ops-achievement">Engineered a secure candidate assessment platform with anti-cheat mechanisms, supporting <strong>500+ concurrent users</strong>.</div>
+                    <div class="ops-achievement">Integrated <strong>15+ REST APIs</strong> into a hospitality booking application for real-time reservation sync.</div>
+                    <div class="ops-achievement">Maintained code quality through Git version control, peer code reviews, and Agile sprint delivery.</div>
+                  </div>
+                </div>
               </div>
+
             </div>
 
-            <!-- Backend -->
-            <div class="bento-tile reveal">
-              <p class="bento-tile__label">Backend & APIs</p>
-              <p class="bento-tile__title">Data & Services</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">Firebase Auth</span>
-                <span class="bento-skill">Firestore</span>
-                <span class="bento-skill">Supabase</span>
-                <span class="bento-skill">REST APIs</span>
-                <span class="bento-skill">Razorpay</span>
-                <span class="bento-skill">Push Notifications</span>
-                <span class="bento-skill">JSON Parsing</span>
-              </div>
-            </div>
-
-            <!-- Full Stack — wide tile -->
-            <div class="bento-tile bento-tile--wide reveal">
-              <p class="bento-tile__label">Full Stack Web</p>
-              <p class="bento-tile__title">MERN Stack</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">React</span>
-                <span class="bento-skill">Node.js</span>
-                <span class="bento-skill">Express.js</span>
-                <span class="bento-skill">MongoDB</span>
-                <span class="bento-skill">JavaScript</span>
-                <span class="bento-skill">Stripe</span>
-                <span class="bento-skill">Vercel</span>
-              </div>
-            </div>
-
-            <!-- AI & Automation -->
-            <div class="bento-tile reveal">
-              <p class="bento-tile__label">AI & Automation</p>
-              <p class="bento-tile__title">Intelligent Workflows</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">n8n</span>
-                <span class="bento-skill">LLM APIs</span>
-                <span class="bento-skill">RAG Agents</span>
-                <span class="bento-skill">Email Automation</span>
-                <span class="bento-skill">Python</span>
-              </div>
-            </div>
-
-            <!-- DevOps & Tools -->
-            <div class="bento-tile reveal">
-              <p class="bento-tile__label">DevOps & Tools</p>
-              <p class="bento-tile__title">Delivery Infrastructure</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">Git</span>
-                <span class="bento-skill">Docker</span>
-                <span class="bento-skill">GCP</span>
-                <span class="bento-skill">CI/CD</span>
-                <span class="bento-skill">SonarQube</span>
-                <span class="bento-skill">Postman</span>
-                <span class="bento-skill">VS Code</span>
-                <span class="bento-skill">Android Studio</span>
+            <!-- Capabilities Block -->
+            <div class="ops-capabilities reveal">
+              <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; margin-bottom: var(--space-3);">03 // CORE CAPABILITIES</div>
+              <div class="ops-capabilities__tags">
+                <span class="ops-capability-tag">SYS-ARCHITECTURE</span>
+                <span class="ops-capability-tag">PERF-TUNING</span>
+                <span class="ops-capability-tag">CI/CD-PIPELINES</span>
+                <span class="ops-capability-tag">DISTRIBUTED-NETS</span>
+                <span class="ops-capability-tag">CLEAN-CODE</span>
+                <span class="ops-capability-tag">STATE-MANAGEMENT</span>
               </div>
             </div>
 
           </div>
         </div>
-      </section>
 
-      <!-- ──────────────────────────────────────────────────
-           CONTACT
-           ────────────────────────────────────────────────── -->
-      <section id="contact" class="section" aria-labelledby="contact-title">
-        <div class="container">
-          <div class="contact-grid">
-
-            <!-- Left: heading + status -->
-            <div class="reveal reveal--left">
-              <div class="hero__availability" style="margin-bottom: var(--space-6);">
-                <span class="pulse-dot" aria-hidden="true"></span>
-                Available for opportunities
-              </div>
-              <h2 class="contact-heading" id="contact-title">
-                Ready to<br />build something.
-              </h2>
-              <p class="contact-subtext">
-                Open to Flutter and full-stack roles. Pune-based, remote-ready.
-                If you're looking for an engineer who ships production code and
-                communicates clearly — let's talk.
-              </p>
-              <div data-magnetic data-magnetic-strength="0.2" class="btn-magnetic" style="display:inline-block">
-                <a href="mailto:agarwaldev626@gmail.com"
-                   class="btn btn--primary btn--lg"
-                   id="contact-email-btn"
-                   aria-label="Send email to Dev Agarwal">
-                  Send me an email
-                  <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </a>
-              </div>
+        <!-- ──────────────────────────────────────────────────
+             DEPT-03 // ASSEMBLY (Projects list)
+             ────────────────────────────────────────────────── -->
+        <div id="tab-work" class="console-screen">
+          <div class="container screen-scroll-container">
+            
+            <div class="section-header reveal">
+              <p class="section-label">DEPT-03 // ASSEMBLY LINE</p>
+              <h2 class="section-title">Things I've built</h2>
+              <p class="section-subtitle">Active systems in production and advanced R&amp;D pipelines.</p>
             </div>
 
-            <!-- Right: contact links + resume -->
-            <div class="reveal reveal--right">
-              <nav class="contact-links" aria-label="Contact and social links">
+            <div class="assembly-track reveal">
+              
+              <!-- Item 1: HRMS Platform -->
+              <div class="assembly-item">
+                <div class="assembly-item__blueprint">
+                  <svg width="100%" height="100%" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8; width: 100%; height: 100%;">
+                    <rect width="400" height="250" fill="#000" />
+                    <path d="M 0 50 L 400 50 M 0 100 L 400 100 M 0 150 L 400 150 M 0 200 L 400 200 M 50 0 L 50 250 M 100 0 L 100 250 M 150 0 L 150 250 M 200 0 L 200 250 M 250 0 L 250 250 M 300 0 L 300 250 M 350 0 L 350 250" stroke="rgba(0, 240, 255, 0.03)" stroke-width="1" />
+                    <rect x="270" y="70" width="110" height="110" rx="3" fill="rgba(8,10,15,0.6)" stroke="var(--color-accent)" stroke-dasharray="2 2" />
+                    <text x="325" y="95" fill="#fff" font-size="9" font-family="monospace" text-anchor="middle">HR DATA STORE</text>
+                    <rect x="285" y="110" width="80" height="20" rx="1" fill="rgba(0, 240, 255, 0.1)" stroke="var(--color-accent)" />
+                    <text x="325" y="123" fill="var(--color-accent)" font-size="8" font-family="monospace" text-anchor="middle">LEAVE_LOGS</text>
+                    <rect x="285" y="140" width="80" height="20" rx="1" fill="rgba(0, 240, 255, 0.1)" stroke="var(--color-accent)" />
+                    <text x="325" y="153" fill="var(--color-accent)" font-size="8" font-family="monospace" text-anchor="middle">ASSESS_KEYS</text>
+                    <rect x="20" y="80" width="90" height="90" rx="3" fill="rgba(8,10,15,0.6)" stroke="var(--color-accent)" />
+                    <text x="65" y="105" fill="#fff" font-size="9" font-family="monospace" text-anchor="middle">PORTAL CLIENT</text>
+                    <circle cx="65" cy="140" r="15" fill="none" stroke="var(--color-accent)" />
+                    <path d="M 60 140 L 70 140 M 65 135 L 65 145" stroke="var(--color-accent)" />
+                    <path d="M 110 110 L 270 110" stroke="var(--color-accent)" stroke-width="1" />
+                    <path d="M 270 140 L 110 140" stroke="var(--color-accent)" stroke-width="1" stroke-dasharray="3 3" />
+                    <text x="190" y="100" fill="var(--color-accent)" font-size="8" font-family="monospace" text-anchor="middle">REQS (500+ CONCUR)</text>
+                    <text x="190" y="155" fill="var(--color-text-secondary)" font-size="8" font-family="monospace" text-anchor="middle">SYNCED APPROVALS</text>
+                    <text x="12" y="15" fill="var(--color-text-muted)" font-size="7" font-family="monospace">SCHEMATIC: PRJ-772A</text>
+                  </svg>
+                </div>
+                <div class="assembly-item__details">
+                  <div class="assembly-item__meta">
+                    <span>ID: PRJ-772A</span>
+                    <span>ENTERPRISE &mdash; NDA</span>
+                  </div>
+                  <h3 class="assembly-item__title">HRMS Leave Management &amp; Assessment Platform</h3>
+                  <p class="assembly-item__desc">
+                    A production HRMS module handling leave approvals and concurrent candidate assessments. Processed real HR decisions, serving over 500 simultaneous users. Built with custom anti-cheat mechanisms, optimized API response handling, and delivered via Agile sprints.
+                  </p>
+                  <div class="assembly-item__stack-title">Tech Specifications</div>
+                  <div class="tag-list" style="margin-bottom: var(--space-4);">
+                    <span class="badge badge--accent">Flutter</span>
+                    <span class="badge badge--accent">Dart</span>
+                    <span class="badge badge--accent">REST APIs</span>
+                    <span class="badge badge--accent">BLoC</span>
+                    <span class="badge badge--default">HRMS</span>
+                  </div>
+                </div>
+              </div>
 
-                <a href="https://linkedin.com/in/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="contact-link"
-                   id="contact-linkedin"
-                   aria-label="LinkedIn profile — devagarwal2503">
-                  <div class="contact-link__left">
-                    <div class="contact-link__icon" aria-hidden="true">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              <!-- Item 2: E-Commerce Mobile App -->
+              <div class="assembly-item">
+                <div class="assembly-item__blueprint">
+                  <svg width="100%" height="100%" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8; width: 100%; height: 100%;">
+                    <rect width="400" height="250" fill="#000" />
+                    <path d="M 0 50 L 400 50 M 0 100 L 400 100 M 0 150 L 400 150 M 0 200 L 400 200 M 50 0 L 50 250 M 100 0 L 100 250 M 150 0 L 150 250 M 200 0 L 200 250 M 250 0 L 250 250 M 300 0 L 300 250 M 350 0 L 350 250" stroke="rgba(0, 240, 255, 0.03)" stroke-width="1" />
+                    <rect x="150" y="20" width="100" height="210" rx="10" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" stroke-width="1.5" />
+                    <rect x="185" y="28" width="30" height="4" rx="2" fill="var(--color-accent)" opacity="0.4" />
+                    <rect x="160" y="45" width="80" height="45" rx="2" fill="rgba(0,240,255,0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="200" y="70" fill="var(--color-accent)" font-size="8" font-family="monospace" text-anchor="middle">PROD_GRID</text>
+                    <rect x="160" y="98" width="80" height="35" rx="2" fill="rgba(0,240,255,0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="200" y="118" fill="var(--color-accent)" font-size="7" font-family="monospace" text-anchor="middle">CART_CHECKOUT</text>
+                    <rect x="160" y="142" width="80" height="20" rx="2" fill="rgba(0, 240, 255, 0.1)" stroke="var(--color-accent)" />
+                    <text x="200" y="154" fill="var(--color-accent)" font-size="7" font-family="monospace" text-anchor="middle">RAZORPAY_API</text>
+                    <rect x="160" y="170" width="80" height="20" rx="2" fill="rgba(0,240,255,0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="200" y="182" fill="var(--color-accent)" font-size="7" font-family="monospace" text-anchor="middle">FIREBASE_AUTH</text>
+                    <line x1="180" y1="222" x2="220" y2="222" stroke="var(--color-accent)" stroke-width="1.5" />
+                    <text x="12" y="15" fill="var(--color-text-muted)" font-size="7" font-family="monospace">DEVICE_MOCK: MOB-881</text>
+                  </svg>
+                </div>
+                <div class="assembly-item__details">
+                  <div class="assembly-item__meta">
+                    <span>ID: PRJ-881B</span>
+                    <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="contact-link">[ GITHUB ]</a>
+                  </div>
+                  <h3 class="assembly-item__title">E-Commerce Mobile App</h3>
+                  <p class="assembly-item__desc">
+                    An end-to-end mobile commerce app featuring catalog retrieval, cart management, and Razorpay transactions. Built with Flutter Slivers UI, adaptive light/dark theming, localization, and a Supabase backend database layer.
+                  </p>
+                  <div class="assembly-item__stack-title">Tech Specifications</div>
+                  <div class="tag-list" style="margin-bottom: var(--space-4);">
+                    <span class="badge badge--accent">Flutter</span>
+                    <span class="badge badge--accent">Firebase</span>
+                    <span class="badge badge--accent">Supabase</span>
+                    <span class="badge badge--accent">Razorpay</span>
+                    <span class="badge badge--default">Slivers</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: Full-Stack E-Commerce Platform -->
+              <div class="assembly-item">
+                <div class="assembly-item__blueprint">
+                  <svg width="100%" height="100%" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8; width: 100%; height: 100%;">
+                    <rect width="400" height="250" fill="#000" />
+                    <path d="M 0 50 L 400 50 M 0 100 L 400 100 M 0 150 L 400 150 M 0 200 L 400 200 M 50 0 L 50 250 M 100 0 L 100 250 M 150 0 L 150 250 M 200 0 L 200 250 M 250 0 L 250 250 M 300 0 L 300 250 M 350 0 L 350 250" stroke="rgba(0, 240, 255, 0.03)" stroke-width="1" />
+                    <rect x="20" y="90" width="85" height="70" rx="2" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="62" y="120" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">REACT FRONTEND</text>
+                    <rect x="25" y="132" width="75" height="12" fill="rgba(0,240,255,0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="62" y="140" fill="var(--color-accent)" font-size="6" font-family="monospace" text-anchor="middle">ADMIN DASHBOARD</text>
+                    <rect x="155" y="90" width="90" height="70" rx="2" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="200" y="120" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">NODE / EXPRESS</text>
+                    <rect x="165" y="132" width="70" height="12" fill="rgba(0,240,255,0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="200" y="140" fill="var(--color-accent)" font-size="6" font-family="monospace" text-anchor="middle">REST API GATEWAY</text>
+                    <rect x="300" y="90" width="80" height="70" rx="2" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="340" y="120" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">MONGODB STORE</text>
+                    <rect x="310" y="132" width="60" height="12" fill="rgba(0,240,255,0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="340" y="140" fill="var(--color-accent)" font-size="6" font-family="monospace" text-anchor="middle">COLLECTIONS</text>
+                    <path d="M 105 125 L 155 125" stroke="var(--color-accent)" />
+                    <path d="M 245 125 L 300 125" stroke="var(--color-accent)" />
+                    <text x="12" y="15" fill="var(--color-text-muted)" font-size="7" font-family="monospace">SERVICE: PRJ-992W</text>
+                  </svg>
+                </div>
+                <div class="assembly-item__details">
+                  <div class="assembly-item__meta">
+                    <span>ID: PRJ-992W</span>
+                    <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="contact-link">[ GITHUB ]</a>
+                  </div>
+                  <h3 class="assembly-item__title">Full-Stack E-Commerce Platform</h3>
+                  <p class="assembly-item__desc">
+                    MERN stack storefront with a React frontend web dashboard, REST Express/Node API controllers, and a MongoDB data layer. Supports Stripe checkout, Razorpay checkouts, and inventory trackers.
+                  </p>
+                  <div class="assembly-item__stack-title">Tech Specifications</div>
+                  <div class="tag-list" style="margin-bottom: var(--space-4);">
+                    <span class="badge badge--accent">React</span>
+                    <span class="badge badge--accent">Node.js</span>
+                    <span class="badge badge--accent">MongoDB</span>
+                    <span class="badge badge--accent">Stripe</span>
+                    <span class="badge badge--default">Vercel</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 4: Divine Chats — Real-Time Chat -->
+              <div class="assembly-item">
+                <div class="assembly-item__blueprint">
+                  <svg width="100%" height="100%" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8; width: 100%; height: 100%;">
+                    <rect width="400" height="250" fill="#000" />
+                    <path d="M 0 50 L 400 50 M 0 100 L 400 100 M 0 150 L 400 150 M 0 200 L 400 200 M 50 0 L 50 250 M 100 0 L 100 250 M 150 0 L 150 250 M 200 0 L 200 250 M 250 0 L 250 250 M 300 0 L 300 250 M 350 0 L 350 250" stroke="rgba(0, 240, 255, 0.03)" stroke-width="1" />
+                    <circle cx="80" cy="125" r="25" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="80" y="128" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">PEER_A</text>
+                    <rect x="50" y="165" width="60" height="15" rx="1" fill="rgba(0, 240, 255, 0.05)" stroke="var(--color-accent)" stroke-width="0.5" />
+                    <text x="80" y="174" fill="var(--color-text-secondary)" font-size="6" font-family="monospace" text-anchor="middle">LOCAL_DB</text>
+                    <circle cx="320" cy="125" r="25" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="320" y="128" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">PEER_B</text>
+                    <rect x="175" y="100" width="50" height="50" rx="3" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="200" y="125" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">API</text>
+                    <path d="M 105 125 L 175 125" stroke="var(--color-accent)" />
+                    <path d="M 225 125 L 295 125" stroke="var(--color-accent)" />
+                    <text x="12" y="15" fill="var(--color-text-muted)" font-size="7" font-family="monospace">PROTOCOL: CHAT-552</text>
+                  </svg>
+                </div>
+                <div class="assembly-item__details">
+                  <div class="assembly-item__meta">
+                    <span>ID: PRJ-552C</span>
+                    <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="contact-link">[ GITHUB ]</a>
+                    <span>2023</span>
+                  </div>
+                  <h3 class="assembly-item__title">Divine Chats &mdash; Real-Time Chat</h3>
+                  <p class="assembly-item__desc">
+                    Real-time messaging application supporting notification protocols and local caching, maintaining server communication channels on low-connectivity networks. Rebuilt from a PHP/MySQL stack into Flutter.
+                  </p>
+                  <div class="assembly-item__stack-title">Tech Specifications</div>
+                  <div class="tag-list" style="margin-bottom: var(--space-4);">
+                    <span class="badge badge--accent">Flutter</span>
+                    <span class="badge badge--accent">Dart</span>
+                    <span class="badge badge--accent">REST APIs</span>
+                    <span class="badge badge--default">PHP / MySQL</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 5: AI Automation Agents -->
+              <div class="assembly-item">
+                <div class="assembly-item__blueprint">
+                  <svg width="100%" height="100%" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8; width: 100%; height: 100%;">
+                    <rect width="400" height="250" fill="#000" />
+                    <path d="M 0 50 L 400 50 M 0 100 L 400 100 M 0 150 L 400 150 M 0 200 L 400 200 M 50 0 L 50 250 M 100 0 L 100 250 M 150 0 L 150 250 M 200 0 L 200 250 M 250 0 L 250 250 M 300 0 L 300 250 M 350 0 L 350 250" stroke="rgba(0, 240, 255, 0.03)" stroke-width="1" />
+                    <rect x="20" y="100" width="80" height="50" rx="2" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="60" y="125" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">EMAIL_INBOX</text>
+                    <text x="60" y="135" fill="var(--color-accent)" font-size="7" font-family="monospace" text-anchor="middle">[TRIGGER]</text>
+                    <rect x="150" y="100" width="100" height="50" rx="2" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="200" y="125" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">LLM API AGENT</text>
+                    <text x="200" y="135" fill="var(--color-accent)" font-size="7" font-family="monospace" text-anchor="middle">[SUMMARIZATION]</text>
+                    <rect x="300" y="100" width="80" height="50" rx="2" fill="rgba(8,10,15,0.7)" stroke="var(--color-accent)" />
+                    <text x="340" y="125" fill="#fff" font-size="8" font-family="monospace" text-anchor="middle">n8n OUTBOUND</text>
+                    <text x="340" y="135" fill="var(--color-accent)" font-size="7" font-family="monospace" text-anchor="middle">[RESPONSE]</text>
+                    <path d="M 100 125 L 150 125" stroke="var(--color-accent)" />
+                    <path d="M 250 125 L 300 125" stroke="var(--color-accent)" />
+                    <text x="12" y="15" fill="var(--color-text-muted)" font-size="7" font-family="monospace">PIPELINE: AI-602</text>
+                  </svg>
+                </div>
+                <div class="assembly-item__details">
+                  <div class="assembly-item__meta">
+                    <span>ID: PRJ-602D</span>
+                    <span>IN PROGRESS</span>
+                  </div>
+                  <h3 class="assembly-item__title">AI Automation Agents</h3>
+                  <p class="assembly-item__desc">
+                    An email summarization agent pipeline executing LLM APIs summarization triggered by inbox updates. Generates outreach replies via automated n8n workflows.
+                  </p>
+                  <div class="assembly-item__stack-title">Tech Specifications</div>
+                  <div class="tag-list" style="margin-bottom: var(--space-4);">
+                    <span class="badge badge--accent">n8n</span>
+                    <span class="badge badge--accent">LLM APIs</span>
+                    <span class="badge badge--accent">RAG</span>
+                    <span class="badge badge--default">Workflow Automation</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────
+             DEPT-04 // WAREHOUSE (Skills & Tech Stack)
+             ────────────────────────────────────────────────── -->
+        <div id="tab-stack" class="console-screen">
+          <div class="container screen-scroll-container">
+            
+            <div class="section-header reveal">
+              <p class="section-label">ABOUT // COMPONENT WAREHOUSE</p>
+              <h2 class="section-title">What I work with</h2>
+              <p class="section-subtitle">System hardware inventory, classified into production-ready cards with verified brand integrations.</p>
+            </div>
+
+            <div class="warehouse-grid reveal">
+              
+              <!-- Category 1: Mobile Core -->
+              <div class="skills-category-group" style="margin-bottom: var(--space-8);">
+                <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-accent); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); margin-bottom: var(--space-4); text-transform: uppercase;">
+                  // 01 // CORE MOBILE ECOSYSTEM
+                </div>
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4);">
+                  
+                  <div class="skill-card" style="--brand-color: #02569B; --brand-glow: rgba(2, 86, 155, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.3 2.3L5 11.6l3.7 3.7 9.3-9.3h-3.7z" fill="#02569B"/>
+                        <path d="M14.3 11.6l-3.7 3.7 3.7 3.7 7.4-7.4h-7.4z" fill="#0175C2"/>
+                        <path d="M10.6 15.3l-3.7 3.7 3.7 3.7h3.7l-3.7-3.7z" fill="#13B9FD"/>
                       </svg>
                     </div>
-                    <div>
-                      <p class="contact-link__label">LinkedIn</p>
-                      <p class="contact-link__sub">linkedin.com/in/devagarwal2503</p>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Flutter</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // PRODUCTION</div>
                     </div>
                   </div>
-                  <svg class="contact-link__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M2.5 13.5L13.5 2.5M13.5 2.5H6.5M13.5 2.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  </svg>
-                </a>
 
-                <a href="https://github.com/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="contact-link"
-                   id="contact-github"
-                   aria-label="GitHub profile — devagarwal2503">
-                  <div class="contact-link__left">
-                    <div class="contact-link__icon" aria-hidden="true">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 1C5.37 1 0 6.37 0 13c0 5.3 3.44 9.8 8.21 11.38.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.74-1.33-1.74-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58C20.57 22.8 24 18.3 24 13c0-6.63-5.37-12-12-12z"/>
+                  <div class="skill-card" style="--brand-color: #0175C2; --brand-glow: rgba(1, 117, 194, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 12l10 10 10-10L12 2z" fill="#0175C2"/>
+                        <path d="M12 2L7 7l5 5 5-5-5-5z" fill="#13B9FD"/>
+                        <path d="M12 12l-5 5 5 5 5-5-5-5z" fill="#01579B"/>
                       </svg>
                     </div>
-                    <div>
-                      <p class="contact-link__label">GitHub</p>
-                      <p class="contact-link__sub">github.com/devagarwal2503</p>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Dart</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // ADVANCED</div>
                     </div>
                   </div>
-                  <svg class="contact-link__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M2.5 13.5L13.5 2.5M13.5 2.5H6.5M13.5 2.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  </svg>
-                </a>
 
-                <a href="mailto:agarwaldev626@gmail.com"
-                   class="contact-link"
-                   id="contact-email-link"
-                   aria-label="Email Dev Agarwal at agarwaldev626@gmail.com">
-                  <div class="contact-link__left">
-                    <div class="contact-link__icon" aria-hidden="true">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
+                  <div class="skill-card" style="--brand-color: #3DDC84; --brand-glow: rgba(61, 220, 132, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.5 10c-.8 0-1.5-.7-1.5-1.5S16.7 7 17.5 7s1.5.7 1.5 1.5-.7 1.5-1.5 1.5zM6.5 10c-.8 0-1.5-.7-1.5-1.5S5.7 7 6.5 7s1.5.7 1.5 1.5-.7 1.5-1.5 1.5zm11.3-4.8l1.4-2.4c.1-.2 0-.5-.2-.6-.2-.1-.5 0-.6.2l-1.4 2.4c-1.3-.6-2.8-.9-4.5-.9s-3.2.3-4.5.9L6.6 2.4c-.1-.2-.4-.3-.6-.2-.2.1-.3.4-.2.6l1.4 2.4C4.3 6.9 2.5 9.7 2 13h20c-.5-3.3-2.3-6.1-5.2-7.8z" fill="#3DDC84"/>
                       </svg>
                     </div>
-                    <div>
-                      <p class="contact-link__label">Email</p>
-                      <p class="contact-link__sub">agarwaldev626@gmail.com</p>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Android SDK</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // INTEGRATION</div>
                     </div>
                   </div>
-                  <svg class="contact-link__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M2.5 13.5L13.5 2.5M13.5 2.5H6.5M13.5 2.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  </svg>
-                </a>
-              </nav>
 
-              <!-- Resume download -->
-              <a href="Dev_Agarwal_Resume.pdf"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="resume-block"
-                 id="contact-resume"
-                 aria-label="Download Dev Agarwal's resume as PDF">
-                <div class="resume-block__text">
-                  <strong>Download Resume</strong>
-                  <span>Dev_Agarwal_Resume.pdf · PDF</span>
+                  <div class="skill-card" style="--brand-color: #777777; --brand-glow: rgba(119, 119, 119, 0.3);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.2.67-2.92 1.49-.62.71-1.16 1.85-1.02 2.96 1.1.09 2.22-.58 2.95-1.39z"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>iOS Ecosystem</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // BUILDS</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #00f0ff; --brand-glow: rgba(0, 240, 255, 0.3);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M9 17v-5h6v5" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Slivers UI</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.5 YRS // EXPERT</div>
+                    </div>
+                  </div>
+
                 </div>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="color: var(--color-accent-hover); flex-shrink:0;">
-                  <path d="M3.5 14.5v1a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1M10 3v10M10 13l-3.5-3.5M10 13l3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              </div>
+
+              <!-- Category 2: State Flow & Architecture -->
+              <div class="skills-category-group" style="margin-bottom: var(--space-8);">
+                <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-accent); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); margin-bottom: var(--space-4); text-transform: uppercase;">
+                  // 02 // STATE FLOW &amp; ARCHITECTURAL SPECIFICATIONS
+                </div>
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4);">
+                  
+                  <div class="skill-card" style="--brand-color: #80DEEA; --brand-glow: rgba(128, 222, 234, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>BLoC Pattern</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.5 YRS // PRODUCTION</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #FFB700; --brand-glow: rgba(255, 183, 0, 0.3);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9" />
+                        <line x1="12" y1="2" x2="12" y2="22" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Provider / Riverpod</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // ADVANCED</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #c084fc; --brand-glow: rgba(192, 132, 252, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                        <path d="M10 6.5h4M6.5 10v4" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Clean Arch.</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.5 YRS // SYSTEMATIC</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Category 3: Backend Gateway & Data -->
+              <div class="skills-category-group" style="margin-bottom: var(--space-8);">
+                <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-accent); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); margin-bottom: var(--space-4); text-transform: uppercase;">
+                  // 03 // BACKEND ENDPOINTS &amp; INTEGRATIONS
+                </div>
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4);">
+                  
+                  <div class="skill-card" style="--brand-color: #FFCA28; --brand-glow: rgba(255, 202, 40, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.9 18.2l7.1-13.4c.2-.4.8-.4 1 0l2 3.8-10.1 9.6z" fill="#FFA000"/>
+                        <path d="M16.3 9.7L12.7 3c-.2-.4-.8-.4-1 0L3.9 18.2l12.4-8.5z" fill="#F57C00"/>
+                        <path d="M12 17.8L3.9 18.2l8.1 4.6c.2.1.5.1.7 0l8.1-4.6-8.8-.4z" fill="#FFCA28"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Firebase Services</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // AUTH &amp; DB</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #3ECF8E; --brand-glow: rgba(62, 207, 142, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.8 9.5l-6.8 9.2c-.4.5-1.2.2-1.1-.4l.8-6.1H5.2c-.7 0-1.1-.8-.6-1.3l6.8-9.2c.4-.5 1.2-.2 1.1.4l-.8 6.1h6.5c.7 0 1.1.8.6 1.3z" fill="#3ECF8E"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Supabase Data</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.0 YRS // SCHEMAS</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #00F0FF; --brand-glow: rgba(0, 240, 255, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="5" r="3" />
+                        <circle cx="5" cy="19" r="3" />
+                        <circle cx="19" cy="19" r="3" />
+                        <path d="M5 16v-3a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3" />
+                        <path d="M12 9v5" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>REST APIs</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // CLIENT CONNEC</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #FFA000; --brand-glow: rgba(255, 160, 0, 0.3);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                        <path d="M7 15h.01M11 15h.01" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Razorpay API</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.5 YRS // CHECKOUTS</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Category 4: Full Stack Web -->
+              <div class="skills-category-group" style="margin-bottom: var(--space-8);">
+                <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-accent); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); margin-bottom: var(--space-4); text-transform: uppercase;">
+                  // 04 // FULL STACK WEB DEPLOYMENTS (MERN)
+                </div>
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4);">
+                  
+                  <div class="skill-card" style="--brand-color: #61DAFB; --brand-glow: rgba(97, 218, 251, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="12" cy="12" rx="3.5" ry="9" stroke="#61DAFB" stroke-width="1.5" transform="rotate(30 12 12)" />
+                        <ellipse cx="12" cy="12" rx="3.5" ry="9" stroke="#61DAFB" stroke-width="1.5" transform="rotate(90 12 12)" />
+                        <ellipse cx="12" cy="12" rx="3.5" ry="9" stroke="#61DAFB" stroke-width="1.5" transform="rotate(150 12 12)" />
+                        <circle cx="12" cy="12" r="1.5" fill="#61DAFB" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>React</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.0 YRS // FRONTEND</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #339933; --brand-glow: rgba(51, 153, 51, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L3 7v10l9 5 9-5V7l-9-5zm7.3 14.1l-7.3 4V8.9l7.3-4.1v11.3z" fill="#339933"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Node.js</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.5 YRS // BACKEND</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #47A248; --brand-glow: rgba(71, 162, 72, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 1C10 5 7 9 7 13c0 3.3 2.2 5 5 5s5-1.7 5-5c0-4-3-8-5-12z" fill="#47A248"/>
+                        <path d="M12 1v17c-2 0-3-1-3-4 0-3.3 2-6.5 3-13z" fill="#3F9142"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>MongoDB</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.0 YRS // COLLECTION</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #F7DF1E; --brand-glow: rgba(247, 223, 30, 0.3);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <rect width="24" height="24" rx="3" fill="#F7DF1E" />
+                        <path d="M12.2 18.4c.4.7.9 1.3 1.8 1.3.8 0 1.3-.4 1.3-1v-4.1h1.5v4.2c0 1.6-1 2.4-2.7 2.4-1.6 0-2.6-.9-3.2-2.1l1.3-.7zm6.7 0c.3.6.8 1.1 1.5 1.1.6 0 1-.3 1-.8 0-.5-.4-.7-.9-1l-1.3-.5c-1.3-.5-1.8-1.3-1.8-2.4 0-1.4 1.1-2.4 2.7-2.4 1.2 0 2.1.5 2.6 1.5l-1.2.7c-.3-.5-.7-.8-1.3-.8-.5 0-.8.2-.8.6 0 .4.3.6.7.7l1.3.5c1.4.5 2.1 1.2 2.1 2.5 0 1.6-1.2 2.6-3 2.6-1.8 0-2.8-1-3.3-2.2l1.4-.8z" fill="#000"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>JavaScript</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // SCRIPTING</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Category 5: Workflows & AI -->
+              <div class="skills-category-group" style="margin-bottom: var(--space-8);">
+                <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-accent); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); margin-bottom: var(--space-4); text-transform: uppercase;">
+                  // 05 // INTELLIGENT AGENTS &amp; WORKFLOW AUTOMATIONS
+                </div>
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4);">
+                  
+                  <div class="skill-card" style="--brand-color: #FF6D5A; --brand-glow: rgba(255, 109, 90, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="6" cy="12" r="3" fill="#FF6D5A" />
+                        <circle cx="18" cy="6" r="3" fill="#FF6D5A" />
+                        <circle cx="18" cy="18" r="3" fill="#FF6D5A" />
+                        <path d="M6 12 L18 6 M6 12 L18 18" stroke="#FF6D5A" stroke-width="2" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>n8n Flows</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>0.5 YRS // PIPELINES</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #C084FC; --brand-glow: rgba(192, 132, 252, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>LLM APIs / RAG</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>0.5 YRS // AGENTS</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #3776AB; --brand-glow: rgba(55, 118, 171, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.1 1.7c-2.7 0-4.8.4-4.8 2.8v1.9h5v.7H7.3c-2.4 0-4.5 1.5-4.5 4.8 0 3 2.1 4.7 4.5 4.7h1.6v-2.2c0-2.4 2.1-4.6 4.8-4.6h4.8V4.5c0-2.4-2.1-2.8-4.8-2.8zm-2.2 1.8a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm2.1 18.8c2.7 0 4.8-.4 4.8-2.8v-1.9h-5v-.7h5c2.4 0 4.5-1.5 4.5-4.8 0-3-2.1-4.7-4.5-4.7H15v2.2c0 2.4-2.1 4.6-4.8 4.6H5.4V19.5c0 2.4 2.1 2.8 4.8 2.8zm2.2-1.8a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z" fill="#3776AB"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Python R&amp;D</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.0 YRS // SCRIPTS</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Category 6: DevOps & Utilities -->
+              <div class="skills-category-group" style="margin-bottom: var(--space-8);">
+                <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-accent); border-bottom: 1px dashed var(--color-border); padding-bottom: var(--space-2); margin-bottom: var(--space-4); text-transform: uppercase;">
+                  // 06 // DEVOPS &amp; DEVELOPMENT UTILITIES
+                </div>
+                <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4);">
+                  
+                  <div class="skill-card" style="--brand-color: #F05032; --brand-glow: rgba(240, 80, 50, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.6 10.4L13.6 3.4c-.8-.8-2-.8-2.8 0L9.4 4.8l2.9 2.9c.7-.2 1.5 0 2 .6.5.5.7 1.3.5 2l2.9 2.9c.7-.2 1.5 0 2 .5.8.8.8 2 0 2.8s-2 .8-2.8 0c-.5-.5-.7-1.3-.5-2l-2.9-2.9c-.2.7-.9 1.2-1.7 1.2-.8 0-1.5-.5-1.7-1.2L7.3 14c.2.7 0 1.5-.5 2-.8.8-2 .8-2.8 0s-.8-2 0-2.8c.5-.5 1.3-.7 2-.5l3.2-3.2V9.3L6 12c-.8.8-2 .8-2.8 0L2 10.6c-.8-.8-.8-2 0-2.8l7.2-7.2c.8-.8 2-.8 2.8 0l7.2 7.2c.8.8.8 2 0 2.8z" fill="#F05032"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Git VCS</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>2.0 YRS // COLLAB</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #2496ED; --brand-glow: rgba(36, 150, 237, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13.983 8.871h-1.996V10.87h1.996V8.871zM11.486 8.871H9.49V10.87h1.996V8.871zM8.99 8.871H6.993V10.87H8.99V8.871zM6.494 8.871H4.497V10.87h1.997V8.871zM11.486 6.375H9.49v1.996h1.996V6.375zM8.99 6.375H6.993v1.996H8.99V6.375zM13.983 6.375h-1.996v1.996h1.996V6.375zM16.48 8.871h-1.996V10.87h1.996V8.871zM23.966 11.233c-.049-.078-.315-.49-.784-.872-.519-.42-1.32-.71-2.484-.71-.235 0-.466.014-.693.04-.15-.812-.628-1.545-1.353-2.037a3.87 3.87 0 0 0-2.124-.627c-.203 0-.406.015-.606.046V8.87c.2.03.398.05.596.05 1.05 0 2.03.49 2.637 1.347.08.113.15.234.21.36.14.31.22.64.24.97.02.26-.025.53-.13.78a2.6 2.6 0 0 1-.85 1.13c-.56.44-1.325.68-2.285.68h-12.3c-.63 0-1.23-.21-1.7-.58-.45-.36-.71-.85-.73-1.39l-.004-.33c.01-.22.05-.44.13-.65.25-.66.74-1.2 1.39-1.53.51-.26 1.09-.39 1.7-.39h.12v1.997H1.99v1.996c0 .7.31 1.37.86 1.86.58.52 1.35.8 2.14.8h14.7c1.37 0 2.53-.39 3.4-1.12.87-.73 1.36-1.78 1.4-2.88.01-.26-.11-.79-.53-1.13z" fill="#2496ED"/>
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>Docker</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.0 YRS // CONTAINERS</div>
+                    </div>
+                  </div>
+
+                  <div class="skill-card" style="--brand-color: #4285F4; --brand-glow: rgba(66, 133, 244, 0.35);"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div class="skill-card__logo"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                      </svg>
+                    </div>
+                    <div class="skill-card__info"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                      <div class="skill-card__title"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>GCP Platform</div>
+                      <div class="skill-card__level"><span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>1.0 YRS // CLOUD ARCH</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div><!-- ──────────────────────────────────────────────────
+             DEPT-05 // UPLINK (Contact Terminals)
+             ────────────────────────────────────────────────── -->
+        <div id="tab-contact" class="console-screen">
+          <div class="container screen-scroll-container">
+            
+            <div class="section-header reveal">
+              <p class="section-label">CONTACT // COMMUNICATION TERMINAL</p>
+              <h2 class="section-title">Establish Connection</h2>
+              <p class="section-subtitle">Direct coordinates and transmission channels to contact Dev Agarwal.</p>
             </div>
 
+            <div class="reveal contact-dashboard-grid" style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-6); margin-bottom: var(--space-8); align-items: start;">
+              
+              <!-- Left Column: Direct coordinates -->
+              <div class="dashboard-panel" style="padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+                <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                
+                <div class="dashboard-panel__header">
+                  <span>01 // DIRECT LINE</span>
+                  <span class="text-accent"> Pune, MH, IN </span>
+                </div>
+
+                <!-- Email Link Box -->
+                <a href="mailto:agarwaldev626@gmail.com" style="text-decoration: none; display: flex; flex-direction: column; gap: var(--space-2); border: 1px solid rgba(0, 240, 255, 0.15); padding: var(--space-4); background: rgba(0, 240, 255, 0.015); transition: border-color 0.2s;">
+                  <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); letter-spacing: 1px;">DIRECT MAIL UPLINK</div>
+                  <div style="font-family: var(--font-mono); font-size: var(--text-base); color: #fff; word-break: break-all; font-weight: bold;">agarwaldev626@gmail.com</div>
+                  <div style="margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent);">[ SEND TRANSMISSION &rarr; ]</div>
+                </a>
+
+                <!-- Location Coordinates Box -->
+                <div style="display: flex; flex-direction: column; gap: var(--space-2); border: 1px solid rgba(0, 240, 255, 0.15); padding: var(--space-4); background: rgba(0, 240, 255, 0.015);">
+                  <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); letter-spacing: 1px;">GEOLOCATION LOCATION</div>
+                  <div style="font-family: var(--font-mono); font-size: var(--text-base); color: #fff; font-weight: bold;">Pune, Maharashtra, India</div>
+                  <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted);">18.5204° N, 73.8567° E // ACTIVE</div>
+                </div>
+
+              </div>
+
+              <!-- Right Column: External Communication Links -->
+              <div class="dashboard-panel" style="padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+                <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                
+                <div class="dashboard-panel__header">
+                  <span>02 // CONNECTION NETWORKS</span>
+                  <span class="text-accent">EXTERNAL UPLINKS</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                  
+                  <!-- LinkedIn Horizontal Row -->
+                  <a href="https://linkedin.com/in/devagarwal2503" target="_blank" rel="noopener noreferrer" class="skill-card" style="--brand-color: #0a66c2; --brand-glow: rgba(10, 102, 194, 0.25); text-decoration: none; display: block; padding: 0;">
+                    <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); width: 100%;">
+                      <div style="display: flex; align-items: center; gap: var(--space-4);">
+                        <div class="skill-card__logo" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); flex-shrink: 0;">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <div style="font-family: var(--font-sans); font-size: var(--text-base); font-weight: 700; color: #fff;">LinkedIn Network</div>
+                          <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-muted); word-break: break-all;">linkedin.com/in/devagarwal2503</div>
+                        </div>
+                      </div>
+                      <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); white-space: nowrap; margin-left: var(--space-3);">[ CONNECT &rarr; ]</div>
+                    </div>
+                  </a>
+
+                  <!-- GitHub Horizontal Row -->
+                  <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="skill-card" style="--brand-color: #ffffff; --brand-glow: rgba(255, 255, 255, 0.25); text-decoration: none; display: block; padding: 0;">
+                    <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); width: 100%;">
+                      <div style="display: flex; align-items: center; gap: var(--space-4);">
+                        <div class="skill-card__logo" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); flex-shrink: 0;">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <div style="font-family: var(--font-sans); font-size: var(--text-base); font-weight: 700; color: #fff;">GitHub Repositories</div>
+                          <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-muted); word-break: break-all;">github.com/devagarwal2503</div>
+                        </div>
+                      </div>
+                      <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); white-space: nowrap; margin-left: var(--space-3);">[ EXPLORE &rarr; ]</div>
+                    </div>
+                  </a>
+
+                  <!-- Resume Horizontal Row -->
+                  <a href="Dev_Agarwal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="skill-card" style="--brand-color: #f40f02; --brand-glow: rgba(244, 15, 2, 0.25); text-decoration: none; display: block; padding: 0;">
+                    <span class="corner-bracket top-left"></span><span class="corner-bracket top-right"></span><span class="corner-bracket bottom-left"></span><span class="corner-bracket bottom-right"></span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); width: 100%;">
+                      <div style="display: flex; align-items: center; gap: var(--space-4);">
+                        <div class="skill-card__logo" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border: 1px solid var(--color-border); flex-shrink: 0;">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                          </svg>
+                        </div>
+                        <div>
+                          <div style="font-family: var(--font-sans); font-size: var(--text-base); font-weight: 700; color: #fff;">Curriculum Vitae</div>
+                          <div style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-muted); word-break: break-all;">Dev_Agarwal_Resume.pdf &middot; 142KB</div>
+                        </div>
+                      </div>
+                      <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); white-space: nowrap; margin-left: var(--space-3);">[ DOWNLOAD &rarr; ]</div>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-      </section>
-
-    </main><!-- /main -->
-
-    <!-- ════════════════════════════════════════════════════
-         FOOTER
-         ════════════════════════════════════════════════════ -->
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <div class="footer__inner">
-          <p class="footer__copy">
-            &copy; 2026 Dev Agarwal &mdash; Built with intent.
-          </p>
-          <nav class="footer__links" aria-label="Footer links">
-            <a href="https://github.com/devagarwal2503"  target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a>
-            <a href="https://linkedin.com/in/devagarwal2503" target="_blank" rel="noopener noreferrer" class="footer__link">LinkedIn</a>
-            <a href="Dev_Agarwal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="footer__link">Resume</a>
-          </nav>
+</main>
+      
+      <!-- Persistent Bottom Status Bar -->
+      <footer style="flex-shrink: 0; border-top: 1px solid var(--color-border); padding: var(--space-3) var(--container-px); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: var(--tracking-wider); display: flex; justify-content: space-between; background: rgba(5,6,8,0.8); align-items: center;">
+        <div>SYSTEM STATUS: ONLINE // CLEARANCE OMEGA // DEPT-00 ACTIVE</div>
+        <div style="display: flex; gap: var(--space-4);">
+          <span>UPTIME: <span id="uptime-counter">00:00:00</span></span>
+          <span>LATENCY: 12ms</span>
+          <span>LOAD: 94.2%</span>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+    </div>
 
     <!-- ── JS Modules ─────────────────────────────────────── -->
     <script type="module" src="js/main.js"></script>

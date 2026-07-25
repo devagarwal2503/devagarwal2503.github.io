@@ -23,6 +23,10 @@ export function initCursor() {
     mouseY = e.clientY;
     dot.style.left = mouseX + 'px';
     dot.style.top  = mouseY + 'px';
+    
+    // Pass coordinates to CSS for mouse-tracking spotlights
+    document.documentElement.style.setProperty('--mouse-x', mouseX + 'px');
+    document.documentElement.style.setProperty('--mouse-y', mouseY + 'px');
   });
 
   // Ring follows with spring lag
@@ -39,17 +43,19 @@ export function initCursor() {
   animateRing();
 
   // Hover state — enlarge ring over interactive elements
-  const interactiveSelectors = 'a, button, .btn, .card, .contact-link, .nav__link, [data-cursor-hover]';
+  const interactiveSelectors = 'a, button, .btn, .btn-tech, .btn-transmit, .assembly-item, .blade-card, .terminal-card, .contact-link, .nav__link, [data-cursor-hover]';
 
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest(interactiveSelectors)) {
+    const target = e.target.closest(interactiveSelectors);
+    if (target) {
       ring.classList.add('is-hovering');
       dot.style.opacity = '0';
     }
   });
 
   document.addEventListener('mouseout', (e) => {
-    if (e.target.closest(interactiveSelectors)) {
+    const target = e.target.closest(interactiveSelectors);
+    if (target) {
       ring.classList.remove('is-hovering');
       dot.style.opacity = '1';
     }

@@ -1,32 +1,28 @@
 /* =========================================================
    ANIMATIONS & MOTION SYSTEM
    GPU-accelerated, scroll-triggered, purposeful motion.
-   All animations use only transform + opacity.
    ========================================================= */
 
 /* ── Reveal System (IntersectionObserver) ────────────────── */
-/* Default: visible. JS adds .js-animations class to <html>
-   which opts-in to the animated state. This ensures
-   content is always readable without JS or on file:// protocol. */
 .js-animations .reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(32px) scale(0.98);
   transition:
-    opacity var(--duration-slower) var(--ease-out-expo),
-    transform var(--duration-slower) var(--ease-out-expo);
+    opacity var(--duration-slower) var(--ease-spring),
+    transform var(--duration-slower) var(--ease-spring);
   will-change: opacity, transform;
 }
 
 .js-animations .reveal.reveal--left {
-  transform: translateX(-24px);
+  transform: translateX(-32px) scale(0.98);
 }
 
 .js-animations .reveal.reveal--right {
-  transform: translateX(24px);
+  transform: translateX(32px) scale(0.98);
 }
 
 .js-animations .reveal.reveal--scale {
-  transform: scale(0.95) translateY(12px);
+  transform: scale(0.92) translateY(16px);
 }
 
 .js-animations .reveal.is-visible,
@@ -35,29 +31,29 @@
   transform: translateY(0) translateX(0) scale(1);
 }
 
-/* Stagger delays — applied to children (only when JS enabled) */
+/* Stagger delays — applied to children */
 .js-animations .stagger > * { transition-delay: 0ms; }
 .js-animations .stagger > *:nth-child(1)  { transition-delay: 0ms; }
-.js-animations .stagger > *:nth-child(2)  { transition-delay: 80ms; }
-.js-animations .stagger > *:nth-child(3)  { transition-delay: 160ms; }
-.js-animations .stagger > *:nth-child(4)  { transition-delay: 240ms; }
-.js-animations .stagger > *:nth-child(5)  { transition-delay: 320ms; }
-.js-animations .stagger > *:nth-child(6)  { transition-delay: 400ms; }
-.js-animations .stagger > *:nth-child(7)  { transition-delay: 480ms; }
-.js-animations .stagger > *:nth-child(8)  { transition-delay: 560ms; }
+.js-animations .stagger > *:nth-child(2)  { transition-delay: 60ms; }
+.js-animations .stagger > *:nth-child(3)  { transition-delay: 120ms; }
+.js-animations .stagger > *:nth-child(4)  { transition-delay: 180ms; }
+.js-animations .stagger > *:nth-child(5)  { transition-delay: 240ms; }
+.js-animations .stagger > *:nth-child(6)  { transition-delay: 300ms; }
+.js-animations .stagger > *:nth-child(7)  { transition-delay: 360ms; }
+.js-animations .stagger > *:nth-child(8)  { transition-delay: 420ms; }
 
 /* ── Hero Entrance Sequence ──────────────────────────────── */
 .hero-animate {
   opacity: 0;
-  transform: translateY(20px);
-  animation: heroEntrance var(--duration-slower) var(--ease-out-expo) forwards;
+  transform: translateY(16px);
+  animation: heroEntrance var(--duration-slower) var(--ease-spring) forwards;
 }
 
-.hero-animate--d1 { animation-delay: 100ms; }
-.hero-animate--d2 { animation-delay: 200ms; }
-.hero-animate--d3 { animation-delay: 340ms; }
-.hero-animate--d4 { animation-delay: 480ms; }
-.hero-animate--d5 { animation-delay: 600ms; }
+.hero-animate--d1 { animation-delay: 150ms; }
+.hero-animate--d2 { animation-delay: 250ms; }
+.hero-animate--d3 { animation-delay: 380ms; }
+.hero-animate--d4 { animation-delay: 500ms; }
+.hero-animate--d5 { animation-delay: 620ms; }
 
 @keyframes heroEntrance {
   to {
@@ -66,14 +62,14 @@
   }
 }
 
-/* ── Marquee ─────────────────────────────────────────────── */
+/* ── Marquee Loop ────────────────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
 .marquee-track {
-  animation: marquee 40s linear infinite;
+  animation: marquee 35s linear infinite;
   will-change: transform;
 }
 
@@ -81,17 +77,17 @@
   animation-play-state: paused;
 }
 
-/* ── Pulse (availability badge) ──────────────────────────── */
+/* ── Pulse (availability dot) ───────────────────────────── */
 @keyframes pulse-ring {
   0%   { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.0); opacity: 0; }
 }
 
 .pulse-dot {
   position: relative;
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: var(--radius-full);
   background: var(--color-green);
   flex-shrink: 0;
@@ -106,6 +102,27 @@
   animation: pulse-ring 2s var(--ease-out-expo) infinite;
 }
 
+/* ── Technical Scanline Sweep ────────────────────────────── */
+@keyframes scanline-sweep {
+  0% { transform: translateY(-5px); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(355px); opacity: 0; }
+}
+
+.photo-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  box-shadow: 0 0 12px var(--color-accent);
+  animation: scanline-sweep 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
 /* ── Gradient text ───────────────────────────────────────── */
 .gradient-text {
   background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
@@ -115,7 +132,7 @@
 }
 
 .gradient-text--accent {
-  background: linear-gradient(135deg, var(--color-accent-hover) 0%, var(--color-violet) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-violet) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -127,25 +144,36 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ── Line draw (timeline) ────────────────────────────────── */
-@keyframes drawLine {
-  from { transform: scaleY(0); }
-  to   { transform: scaleY(1); }
+/* ── Racks Diagnostics Telemetry Fill ────────────────────── */
+@keyframes barFill {
+  from { width: 0%; }
+  to   { width: var(--fill-target); }
 }
 
-.timeline-line-animated {
-  transform-origin: top;
-  animation: drawLine 1s var(--ease-out-expo) forwards;
+.tech-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 240, 255, 0.08);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-block: var(--space-2) var(--space-4);
+  position: relative;
 }
 
-/* ── Shimmer loading state ───────────────────────────────── */
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+.tech-bar__fill {
+  height: 100%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+  width: 0%;
+}
+
+.reveal.is-visible .tech-bar__fill {
+  width: var(--fill-target);
+  animation: barFill 1.2s var(--ease-out-expo) forwards;
 }
 
 /* ── Float subtle ────────────────────────────────────────── */
 @keyframes floatSubtle {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-6px); }
+  50%       { transform: translateY(-4px); }
 }

@@ -10,7 +10,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 18px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -56,6 +56,13 @@ input, button, textarea, select {
 /* Avoid text overflow */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
 }
 
 /* Reduce motion for accessibility */
