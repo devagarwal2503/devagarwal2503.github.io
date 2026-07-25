@@ -69,132 +69,194 @@
     <div class="cursor-dot"  aria-hidden="true"></div>
     <div class="cursor-ring" aria-hidden="true"></div>
 
-    <!-- ════════════════════════════════════════════════════
-         NAVIGATION
-         ════════════════════════════════════════════════════ -->
-    <header role="banner">
-      <nav class="nav" aria-label="Main navigation">
-        <div class="container">
-          <div class="nav__inner">
+    <div class="layout-wrapper">
+      <!-- ════════════════════════════════════════════════════
+           SIDEBAR NAVIGATION
+           ════════════════════════════════════════════════════ -->
+      <aside class="sidebar-nav" aria-label="System navigation">
+        <div class="sidebar-nav__top">
+          <div class="sidebar-nav__archive">ARCHIVE.01</div>
+        </div>
 
-            <!-- Logo -->
-            <a href="#" class="nav__logo" aria-label="Dev Agarwal — home">
-              dev<span>.</span>agarwal
-            </a>
+        <nav class="sidebar-nav__links" role="list">
+          <a href="#work" class="sidebar-nav__link nav__link is-active" aria-label="View work/projects section">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>WORK</span>
+          </a>
+          <a href="#stack" class="sidebar-nav__link nav__link" aria-label="View technology stack/labs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3h6M10 3v6L4.7 18.5A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.8-2.5L14 9V3"></path>
+            </svg>
+            <span>LABS</span>
+          </a>
+          <a href="#about" class="sidebar-nav__link nav__link" aria-label="View biography/about section">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path>
+            </svg>
+            <span>ABOUT</span>
+          </a>
+          <a href="#experience" class="sidebar-nav__link nav__link" aria-label="View work history log">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+            <span>LOG</span>
+          </a>
+        </nav>
 
-            <!-- Desktop links -->
-            <ul class="nav__links" role="list">
-              <li><a href="#experience" class="nav__link">Experience</a></li>
-              <li><a href="#work"       class="nav__link">Work</a></li>
-              <li><a href="#about"      class="nav__link">About</a></li>
-              <li><a href="#stack"      class="nav__link">Stack</a></li>
-              <li><a href="#contact"    class="nav__link">Contact</a></li>
-            </ul>
-
-            <!-- Desktop CTA -->
-            <a href="Dev_Agarwal_Resume.pdf"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="nav__cta"
-               aria-label="Download resume PDF">
-              Resume
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="sidebar-nav__bottom">
+          <div class="sidebar-nav__utilities">
+            <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="sidebar-nav__utility" aria-label="View GitHub profile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
               </svg>
             </a>
-
-            <!-- Mobile hamburger -->
-            <button class="nav__hamburger"
-                    aria-label="Toggle navigation menu"
-                    aria-expanded="false"
-                    aria-controls="mobile-menu">
-              <span class="nav__hamburger-line"></span>
-              <span class="nav__hamburger-line"></span>
-              <span class="nav__hamburger-line"></span>
-            </button>
+            <a href="#contact" class="sidebar-nav__utility" aria-label="Open command console/hire option">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="18" rx="0" ry="0"></rect>
+                <path d="M6 8l4 4-4 4M12 16h6"></path>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/devagarwal2503" target="_blank" rel="noopener noreferrer" class="sidebar-nav__utility" aria-label="View LinkedIn profile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </a>
           </div>
+          <div class="sidebar-nav__version">V.24.9.SYS</div>
+        </div>
+      </aside>
+
+      <!-- ════════════════════════════════════════════════════
+           SYSTEM HEADER
+           ════════════════════════════════════════════════════ -->
+      <header class="system-header nav" role="banner">
+        <div class="system-header__title">
+          PORTFOLIO_CORE // INDEX_SYSTEM
+        </div>
+        <div class="system-header__nav">
+          <div class="system-header__links">
+            <a href="Dev_Agarwal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="system-header__link">RESOURCES</a>
+            <a href="#work" class="system-header__link">INDEX</a>
+          </div>
+          
+          <button class="system-header__hamburger nav__hamburger"
+                  aria-label="Toggle navigation menu"
+                  aria-expanded="false"
+                  aria-controls="mobile-menu">
+            <span class="system-header__hamburger-line nav__hamburger-line"></span>
+            <span class="system-header__hamburger-line nav__hamburger-line"></span>
+            <span class="system-header__hamburger-line nav__hamburger-line"></span>
+          </button>
         </div>
 
         <!-- Mobile overlay menu -->
         <div id="mobile-menu" class="nav__mobile" role="dialog" aria-label="Navigation menu">
-          <a href="#experience" class="nav__mobile-link">Experience</a>
           <a href="#work"       class="nav__mobile-link">Work</a>
+          <a href="#stack"      class="nav__mobile-link">Labs</a>
           <a href="#about"      class="nav__mobile-link">About</a>
-          <a href="#stack"      class="nav__mobile-link">Stack</a>
-          <a href="#contact"    class="nav__mobile-link">Contact</a>
+          <a href="#experience" class="nav__mobile-link">Log</a>
+          <a href="Dev_Agarwal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav__mobile-link">Resources</a>
         </div>
-      </nav>
-    </header>
+      </header>
 
-    <!-- ════════════════════════════════════════════════════
-         MAIN CONTENT
-         ════════════════════════════════════════════════════ -->
-    <main id="main">
+      <!-- ════════════════════════════════════════════════════
+           MAIN CONTENT
+           ════════════════════════════════════════════════════ -->
+      <main id="main">
 
-      <!-- ──────────────────────────────────────────────────
-           HERO
-           ────────────────────────────────────────────────── -->
-      <section class="hero section" aria-labelledby="hero-name">
-        <div class="container">
+        <!-- ──────────────────────────────────────────────────
+             HERO
+             ────────────────────────────────────────────────── -->
+        <section class="hero section" aria-labelledby="hero-title">
+          <!-- Oversized background text -->
+          <div class="hero__bg-text">{.01}</div>
 
-          <!-- Availability badge -->
-          <div class="hero__availability hero-animate hero-animate--d1"
-               aria-label="Currently available for opportunities">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            Available for opportunities
-          </div>
+          <div class="container hero__container">
+            
+            <!-- Left Column: Introduction & Identity -->
+            <div class="hero__identity">
+              <div class="hero__availability">
+                <span class="status-dot"></span> STATUS: AVAILABLE_FOR_BUILD
+              </div>
+              <h1 class="hero__name" id="hero-title">DEV_AGARWAL</h1>
+              <p class="hero__role font-mono">// SOFTWARE_ENGINEER_FLUTTER_FULLSTACK</p>
+              
+              <p class="hero__tagline">
+                Building high-performance production systems with Flutter and full-stack web technologies. 
+                Focused on architectural precision, clean execution, and shipping robust systems that scale.
+              </p>
 
-          <!-- Name -->
-          <h1 class="hero__name hero-animate hero-animate--d2" id="hero-name">
-            Dev Agarwal
-          </h1>
+              <!-- System Spec sheet block -->
+              <div class="hero__specs-sheet card-sunken font-mono">
+                <div class="card-sunken__header">ENGINEER_METRICS</div>
+                <div class="card-sunken__body">
+                  <div>EXPERIENCE // 2_YEARS_PRODUCTION</div>
+                  <div>SHIPPED_SYS // 3_ACTIVE_PRODUCTS</div>
+                  <div>LOAD_LIMIT // 500+_CONCURRENT_USERS</div>
+                  <div>LOCATION // PUNE_NODE_IN (REMOTE_READY)</div>
+                </div>
+              </div>
 
-          <!-- Tagline -->
-          <p class="hero__tagline hero-animate hero-animate--d3">
-            Software Engineer with strong Flutter &amp; full-stack expertise.<br />
-            I build software that ships — not demos.
-          </p>
-
-          <!-- Metrics -->
-          <div class="hero__metrics hero-animate hero-animate--d4">
-            <span class="hero__metric"><strong>2 yrs</strong> professional experience</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>3</strong> production systems shipped</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>500+</strong> concurrent users supported</span>
-          </div>
-
-          <!-- Actions -->
-          <div class="hero__actions hero-animate hero-animate--d5">
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.3">
-              <a href="#work" class="btn btn--primary btn--lg" id="hero-cta-work">
-                View my work
-                <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <div class="hero__actions">
+                <a href="#contact" class="btn-brutalist btn-brutalist--lg btn-brutalist--primary-green hero__hire-btn">
+                  <span>CMD:</span> HIRE_DEV
+                </a>
+                <a href="Dev_Agarwal_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-brutalist btn-brutalist--lg">
+                  DOWNLOAD_CV.PDF
+                </a>
+              </div>
             </div>
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.25">
-              <a href="Dev_Agarwal_Resume.pdf"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="btn btn--ghost btn--lg"
-                 id="hero-cta-resume">
-                Download resume
-                <svg class="btn__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1.5 12.5H12.5M7 1.5V9.5M7 9.5L4 6.5M7 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
 
-        <!-- Scroll indicator -->
-        <div class="hero__scroll" aria-hidden="true">
-          <span>scroll</span>
-          <div class="hero__scroll-line"></div>
-        </div>
-      </section>
+            <!-- Right Column: Overlapping cards showcase -->
+            <div class="hero__showcase">
+              
+              <!-- Primary Project Card -->
+              <div class="hero__primary-card card-brutalist">
+                <div class="card-brutalist__meta">[PROJECT_001] // ENTERPRISE_HRMS</div>
+                <div class="card-brutalist__stack">STACK: Flutter, Dart, BLoC // STATUS: SECURED_NDA</div>
+                <div class="card-brutalist__img-wrap">
+                  <img src="assets/hrms_portal.png" alt="HRMS Enterprise Portal Wireframe Dashboard" class="card-brutalist__img">
+                </div>
+                <div class="card-brutalist__title-wrap">
+                  <h3 class="card-brutalist__title">LEAVE_MGMT_SYS</h3>
+                </div>
+                <div class="card-brutalist__actions">
+                  <a href="#work" class="btn-brutalist btn-brutalist--sm" style="opacity: 0.6; cursor: not-allowed;" onclick="return false;">NDA_RESTRICTED</a>
+                  <a href="#work" class="btn-brutalist btn-brutalist--sm btn-brutalist--accent">SPEC_DATA.EXE</a>
+                </div>
+              </div>
+
+              <!-- Overlapping Overlay Card -->
+              <div class="hero__overlay-card card-brutalist">
+                <div class="card-brutalist__meta">[PROJECT_002] // MOBILE_STORE</div>
+                <div class="card-brutalist__title-wrap">
+                  <h4 class="card-brutalist__subtitle">E_COM_MOBILE</h4>
+                </div>
+                <div class="card-brutalist__img-wrap hero__overlay-img-wrap">
+                  <img src="assets/e_com_mobile.png" alt="E-Commerce Mobile Checkout Wireframe Screen" class="card-brutalist__img">
+                </div>
+                <div class="card-brutalist__overlay-details">
+                  <span class="status-dot"></span> Flutter // Firebase // Supabase
+                </div>
+                <div class="card-brutalist__actions hero__overlay-actions">
+                  <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="btn-brutalist btn-brutalist--sm">SOURCE.SRC</a>
+                  <a href="https://github.com/devagarwal2503" target="_blank" rel="noopener noreferrer" class="btn-brutalist btn-brutalist--sm btn-brutalist--accent">LAUNCH.EXE</a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
 
       <!-- ──────────────────────────────────────────────────
            MARQUEE — TECH STRIP
@@ -873,8 +935,9 @@
         </div>
       </div>
     </footer>
+  </div><!-- /.layout-wrapper -->
 
-    <!-- ── JS Modules ─────────────────────────────────────── -->
-    <script type="module" src="js/main.js"></script>
-  </body>
+  <!-- ── JS Modules ─────────────────────────────────────── -->
+  <script type="module" src="js/main.js"></script>
+</body>
 </html>
