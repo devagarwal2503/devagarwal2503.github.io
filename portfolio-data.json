@@ -1,0 +1,504 @@
+{
+  "$schema_note": "You can edit any text, metrics, experiences, projects, or links in this file. When ready, tell Antigravity or run 'node build.js' to update index.html.",
+  "meta": {
+    "title": "Dev Agarwal — Software Engineer",
+    "description": "Software Engineer with strong DSA, system design, and backend fundamentals. 2 years shipping production HRMS, hospitality, and e-commerce systems. Built a real-time load balancer simulator with a custom Indexed Min-Heap and an AI-powered GitHub code review app. Based in Pune, open to opportunities across India and remote.",
+    "author": "Dev Agarwal",
+    "canonicalUrl": "https://devagarwal2503.github.io/",
+    "ogImage": "https://devagarwal2503.github.io/assets/og-image.jpg",
+    "socialShareTitle": "Dev Agarwal — Software Engineer",
+    "socialShareDescription": "SDE with a DSA + system design foundation. 2 years in production. Custom Indexed Min-Heap, WebSocket telemetry, AI code review GitHub App."
+  },
+  "profile": {
+    "name": "Dev Agarwal",
+    "navLogo": "dev.agarwal",
+    "role": "Software Engineer",
+    "email": "agarwaldev626@gmail.com",
+    "location": {
+      "locality": "Pune",
+      "region": "Maharashtra",
+      "country": "IN"
+    },
+    "resumeFileName": "Dev_Agarwal_Resume.pdf",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/devagarwal2503",
+      "github": "https://github.com/devagarwal2503"
+    }
+  },
+  "hero": {
+    "statusBadge": "Available for opportunities",
+    "name": "Dev Agarwal",
+    "tagline": "Software Engineer with strong DSA, system design, and backend fundamentals.<br />I build software that ships — and understand why it works.",
+    "metrics": [
+      {
+        "highlight": "2 yrs",
+        "label": "production experience"
+      },
+      {
+        "highlight": "500+",
+        "label": "concurrent users supported"
+      },
+      {
+        "highlight": "O(log N)",
+        "label": "custom Indexed Min-Heap"
+      }
+    ],
+    "primaryCta": {
+      "text": "View my work",
+      "href": "#work"
+    },
+    "secondaryCta": {
+      "text": "Download resume",
+      "href": "Dev_Agarwal_Resume.pdf"
+    }
+  },
+  "marqueeSkills": [
+    "C++",
+    "Data Structures & Algorithms",
+    "System Design",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "React",
+    "WebSockets",
+    "MongoDB",
+    "REST APIs",
+    "Flutter",
+    "Dart",
+    "Firebase",
+    "Supabase",
+    "Docker",
+    "GitHub Actions",
+    "CI/CD",
+    "LLM APIs",
+    "RAG",
+    "n8n"
+  ],
+  "experienceSection": {
+    "label": "Experience",
+    "title": "Where I've shipped",
+    "subtitle": "Nearly 2 years across two companies — production systems, measurable outcomes.",
+    "experiences": [
+      {
+        "period": "Feb 2026 – Jun 2026",
+        "company": "Vishwaguru Infotech",
+        "role": "Software Engineer Trainee",
+        "highlightBadge": "↑ Promoted from intern in 30 days",
+        "achievements": [
+          "Designed and built a <strong>full e-commerce application spanning 8+ screens</strong> — onboarding, authentication, catalogue, cart, and payments.",
+          "Integrated <strong>Firebase Auth, Razorpay, and Supabase</strong> for secure login and payment processing, and migrated the backend to Supabase behind a clean, structured JSON API layer.",
+          "Built <strong>10+ reusable responsive UI components</strong> and integrated <strong>8+ REST APIs</strong>, using Flutter Slivers for advanced scrolling, adaptive light/dark theming, and l10n localization.",
+          "Promoted from intern to trainee within one month for consistently shipping production-ready modules.",
+          "Tracked and delivered work through OpenProject alongside senior engineers, with sprint planning, code reviews, and bug triage."
+        ],
+        "tech": "Flutter, Firebase, Supabase, Razorpay, REST APIs, Python, OpenProject"
+      },
+      {
+        "period": "Mar 2023 – Apr 2024",
+        "company": "Centralogic Pvt Ltd",
+        "role": "Software Engineer",
+        "highlightBadge": null,
+        "achievements": [
+          "Delivered a <strong>Leave Management module</strong> for a production HRMS platform with multi-level approval workflows, reducing manual HR effort by <strong>40%</strong>.",
+          "Developed a secure candidate assessment platform with <strong>anti-cheat mechanisms</strong>, supporting <strong>500+ concurrent users</strong>.",
+          "Integrated <strong>15+ REST APIs</strong> into a hospitality booking application for real-time reservation synchronization.",
+          "Hardened API response handling to minimize data parsing errors and improve application stability.",
+          "Maintained code quality through Git workflows, peer code reviews, and Agile sprint delivery using Jira."
+        ],
+        "tech": "Flutter, REST APIs, Git, Jira, Agile"
+      }
+    ]
+  },
+  "projectsSection": {
+    "label": "Projects",
+    "title": "Things I've built",
+    "subtitle": "Systems with real constraints: custom data structures, real-time telemetry, and production workloads.",
+    "featuredProject": {
+      "eyebrow": "Featured · Node.js · OpenAI API · GitHub Apps",
+      "title": "AI-Powered Code Review Assistant",
+      "description": "A GitHub App that analyzes pull requests and posts structured, line-anchored review comments using OpenAI's gpt-4o-mini.",
+      "highlights": [
+        "Detects context-sensitive issues, such as <strong>race conditions and cross-file anti-patterns</strong>, that standard linting misses.",
+        "Engineered <strong>diff chunking and ±25-line context fetching</strong> to keep large PRs within LLM token limits.",
+        "Built a MongoDB-backed React/Vite dashboard that visualizes issues by <strong>severity and category</strong>.",
+        "Secured the pipeline with <strong>HMAC-verified webhooks</strong>, with structured logging via Winston and CI through GitHub Actions."
+      ],
+      "tags": [
+        {
+          "name": "Node.js",
+          "type": "accent"
+        },
+        {
+          "name": "Express",
+          "type": "accent"
+        },
+        {
+          "name": "MongoDB",
+          "type": "accent"
+        },
+        {
+          "name": "React",
+          "type": "accent"
+        },
+        {
+          "name": "OpenAI API",
+          "type": "default"
+        },
+        {
+          "name": "GitHub Actions",
+          "type": "default"
+        },
+        {
+          "name": "Vite",
+          "type": "default"
+        }
+      ],
+      "badge": "Open Source",
+      "links": [
+        {
+          "type": "github",
+          "label": "GitHub",
+          "url": "https://github.com/devagarwal2503"
+        }
+      ],
+      "stats": [
+        {
+          "value": "gpt-4o",
+          "label": "mini model"
+        },
+        {
+          "value": "±25 lines",
+          "label": "context fetch"
+        },
+        {
+          "value": "HMAC",
+          "label": "secured webhooks"
+        }
+      ]
+    },
+    "projects": [
+      {
+        "id": "proj-pulsegrid-title",
+        "eyebrow": "TypeScript · WebSocket · React · Vite",
+        "title": "PulseGrid — Load Balancer Visualizer",
+        "description": "A real-time load balancer simulator that compares five scheduling algorithms across a virtual server pool, with live telemetry streamed to a React dashboard.",
+        "highlights": [
+          "Built a custom <strong>Indexed Min-Heap</strong> with <strong>O(1) peek and O(log N) updates</strong>, powering two of the five scheduling strategies.",
+          "Engineered a <strong>Predictive Headroom scheduler</strong> using Linear Regression, cutting CPU load standard deviation from <strong>15.72 to 3.15</strong> — roughly an <strong>80% improvement over Weighted Round Robin</strong>.",
+          "Built a WebSocket telemetry layer sustaining <strong>10Hz broadcasts</strong>, with <strong>backpressure-aware frame dropping at a 64KB buffer threshold</strong> so slow clients never stall the server.",
+          "Visualized live load distribution across the server pool with React and Recharts, so each algorithm's behavior can be compared side by side."
+        ],
+        "tags": [
+          {
+            "name": "TypeScript",
+            "type": "accent"
+          },
+          {
+            "name": "Node.js",
+            "type": "accent"
+          },
+          {
+            "name": "WebSocket",
+            "type": "accent"
+          },
+          {
+            "name": "React",
+            "type": "accent"
+          },
+          {
+            "name": "Recharts",
+            "type": "default"
+          }
+        ],
+        "links": [
+          {
+            "type": "github",
+            "label": "GitHub",
+            "url": "https://github.com/devagarwal2503"
+          }
+        ],
+        "statusBadge": {
+          "text": "2026",
+          "type": "default"
+        }
+      },
+      {
+        "id": "proj-hrms-title",
+        "eyebrow": "Centralogic Pvt Ltd · Flutter · REST APIs",
+        "title": "HRMS Leave Management & Assessment Platform",
+        "description": "Production modules for an enterprise HRMS and a concurrent candidate assessment system, delivered in Agile sprints.",
+        "highlights": [
+          "Multi-level leave approval workflow that cut manual HR effort by <strong>40%</strong>.",
+          "Assessment platform with <strong>anti-cheat mechanisms</strong> serving <strong>500+ concurrent users</strong>.",
+          "Integrated <strong>15+ REST APIs</strong> for real-time reservation sync in a hospitality booking app, with hardened response handling to reduce parsing errors."
+        ],
+        "tags": [
+          {
+            "name": "Flutter",
+            "type": "accent"
+          },
+          {
+            "name": "Dart",
+            "type": "accent"
+          },
+          {
+            "name": "REST APIs",
+            "type": "accent"
+          },
+          {
+            "name": "Agile",
+            "type": "default"
+          }
+        ],
+        "links": [],
+        "statusBadge": {
+          "text": "Enterprise — NDA",
+          "type": "default"
+        }
+      },
+      {
+        "id": "proj-ecom-title",
+        "eyebrow": "Flutter · Firebase · Supabase",
+        "title": "E-Commerce Mobile App",
+        "description": "End-to-end commerce app built during my time at Vishwaguru Infotech.",
+        "highlights": [
+          "8+ screens covering onboarding, auth, catalogue, cart, and Razorpay payments.",
+          "10+ reusable responsive components and 8+ REST API integrations.",
+          "Advanced Slivers UI, adaptive theming, l10n localization, and a Supabase-backed API layer."
+        ],
+        "tags": [
+          {
+            "name": "Flutter",
+            "type": "accent"
+          },
+          {
+            "name": "Firebase",
+            "type": "accent"
+          },
+          {
+            "name": "Supabase",
+            "type": "accent"
+          },
+          {
+            "name": "Razorpay",
+            "type": "default"
+          }
+        ],
+        "links": [
+          {
+            "type": "github",
+            "label": "GitHub",
+            "url": "https://github.com/devagarwal2503"
+          }
+        ],
+        "statusBadge": null
+      },
+      {
+        "id": "proj-ai-title",
+        "eyebrow": "n8n · LLM APIs · RAG",
+        "title": "AI Automation Agents",
+        "description": "Workflow automations that use LLMs to cut down repetitive email work, plus RAG-based agents in progress.",
+        "highlights": [
+          "Email summarization pipeline that processes <strong>50+ incoming emails</strong> into concise LLM-generated summaries.",
+          "Automated reply workflow for sponsorship and outreach emails, reducing manual response time by an estimated <strong>70%</strong>.",
+          "Building RAG-based agents for knowledge retrieval and conversational automation, with 3 implementations planned."
+        ],
+        "tags": [
+          {
+            "name": "n8n",
+            "type": "violet"
+          },
+          {
+            "name": "LLM APIs",
+            "type": "violet"
+          },
+          {
+            "name": "RAG",
+            "type": "violet"
+          }
+        ],
+        "links": [],
+        "statusBadge": {
+          "text": "In Progress",
+          "type": "amber"
+        }
+      }
+    ]
+  },
+  "aboutSection": {
+    "label": "About",
+    "title": "The person behind the code",
+    "photo": {
+      "src": "assets/photo.webp",
+      "alt": "Dev Agarwal, Flutter and cross-platform mobile engineer based in Pune"
+    },
+    "stats": [
+      {
+        "count": 2,
+        "suffix": "+",
+        "label": "Years experience"
+      },
+      {
+        "count": 500,
+        "suffix": "+",
+        "label": "Concurrent users"
+      },
+      {
+        "count": 5,
+        "suffix": "",
+        "label": "Scheduling algorithms built"
+      },
+      {
+        "count": 6,
+        "suffix": "",
+        "label": "Yrs coaching"
+      }
+    ],
+    "storyParagraphs": [
+      "I build software that ships — and I care about why it works.",
+      "At Centralogic, I delivered a Leave Management module that cut HR processing effort by <strong>40%</strong> and a candidate assessment platform serving <strong>500+ concurrent users</strong>. That's where I learned what production constraints actually feel like.",
+      "Since then I've been deepening my fundamentals: DSA and system design in C++, and projects like <strong>PulseGrid</strong>, where I built a custom Indexed Min-Heap and a regression-based scheduler that cut load variance by about 80% against Weighted Round Robin.",
+      "Outside engineering, I coached badminton at the competitive level for six years, running tournaments for <strong>100+ participants</strong>. It taught me communication, execution under pressure, and working with very different personalities.",
+      "I'm now targeting SDE roles at product-based companies, where I can apply both production experience and strong CS fundamentals."
+    ]
+  },
+  "techStackSection": {
+    "label": "Tech Stack",
+    "title": "What I work with",
+    "subtitle": "Tools and technologies I've used in production — not just tutorials.",
+    "categories": [
+      {
+        "label": "Core CS",
+        "title": "Fundamentals",
+        "isWide": false,
+        "skills": [
+          "Data Structures & Algorithms",
+          "OOP",
+          "System Design Basics",
+          "C++"
+        ]
+      },
+      {
+        "label": "Languages",
+        "title": "Programming Languages",
+        "isWide": false,
+        "skills": [
+          "C++",
+          "TypeScript",
+          "JavaScript",
+          "Dart",
+          "Python",
+          "SQL"
+        ]
+      },
+      {
+        "label": "Backend & Real-Time",
+        "title": "Services & Data",
+        "isWide": false,
+        "skills": [
+          "Node.js",
+          "Express",
+          "REST APIs",
+          "WebSockets",
+          "MongoDB",
+          "Firebase",
+          "Supabase"
+        ]
+      },
+      {
+        "label": "Frontend & Mobile",
+        "title": "Client Side",
+        "isWide": true,
+        "skills": [
+          "React",
+          "Angular",
+          "Flutter",
+          "Vite",
+          "Recharts",
+          "BLoC",
+          "Provider",
+          "Riverpod"
+        ]
+      },
+      {
+        "label": "AI & Automation",
+        "title": "Intelligent Workflows",
+        "isWide": false,
+        "skills": [
+          "LLM API Integration",
+          "RAG Agents",
+          "n8n",
+          "GitHub Apps & Webhooks"
+        ]
+      },
+      {
+        "label": "DevOps & Tools",
+        "title": "Delivery",
+        "isWide": false,
+        "skills": [
+          "Git",
+          "GitHub Actions",
+          "Docker",
+          "CI/CD",
+          "Linux",
+          "Postman",
+          "Jira",
+          "OpenProject"
+        ]
+      }
+    ]
+  },
+  "contactSection": {
+    "statusBadge": "Available for opportunities",
+    "heading": "Ready to<br />build something.",
+    "subtext": "Open to SDE roles at product-based companies. If you want an engineer with production experience and solid CS fundamentals — let's talk.",
+    "emailButton": {
+      "text": "Send me an email",
+      "email": "agarwaldev626@gmail.com"
+    },
+    "socialLinks": [
+      {
+        "type": "linkedin",
+        "label": "LinkedIn",
+        "handleOrSub": "linkedin.com/in/devagarwal2503",
+        "url": "https://linkedin.com/in/devagarwal2503"
+      },
+      {
+        "type": "github",
+        "label": "GitHub",
+        "handleOrSub": "github.com/devagarwal2503",
+        "url": "https://github.com/devagarwal2503"
+      },
+      {
+        "type": "email",
+        "label": "Email",
+        "handleOrSub": "agarwaldev626@gmail.com",
+        "url": "mailto:agarwaldev626@gmail.com"
+      }
+    ],
+    "resumeDownload": {
+      "title": "Download Resume",
+      "filenameLabel": "Dev_Agarwal_Resume.pdf · PDF",
+      "file": "Dev_Agarwal_Resume.pdf"
+    }
+  },
+  "footer": {
+    "year": "2026",
+    "copyrightName": "Dev Agarwal",
+    "tagline": "Built with intent.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/devagarwal2503"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://linkedin.com/in/devagarwal2503"
+      },
+      {
+        "label": "Resume",
+        "url": "Dev_Agarwal_Resume.pdf"
+      }
+    ]
+  }
+}
