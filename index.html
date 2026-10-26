@@ -17,7 +17,7 @@
     <meta property="og:url"         content="https://devagarwal2503.github.io/" />
     <meta property="og:title"       content="Dev Agarwal — Software Engineer" />
     <meta property="og:description" content="SDE with a DSA + system design foundation. 2 years in production. Custom Indexed Min-Heap, WebSocket telemetry, AI code review GitHub App." />
-    <meta property="og:image"       content="https://devagarwal2503.github.io/assets/og-image.jpg" />
+    <meta property="og:image"       content="https://devagarwal2503.github.io/assets/og-image.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -26,7 +26,7 @@
     <meta name="twitter:url"         content="https://devagarwal2503.github.io/" />
     <meta name="twitter:title"       content="Dev Agarwal — Software Engineer" />
     <meta name="twitter:description" content="SDE with a DSA + system design foundation. 2 years in production. Custom Indexed Min-Heap, WebSocket telemetry, AI code review GitHub App." />
-    <meta name="twitter:image"       content="https://devagarwal2503.github.io/assets/og-image.jpg" />
+    <meta name="twitter:image"       content="https://devagarwal2503.github.io/assets/og-image.png" />
 
     <!-- ── Favicon (inline SVG — zero HTTP request) ──────── -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><text x='16' y='22' font-family='monospace' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>D</text></svg>" />
@@ -62,6 +62,9 @@
   </head>
 
   <body>
+    <!-- ── Scroll Progress Bar ────────────────────────────── -->
+    <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
+
     <!-- ── Skip Link (Accessibility) ────────────────────── -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -90,6 +93,25 @@
               <li><a href="#stack"      class="nav__link">Stack</a></li>
               <li><a href="#contact"    class="nav__link">Contact</a></li>
             </ul>
+
+            <!-- Dev Quick Controls -->
+            <div class="dev-controls">
+              <button class="dev-pill-btn" data-action="open-cmd-palette" aria-label="Open command palette (Cmd+K)" title="Quick Actions (Cmd+K)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>Cmd+K</span>
+              </button>
+
+              <button class="dev-pill-btn" data-action="open-terminal" aria-label="Open interactive terminal" title="Open Interactive CLI">
+                <span style="color:var(--color-green);font-weight:700;">&gt;_</span>
+                <span>Terminal</span>
+              </button>
+
+              <button class="dev-pill-btn" data-action="toggle-sound" aria-label="Toggle UI sound effects" title="Toggle audio feedback">
+                <span class="audio-icon">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </span>
+              </button>
+            </div>
 
             <!-- Desktop CTA -->
             <a href="Dev_Agarwal_Resume.pdf"
@@ -135,64 +157,180 @@
            HERO
            ────────────────────────────────────────────────── -->
       <section class="hero section" aria-labelledby="hero-name">
+        <!-- Interactive Particle & Constellation Canvas -->
+        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
         <div class="container">
+          <div class="hero-studio-grid">
 
-          <!-- Availability badge -->
-          <div class="hero__availability hero-animate hero-animate--d1"
-               aria-label="Currently available for opportunities">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            Available for opportunities
-          </div>
+            <!-- Hero Left: Typographic Statement & Core Highlights -->
+            <div class="hero__intro">
+              <!-- Radar Availability Pill -->
+              <div class="hero__status-pill hero-animate hero-animate--d1"
+                   aria-label="Currently available for SDE opportunities">
+                <span class="status-radar" aria-hidden="true">
+                  <span class="status-ping"></span>
+                  <span class="status-core"></span>
+                </span>
+                <span>Available for SDE Roles · Pune &amp; Remote</span>
+              </div>
 
-          <!-- Name -->
-          <h1 class="hero__name hero-animate hero-animate--d2" id="hero-name">
-            Dev Agarwal
-          </h1>
+              <!-- Main Title with Gradient Shimmer -->
+              <h1 class="hero__title hero-animate hero-animate--d2" id="hero-name">
+                Engineering <span class="text-gradient">resilient systems</span>, backends &amp; AI tooling.
+              </h1>
 
-          <!-- Tagline -->
-          <p class="hero__tagline hero-animate hero-animate--d3">
-            Software Engineer with strong DSA, system design, and backend fundamentals.<br />
-            I build software that ships — and understand why it works.
-          </p>
+              <!-- Subtitle -->
+              <p class="hero__tagline hero-animate hero-animate--d3">
+                Hi, I'm <strong class="text-glow">Dev Agarwal</strong> &mdash; a Software Engineer with nearly 2 years in production shipping enterprise HRMS, real-time telemetry systems, and low-latency schedulers. Grounded in C++, DSA, and System Design.
+              </p>
 
-          <!-- Metrics -->
-          <div class="hero__metrics hero-animate hero-animate--d4">
-            <span class="hero__metric"><strong>2 yrs</strong> production experience</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>500+</strong> concurrent users supported</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>O(log N)</strong> custom Indexed Min-Heap</span>
-          </div>
+              <!-- Technical Pillar Badges -->
+              <div class="hero__chips hero-animate hero-animate--d4">
+                <span class="hero-chip"><span class="chip-dot" style="background:#6366f1;"></span>C++ / DSA (O(log N))</span>
+                <span class="hero-chip"><span class="chip-dot" style="background:#38bdf8;"></span>Distributed &amp; System Design</span>
+                <span class="hero-chip"><span class="chip-dot" style="background:#34d399;"></span>Node.js &amp; WebSockets</span>
+                <span class="hero-chip"><span class="chip-dot" style="background:#a78bfa;"></span>LLM AST Tooling</span>
+              </div>
 
-          <!-- Actions -->
-          <div class="hero__actions hero-animate hero-animate--d5">
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.3">
-              <a href="#work" class="btn btn--primary btn--lg" id="hero-cta-work">
-                View my work
-                <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <!-- Actions -->
+              <div class="hero__actions hero-animate hero-animate--d5">
+                <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.3">
+                  <a href="#work" class="btn btn--primary btn--lg btn-glow" id="hero-cta-work">
+                    Explore Flagship Work
+                    <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+                <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.25">
+                  <a href="Dev_Agarwal_Resume.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="btn btn--ghost btn--lg"
+                     id="hero-cta-resume">
+                    Download Resume
+                    <svg class="btn__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M1.5 12.5H12.5M7 1.5V9.5M7 9.5L4 6.5M7 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.25">
-              <a href="Dev_Agarwal_Resume.pdf"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="btn btn--ghost btn--lg"
-                 id="hero-cta-resume">
-                Download resume
-                <svg class="btn__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1.5 12.5H12.5M7 1.5V9.5M7 9.5L4 6.5M7 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+
+            <!-- Hero Right: Interactive Developer IDE Card -->
+            <div class="hero__cockpit hero-animate hero-animate--d4">
+              <div id="hero-cockpit" class="cockpit-card">
+                <div class="cockpit-header">
+                  <div class="demo-traffic-lights" aria-hidden="true">
+                    <span class="traffic-light traffic-light--red"></span>
+                    <span class="traffic-light traffic-light--yellow"></span>
+                    <span class="traffic-light traffic-light--green"></span>
+                  </div>
+                  <div class="cockpit-tabs" role="tablist" aria-label="Developer IDE Tabs">
+                    <button type="button" class="cockpit-tab-btn is-active" data-target="panel-engineer" role="tab" aria-selected="true">engineer.ts</button>
+                    <button type="button" class="cockpit-tab-btn" data-target="panel-stack" role="tab" aria-selected="false">stack.json</button>
+                    <button type="button" class="cockpit-tab-btn" data-target="panel-arch" role="tab" aria-selected="false">architecture.txt</button>
+                  </div>
+                  <button type="button" id="cockpit-copy-btn" class="cockpit-mini-btn" title="Copy code snippet">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy
+                  </button>
+                </div>
+
+                <!-- Panel 1: Real Profile Code -->
+                <div id="panel-engineer" class="cockpit-panel is-active" role="tabpanel">
+                  <pre class="cockpit-code-box" style="max-height: 280px;"><code class="code-editor"><span class="token-keyword">export const</span> <span class="token-var">devAgarwal</span> = {
+  <span class="token-prop">name</span>: <span class="token-string">"Dev Agarwal"</span>,
+  <span class="token-prop">role</span>: <span class="token-string">"Software Engineer"</span>,
+  <span class="token-prop">location</span>: <span class="token-string">"Pune, India"</span>,
+  <span class="token-prop">openTo</span>: [<span class="token-string">"India"</span>, <span class="token-string">"Remote"</span>],
+  <span class="token-prop">coreCompetencies</span>: [
+    <span class="token-string">"Data Structures &amp; Algorithms (C++)"</span>,
+    <span class="token-string">"System Design &amp; Backend Engineering"</span>,
+    <span class="token-string">"Real-Time Telemetry &amp; AI Tooling"</span>
+  ],
+  <span class="token-prop">productionTrackRecord</span>: {
+    <span class="token-prop">experience</span>: <span class="token-string">"Nearly 2 years in production"</span>,
+    <span class="token-prop">concurrencyHandled</span>: <span class="token-string">"500+ active users"</span>,
+    <span class="token-prop">keyOptimization</span>: <span class="token-string">"O(log N) Indexed Min-Heap"</span>
+  }
+};</code></pre>
+                </div>
+
+                <!-- Panel 2: Verified Technical Stack -->
+                <div id="panel-stack" class="cockpit-panel" role="tabpanel">
+                  <pre class="cockpit-code-box" style="max-height: 280px;"><code class="code-editor">{
+  <span class="token-prop">"languages"</span>: [<span class="token-string">"C++"</span>, <span class="token-string">"TypeScript"</span>, <span class="token-string">"JavaScript"</span>, <span class="token-string">"Dart"</span>, <span class="token-string">"Python"</span>, <span class="token-string">"SQL"</span>],
+  <span class="token-prop">"backend"</span>: [<span class="token-string">"Node.js"</span>, <span class="token-string">"Express"</span>, <span class="token-string">"WebSockets"</span>, <span class="token-string">"MongoDB"</span>, <span class="token-string">"Supabase"</span>],
+  <span class="token-prop">"frontend_mobile"</span>: [<span class="token-string">"React"</span>, <span class="token-string">"Flutter"</span>, <span class="token-string">"Vite"</span>, <span class="token-string">"BLoC"</span>, <span class="token-string">"Recharts"</span>],
+  <span class="token-prop">"ai_tooling"</span>: [<span class="token-string">"OpenAI API"</span>, <span class="token-string">"AST Context Fetching"</span>, <span class="token-string">"GitHub Apps"</span>],
+  <span class="token-prop">"devops"</span>: [<span class="token-string">"Docker"</span>, <span class="token-string">"GitHub Actions"</span>, <span class="token-string">"CI/CD"</span>, <span class="token-string">"Linux"</span>]
+}</code></pre>
+                </div>
+
+                <!-- Panel 3: Architecture -->
+                <div id="panel-arch" class="cockpit-panel" role="tabpanel">
+                  <pre class="cockpit-code-box" style="max-height: 280px;"><code class="code-editor">[PulseGrid Telemetry Pipeline]
+ Client Workload (500+ Concurrent Req)
+         │
+         ▼
+ Ingress Proxy (HMAC Webhooks)
+         │
+         ▼
+ Indexed Min-Heap Regression Scheduler
+  ├── Node A (C++)  [O(1) Peek]
+  ├── Node B (C++)  [O(log N) Update]
+  └── Node C (Go)   [~80% Lower Variance]
+         │
+         ▼
+ 10Hz WebSocket Telemetry Stream</code></pre>
+                </div>
+
+                <div class="cockpit-footer">
+                  <span class="cockpit-footer-txt">dev@portfolio:~ bash</span>
+                  <button type="button" class="cockpit-mini-btn" data-action="open-terminal">Open CLI Terminal &gt;_</button>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
         <!-- Scroll indicator -->
         <div class="hero__scroll" aria-hidden="true">
-          <span>scroll</span>
+          <span>scroll to explore</span>
           <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           LIVE ENGINEERING STATS STRIP
+           ────────────────────────────────────────────────── -->
+      <section class="stats-strip-section" aria-label="Key engineering metrics">
+        <div class="container">
+          <div class="stats-ribbon stagger">
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num"><span data-count="2">0</span>+</span>
+              <span class="stat-ribbon-label">Years Production Experience</span>
+              <span class="stat-ribbon-sub">Shipped across 2 enterprise systems</span>
+            </div>
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num"><span data-count="500">0</span>+</span>
+              <span class="stat-ribbon-label">Concurrent Users Handled</span>
+              <span class="stat-ribbon-sub">Assessment platform with zero drops</span>
+            </div>
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num">O(log N)</span>
+              <span class="stat-ribbon-label">Indexed Min-Heap Scheduler</span>
+              <span class="stat-ribbon-sub">Custom algorithm cutting variance ~80%</span>
+            </div>
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num"><span data-count="40">0</span>%</span>
+              <span class="stat-ribbon-label">HR Manual Effort Reduction</span>
+              <span class="stat-ribbon-sub">Full multi-level leave approval engine</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -334,7 +472,10 @@
           <!-- Featured: AI-Powered Code Review Assistant -->
           <article class="card card--featured reveal" aria-labelledby="proj-codereview-title">
             <div class="card__content">
-              <p class="card__eyebrow">Featured · Node.js · OpenAI API · GitHub Apps</p>
+              <div style="display: flex; gap: var(--space-2); align-items: center; margin-bottom: var(--space-4);">
+                <span class="badge badge--accent" style="box-shadow: 0 0 14px rgba(99, 102, 241, 0.4);">★ STUDIO FLAGSHIP</span>
+                <span class="badge badge--violet">Node.js · OpenAI API · GitHub App</span>
+              </div>
               <h3 class="card__title" id="proj-codereview-title">
                 AI-Powered Code Review Assistant
               </h3>
@@ -367,50 +508,35 @@
                 <span class="badge badge--green">Open Source</span>
               </div>
             </div>
-            <div class="card__visual" aria-hidden="true">
-              <!-- Visual: abstract representation of the AI Code Review interface -->
-              <svg width="100%" height="100%" viewBox="0 0 480 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="480" height="300" fill="#0d0d1a"/>
-                <!-- Nav bar -->
-                <rect x="0" y="0" width="480" height="40" fill="#13131f" rx="0"/>
-                <circle cx="20" cy="20" r="6" fill="#a78bfa" opacity="0.8"/>
-                <rect x="34" y="17" width="80" height="6" rx="3" fill="#475569"/>
-                <rect x="370" y="15" width="50" height="10" rx="5" fill="#34d399" opacity="0.8"/>
-                <!-- Stats row -->
-                <rect x="20" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="32" y="68" width="40" height="8" rx="4" fill="#6366f1" opacity="0.4"/>
-                <text x="26" y="106" fill="#f1f5f9" font-size="16" font-weight="bold" font-family="monospace">gpt-4o</text>
-                <rect x="32" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <rect x="136" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="148" y="68" width="40" height="8" rx="4" fill="#a78bfa" opacity="0.4"/>
-                <text x="140" y="106" fill="#f1f5f9" font-size="17" font-weight="bold" font-family="monospace">&plusmn;25 lines</text>
-                <rect x="148" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <rect x="252" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="264" y="68" width="40" height="8" rx="4" fill="#34d399" opacity="0.4"/>
-                <text x="260" y="106" fill="#f1f5f9" font-size="18" font-weight="bold" font-family="monospace">HMAC</text>
-                <rect x="264" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <!-- Code Diff Review Box -->
-                <rect x="20" y="136" width="440" height="44" rx="6" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="32" y="146" width="14" height="14" rx="3" fill="#ef4444" opacity="0.2"/>
-                <rect x="52" y="149" width="160" height="8" rx="4" fill="#f87171" opacity="0.7"/>
-                <rect x="32" y="162" width="14" height="14" rx="3" fill="#34d399" opacity="0.2"/>
-                <rect x="52" y="165" width="220" height="8" rx="4" fill="#34d399" opacity="0.7"/>
-                <!-- Inline AI Review Comment Bubble -->
-                <rect x="40" y="190" width="400" height="70" rx="8" fill="#1a1a2e" stroke="#6366f1" stroke-width="1" stroke-dasharray="2 2"/>
-                <circle cx="56" cy="208" r="7" fill="#6366f1"/>
-                <rect x="70" y="204" width="90" height="8" rx="4" fill="#a78bfa"/>
-                <rect x="70" y="222" width="340" height="6" rx="3" fill="#94a3b8"/>
-                <rect x="70" y="236" width="260" height="6" rx="3" fill="#64748b"/>
-                <rect x="380" y="202" width="45" height="12" rx="6" fill="#34d399" opacity="0.2"/>
-                <!-- Accent line at bottom -->
-                <rect x="0" y="296" width="480" height="4" fill="url(#grad)"/>
-                <defs>
-                  <linearGradient id="grad" x1="0" y1="0" x2="480" y2="0">
-                    <stop offset="0%" stop-color="#6366f1"/>
-                    <stop offset="100%" stop-color="#a78bfa"/>
-                  </linearGradient>
-                </defs>
-              </svg>
+            <div class="card__visual" style="aspect-ratio: auto; min-height: 380px;">
+              <!-- Interactive AI Review Simulator Playground -->
+              <div id="ai-review-demo" class="interactive-demo-container">
+                <div class="demo-header">
+                  <div class="demo-header__left">
+                    <div class="demo-traffic-lights" aria-hidden="true">
+                      <span class="traffic-light traffic-light--red"></span>
+                      <span class="traffic-light traffic-light--yellow"></span>
+                      <span class="traffic-light traffic-light--green"></span>
+                    </div>
+                    <span class="demo-title">PR #42 Diff Inspector</span>
+                  </div>
+                  <select id="ai-file-select" class="demo-select" aria-label="Select file to inspect">
+                    <option value="auth_middleware.ts">auth_middleware.ts</option>
+                    <option value="load_balancer.cpp">load_balancer.cpp</option>
+                  </select>
+                </div>
+                <pre id="ai-code-viewer" class="demo-code-box" tabindex="0" aria-label="Code diff viewer"></pre>
+                <div class="demo-actions">
+                  <button id="ai-run-review-btn" class="demo-btn" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Simulate AI Review
+                  </button>
+                  <span id="ai-status-badge" class="badge badge--default">Ready</span>
+                </div>
+                <div id="ai-review-result" class="demo-result-area" aria-live="polite"></div>
+              </div>
             </div>
           </article>
 
@@ -426,7 +552,45 @@
                 with live telemetry in React/Recharts. Built a custom <strong>Indexed Min-Heap (O(1) peek, O(log N) updates)</strong>
                 and a regression scheduler cutting variance by ~80% vs WRR, with 10Hz WebSocket broadcasts.
               </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
+
+              <!-- PulseGrid Live Simulator Widget -->
+              <div id="pulsegrid-demo" class="pg-demo-card">
+                <div class="pg-algo-toggle" role="group" aria-label="Select load balancing algorithm">
+                  <button type="button" class="pg-tab-btn active" data-algo="predictive">Predictive (Min-Heap)</button>
+                  <button type="button" class="pg-tab-btn" data-algo="wrr">Weighted Round Robin</button>
+                </div>
+                <div class="pg-server-grid" aria-label="Virtual Server Cluster Load Status">
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-01 (C++)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-02 (C++)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-03 (Go)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-04 (Rust)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                </div>
+                <div class="pg-status-bar">
+                  <span id="pg-variance-meter" class="term-cyan">Standard Deviation: σ = 3.15</span>
+                  <button type="button" id="pg-burst-btn" class="demo-btn" style="padding: 2px 10px; font-size: 11px;">
+                    ⚡ Dispatch 500 Requests
+                  </button>
+                </div>
+                <p id="pg-status-msg" style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px; font-family: var(--font-mono);"></p>
+              </div>
+
+              <div class="tag-list" style="margin-bottom: var(--space-6); margin-top: var(--space-4);">
                 <span class="badge badge--accent">TypeScript</span>
                 <span class="badge badge--accent">Node.js</span>
                 <span class="badge badge--accent">WebSocket</span>
@@ -457,7 +621,79 @@
                 Multi-level leave approval workflow cutting manual HR effort by <strong>40%</strong>,
                 anti-cheat assessment platform supporting <strong>500+ concurrent users</strong>, and 15+ REST APIs integrated.
               </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
+
+              <!-- HRMS Enterprise Pipeline & Telemetry Illustration Widget -->
+              <div id="hrms-demo" class="hrms-demo-card">
+                <div class="hrms-tab-toggle" role="group" aria-label="Select HRMS Platform Module">
+                  <button type="button" class="hrms-tab-btn active" data-hrms-tab="leave">Leave Workflow (-40% Time)</button>
+                  <button type="button" class="hrms-tab-btn" data-hrms-tab="assessment">Anti-Cheat Engine (500+ Users)</button>
+                </div>
+
+                <!-- Module 1: Multi-Tier Leave Approval Engine -->
+                <div id="hrms-panel-leave" class="hrms-panel">
+                  <div class="hrms-pipeline-steps">
+                    <div class="hrms-step is-complete" id="hrms-step-1">
+                      <span class="hrms-step-icon">✓</span>
+                      <div class="hrms-step-info">
+                        <span class="hrms-step-title">Leave Request</span>
+                        <span class="hrms-step-desc">Policy validated</span>
+                      </div>
+                    </div>
+                    <div class="hrms-step-arrow">→</div>
+                    <div class="hrms-step is-active" id="hrms-step-2">
+                      <span class="hrms-step-icon">⚡</span>
+                      <div class="hrms-step-info">
+                        <span class="hrms-step-title">L1 Approval</span>
+                        <span class="hrms-step-desc">Lead notified</span>
+                      </div>
+                    </div>
+                    <div class="hrms-step-arrow">→</div>
+                    <div class="hrms-step is-complete" id="hrms-step-3">
+                      <span class="hrms-step-icon">✓</span>
+                      <div class="hrms-step-info">
+                        <span class="hrms-step-title">HR &amp; Payroll</span>
+                        <span class="hrms-step-desc">Auto-synced</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hrms-status-bar">
+                    <span class="term-cyan">Velocity: <strong>40% Reduced HR Effort</strong></span>
+                    <button type="button" id="hrms-simulate-btn" class="demo-btn" style="padding: 2px 10px; font-size: 11px;">
+                      ✦ Simulate Flow
+                    </button>
+                  </div>
+                  <p id="hrms-status-msg" style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px; font-family: var(--font-mono);">Multi-level hierarchy auto-routes requests based on employee department.</p>
+                </div>
+
+                <!-- Module 2: Anti-Cheat Proctoring & 500+ Assessment Engine -->
+                <div id="hrms-panel-assessment" class="hrms-panel" style="display: none;">
+                  <div class="hrms-proctor-grid">
+                    <div class="hrms-metric-box">
+                      <span class="hrms-metric-label">Concurrent Candidates</span>
+                      <div class="hrms-metric-val-row">
+                        <span class="hrms-metric-val" id="hrms-user-count">524</span>
+                        <span class="cockpit-pulse-badge"><span class="cockpit-pulse-dot"></span> Active</span>
+                      </div>
+                    </div>
+                    <div class="hrms-metric-box">
+                      <span class="hrms-metric-label">Anti-Cheat Proctor Guard</span>
+                      <div class="hrms-metric-val-row">
+                        <span class="hrms-metric-val" style="color: var(--color-green);">SECURE</span>
+                        <span style="font-size: 10px; color: var(--color-text-muted);">0 violations</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hrms-status-bar">
+                    <span class="term-cyan">REST Endpoints: <strong>15/15 Synced</strong> (24ms)</span>
+                    <button type="button" id="hrms-ping-btn" class="demo-btn" style="padding: 2px 10px; font-size: 11px;">
+                      ⚡ Audit Session
+                    </button>
+                  </div>
+                  <p id="hrms-proctor-msg" style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px; font-family: var(--font-mono);">Focus tracking &amp; tab isolation active across all 500+ concurrent instances.</p>
+                </div>
+              </div>
+
+              <div class="tag-list" style="margin-bottom: var(--space-6); margin-top: var(--space-4);">
                 <span class="badge badge--accent">Flutter</span>
                 <span class="badge badge--accent">Dart</span>
                 <span class="badge badge--accent">REST APIs</span>
@@ -839,6 +1075,50 @@
         </div>
       </div>
     </footer>
+
+    <!-- ── Developer Command Palette (Cmd+K) ──────────────── -->
+    <div id="cmd-palette-modal" class="cmd-palette-modal" role="dialog" aria-modal="true" aria-label="Command Palette">
+      <div class="cmd-palette-backdrop" data-close-palette></div>
+      <div class="cmd-palette-box">
+        <div class="cmd-palette-input-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="cmd-palette-input" class="cmd-palette-input" placeholder="Type a command or jump to section..." autocomplete="off" spellcheck="false" />
+          <kbd class="dev-kbd">ESC</kbd>
+        </div>
+        <div id="cmd-palette-results" class="cmd-palette-results" role="listbox"></div>
+        <div class="cmd-palette-footer">
+          <span>Navigate <kbd class="dev-kbd">↑</kbd> <kbd class="dev-kbd">↓</kbd></span>
+          <span>Select <kbd class="dev-kbd">↵</kbd></span>
+          <span>Close <kbd class="dev-kbd">ESC</kbd></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Developer Interactive CLI Terminal Modal ────────── -->
+    <div id="terminal-modal" class="terminal-modal" role="dialog" aria-modal="true" aria-label="Developer Terminal">
+      <div class="terminal-backdrop" data-close-terminal></div>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="demo-traffic-lights" aria-hidden="true">
+            <span class="traffic-light traffic-light--red"></span>
+            <span class="traffic-light traffic-light--yellow"></span>
+            <span class="traffic-light traffic-light--green"></span>
+          </div>
+          <span class="terminal-header-title">dev@portfolio:~ (bash)</span>
+          <button type="button" id="terminal-close-btn" class="terminal-close-btn" aria-label="Close terminal">&times;</button>
+        </div>
+        <div id="terminal-output" class="terminal-body" tabindex="0" aria-live="polite"></div>
+        <div class="terminal-input-row">
+          <span class="term-prompt">dev@portfolio:~$</span>
+          <input type="text" id="terminal-input" class="terminal-cli-input" placeholder="type 'help' or 'skills'..." autocomplete="off" spellcheck="false" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Toast Notifications Container ──────────────────── -->
+    <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <!-- ── JS Modules ─────────────────────────────────────── -->
     <script type="module" src="js/main.js"></script>
