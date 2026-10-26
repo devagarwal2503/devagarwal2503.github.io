@@ -7,7 +7,7 @@
     <!-- ── Primary Meta ──────────────────────────────────── -->
     <title>Dev Agarwal — Software Engineer</title>
     <meta name="title"       content="Dev Agarwal — Software Engineer" />
-    <meta name="description" content="Software Engineer with strong Flutter and full-stack expertise. 2 years building production HRMS, e-commerce, and real-time systems. Based in Pune, open to opportunities across India and remote." />
+    <meta name="description" content="Software Engineer with strong DSA, system design, and backend fundamentals. 2 years shipping production HRMS, hospitality, and e-commerce systems. Built a real-time load balancer simulator with a custom Indexed Min-Heap and an AI-powered GitHub code review app. Based in Pune, open to opportunities across India and remote." />
     <meta name="author"      content="Dev Agarwal" />
     <meta name="robots"      content="index, follow" />
     <link rel="canonical"    href="https://devagarwal2503.github.io/" />
@@ -16,8 +16,8 @@
     <meta property="og:type"        content="website" />
     <meta property="og:url"         content="https://devagarwal2503.github.io/" />
     <meta property="og:title"       content="Dev Agarwal — Software Engineer" />
-    <meta property="og:description" content="Software Engineer with strong Flutter & full-stack expertise. 2 years. 3 shipped products. 500+ concurrent users." />
-    <meta property="og:image"       content="https://devagarwal2503.github.io/assets/og-image.jpg" />
+    <meta property="og:description" content="SDE with a DSA + system design foundation. 2 years in production. Custom Indexed Min-Heap, WebSocket telemetry, AI code review GitHub App." />
+    <meta property="og:image"       content="https://devagarwal2503.github.io/assets/og-image.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -25,8 +25,8 @@
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:url"         content="https://devagarwal2503.github.io/" />
     <meta name="twitter:title"       content="Dev Agarwal — Software Engineer" />
-    <meta name="twitter:description" content="Software Engineer with strong Flutter & full-stack expertise. 2 years. 3 shipped products. 500+ concurrent users." />
-    <meta name="twitter:image"       content="https://devagarwal2503.github.io/assets/og-image.jpg" />
+    <meta name="twitter:description" content="SDE with a DSA + system design foundation. 2 years in production. Custom Indexed Min-Heap, WebSocket telemetry, AI code review GitHub App." />
+    <meta name="twitter:image"       content="https://devagarwal2503.github.io/assets/og-image.png" />
 
     <!-- ── Favicon (inline SVG — zero HTTP request) ──────── -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236366f1'/><text x='16' y='22' font-family='monospace' font-size='18' font-weight='bold' fill='white' text-anchor='middle'>D</text></svg>" />
@@ -62,6 +62,9 @@
   </head>
 
   <body>
+    <!-- ── Scroll Progress Bar ────────────────────────────── -->
+    <div id="scroll-progress-bar" class="scroll-progress-bar" aria-hidden="true"></div>
+
     <!-- ── Skip Link (Accessibility) ────────────────────── -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -90,6 +93,25 @@
               <li><a href="#stack"      class="nav__link">Stack</a></li>
               <li><a href="#contact"    class="nav__link">Contact</a></li>
             </ul>
+
+            <!-- Dev Quick Controls -->
+            <div class="dev-controls">
+              <button class="dev-pill-btn" data-action="open-cmd-palette" aria-label="Open command palette (Cmd+K)" title="Quick Actions (Cmd+K)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>Cmd+K</span>
+              </button>
+
+              <button class="dev-pill-btn" data-action="open-terminal" aria-label="Open interactive terminal" title="Open Interactive CLI">
+                <span style="color:var(--color-green);font-weight:700;">&gt;_</span>
+                <span>Terminal</span>
+              </button>
+
+              <button class="dev-pill-btn" data-action="toggle-sound" aria-label="Toggle UI sound effects" title="Toggle audio feedback">
+                <span class="audio-icon">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </span>
+              </button>
+            </div>
 
             <!-- Desktop CTA -->
             <a href="Dev_Agarwal_Resume.pdf"
@@ -135,64 +157,180 @@
            HERO
            ────────────────────────────────────────────────── -->
       <section class="hero section" aria-labelledby="hero-name">
+        <!-- Interactive Particle & Constellation Canvas -->
+        <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
         <div class="container">
+          <div class="hero-studio-grid">
 
-          <!-- Availability badge -->
-          <div class="hero__availability hero-animate hero-animate--d1"
-               aria-label="Currently available for opportunities">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            Available for opportunities
-          </div>
+            <!-- Hero Left: Typographic Statement & Core Highlights -->
+            <div class="hero__intro">
+              <!-- Radar Availability Pill -->
+              <div class="hero__status-pill hero-animate hero-animate--d1"
+                   aria-label="Currently available for SDE opportunities">
+                <span class="status-radar" aria-hidden="true">
+                  <span class="status-ping"></span>
+                  <span class="status-core"></span>
+                </span>
+                <span>Available for SDE Roles · Pune &amp; Remote</span>
+              </div>
 
-          <!-- Name -->
-          <h1 class="hero__name hero-animate hero-animate--d2" id="hero-name">
-            Dev Agarwal
-          </h1>
+              <!-- Main Title with Gradient Shimmer -->
+              <h1 class="hero__title hero-animate hero-animate--d2" id="hero-name">
+                Engineering <span class="text-gradient">resilient systems</span>, backends &amp; AI tooling.
+              </h1>
 
-          <!-- Tagline -->
-          <p class="hero__tagline hero-animate hero-animate--d3">
-            Software Engineer with strong Flutter &amp; full-stack expertise.<br />
-            I build software that ships — not demos.
-          </p>
+              <!-- Subtitle -->
+              <p class="hero__tagline hero-animate hero-animate--d3">
+                Hi, I'm <strong class="text-glow">Dev Agarwal</strong> &mdash; a Software Engineer with nearly 2 years in production shipping enterprise HRMS, real-time telemetry systems, and low-latency schedulers. Grounded in C++, DSA, and System Design.
+              </p>
 
-          <!-- Metrics -->
-          <div class="hero__metrics hero-animate hero-animate--d4">
-            <span class="hero__metric"><strong>2 yrs</strong> professional experience</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>3</strong> production systems shipped</span>
-            <span class="hero__metric-sep" aria-hidden="true">·</span>
-            <span class="hero__metric"><strong>500+</strong> concurrent users supported</span>
-          </div>
+              <!-- Technical Pillar Badges -->
+              <div class="hero__chips hero-animate hero-animate--d4">
+                <span class="hero-chip"><span class="chip-dot" style="background:#6366f1;"></span>C++ / DSA (O(log N))</span>
+                <span class="hero-chip"><span class="chip-dot" style="background:#38bdf8;"></span>Distributed &amp; System Design</span>
+                <span class="hero-chip"><span class="chip-dot" style="background:#34d399;"></span>Node.js &amp; WebSockets</span>
+                <span class="hero-chip"><span class="chip-dot" style="background:#a78bfa;"></span>LLM AST Tooling</span>
+              </div>
 
-          <!-- Actions -->
-          <div class="hero__actions hero-animate hero-animate--d5">
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.3">
-              <a href="#work" class="btn btn--primary btn--lg" id="hero-cta-work">
-                View my work
-                <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+              <!-- Actions -->
+              <div class="hero__actions hero-animate hero-animate--d5">
+                <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.3">
+                  <a href="#work" class="btn btn--primary btn--lg btn-glow" id="hero-cta-work">
+                    Explore Flagship Work
+                    <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+                <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.25">
+                  <a href="Dev_Agarwal_Resume.pdf"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="btn btn--ghost btn--lg"
+                     id="hero-cta-resume">
+                    Download Resume
+                    <svg class="btn__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M1.5 12.5H12.5M7 1.5V9.5M7 9.5L4 6.5M7 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="btn-magnetic" data-magnetic data-magnetic-strength="0.25">
-              <a href="Dev_Agarwal_Resume.pdf"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="btn btn--ghost btn--lg"
-                 id="hero-cta-resume">
-                Download resume
-                <svg class="btn__icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1.5 12.5H12.5M7 1.5V9.5M7 9.5L4 6.5M7 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
+
+            <!-- Hero Right: Interactive Developer IDE Card -->
+            <div class="hero__cockpit hero-animate hero-animate--d4">
+              <div id="hero-cockpit" class="cockpit-card">
+                <div class="cockpit-header">
+                  <div class="demo-traffic-lights" aria-hidden="true">
+                    <span class="traffic-light traffic-light--red"></span>
+                    <span class="traffic-light traffic-light--yellow"></span>
+                    <span class="traffic-light traffic-light--green"></span>
+                  </div>
+                  <div class="cockpit-tabs" role="tablist" aria-label="Developer IDE Tabs">
+                    <button type="button" class="cockpit-tab-btn is-active" data-target="panel-engineer" role="tab" aria-selected="true">engineer.ts</button>
+                    <button type="button" class="cockpit-tab-btn" data-target="panel-stack" role="tab" aria-selected="false">stack.json</button>
+                    <button type="button" class="cockpit-tab-btn" data-target="panel-arch" role="tab" aria-selected="false">architecture.txt</button>
+                  </div>
+                  <button type="button" id="cockpit-copy-btn" class="cockpit-mini-btn" title="Copy code snippet">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy
+                  </button>
+                </div>
+
+                <!-- Panel 1: Real Profile Code -->
+                <div id="panel-engineer" class="cockpit-panel is-active" role="tabpanel">
+                  <pre class="cockpit-code-box" style="max-height: 280px;"><code class="code-editor"><span class="token-keyword">export const</span> <span class="token-var">devAgarwal</span> = {
+  <span class="token-prop">name</span>: <span class="token-string">"Dev Agarwal"</span>,
+  <span class="token-prop">role</span>: <span class="token-string">"Software Engineer"</span>,
+  <span class="token-prop">location</span>: <span class="token-string">"Pune, India"</span>,
+  <span class="token-prop">openTo</span>: [<span class="token-string">"India"</span>, <span class="token-string">"Remote"</span>],
+  <span class="token-prop">coreCompetencies</span>: [
+    <span class="token-string">"Data Structures &amp; Algorithms (C++)"</span>,
+    <span class="token-string">"System Design &amp; Backend Engineering"</span>,
+    <span class="token-string">"Real-Time Telemetry &amp; AI Tooling"</span>
+  ],
+  <span class="token-prop">productionTrackRecord</span>: {
+    <span class="token-prop">experience</span>: <span class="token-string">"Nearly 2 years in production"</span>,
+    <span class="token-prop">concurrencyHandled</span>: <span class="token-string">"500+ active users"</span>,
+    <span class="token-prop">keyOptimization</span>: <span class="token-string">"O(log N) Indexed Min-Heap"</span>
+  }
+};</code></pre>
+                </div>
+
+                <!-- Panel 2: Verified Technical Stack -->
+                <div id="panel-stack" class="cockpit-panel" role="tabpanel">
+                  <pre class="cockpit-code-box" style="max-height: 280px;"><code class="code-editor">{
+  <span class="token-prop">"languages"</span>: [<span class="token-string">"C++"</span>, <span class="token-string">"TypeScript"</span>, <span class="token-string">"JavaScript"</span>, <span class="token-string">"Dart"</span>, <span class="token-string">"Python"</span>, <span class="token-string">"SQL"</span>],
+  <span class="token-prop">"backend"</span>: [<span class="token-string">"Node.js"</span>, <span class="token-string">"Express"</span>, <span class="token-string">"WebSockets"</span>, <span class="token-string">"MongoDB"</span>, <span class="token-string">"Supabase"</span>],
+  <span class="token-prop">"frontend_mobile"</span>: [<span class="token-string">"React"</span>, <span class="token-string">"Flutter"</span>, <span class="token-string">"Vite"</span>, <span class="token-string">"BLoC"</span>, <span class="token-string">"Recharts"</span>],
+  <span class="token-prop">"ai_tooling"</span>: [<span class="token-string">"OpenAI API"</span>, <span class="token-string">"AST Context Fetching"</span>, <span class="token-string">"GitHub Apps"</span>],
+  <span class="token-prop">"devops"</span>: [<span class="token-string">"Docker"</span>, <span class="token-string">"GitHub Actions"</span>, <span class="token-string">"CI/CD"</span>, <span class="token-string">"Linux"</span>]
+}</code></pre>
+                </div>
+
+                <!-- Panel 3: Architecture -->
+                <div id="panel-arch" class="cockpit-panel" role="tabpanel">
+                  <pre class="cockpit-code-box" style="max-height: 280px;"><code class="code-editor">[PulseGrid Telemetry Pipeline]
+ Client Workload (500+ Concurrent Req)
+         │
+         ▼
+ Ingress Proxy (HMAC Webhooks)
+         │
+         ▼
+ Indexed Min-Heap Regression Scheduler
+  ├── Node A (C++)  [O(1) Peek]
+  ├── Node B (C++)  [O(log N) Update]
+  └── Node C (Go)   [~80% Lower Variance]
+         │
+         ▼
+ 10Hz WebSocket Telemetry Stream</code></pre>
+                </div>
+
+                <div class="cockpit-footer">
+                  <span class="cockpit-footer-txt">dev@portfolio:~ bash</span>
+                  <button type="button" class="cockpit-mini-btn" data-action="open-terminal">Open CLI Terminal &gt;_</button>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
         <!-- Scroll indicator -->
         <div class="hero__scroll" aria-hidden="true">
-          <span>scroll</span>
+          <span>scroll to explore</span>
           <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           LIVE ENGINEERING STATS STRIP
+           ────────────────────────────────────────────────── -->
+      <section class="stats-strip-section" aria-label="Key engineering metrics">
+        <div class="container">
+          <div class="stats-ribbon stagger">
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num"><span data-count="2">0</span>+</span>
+              <span class="stat-ribbon-label">Years Production Experience</span>
+              <span class="stat-ribbon-sub">Shipped across 2 enterprise systems</span>
+            </div>
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num"><span data-count="500">0</span>+</span>
+              <span class="stat-ribbon-label">Concurrent Users Handled</span>
+              <span class="stat-ribbon-sub">Assessment platform with zero drops</span>
+            </div>
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num">O(log N)</span>
+              <span class="stat-ribbon-label">Indexed Min-Heap Scheduler</span>
+              <span class="stat-ribbon-sub">Custom algorithm cutting variance ~80%</span>
+            </div>
+            <div class="stat-ribbon-card reveal">
+              <span class="stat-ribbon-num"><span data-count="40">0</span>%</span>
+              <span class="stat-ribbon-label">HR Manual Effort Reduction</span>
+              <span class="stat-ribbon-sub">Full multi-level leave approval engine</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -202,41 +340,47 @@
       <div class="marquee-section" aria-hidden="true">
         <div class="marquee-inner marquee-track">
           <!-- Repeated twice for seamless loop -->
+          <div class="marquee-item">C++<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Data Structures &amp; Algorithms<span class="marquee-dot"></span></div>
+          <div class="marquee-item">System Design<span class="marquee-dot"></span></div>
+          <div class="marquee-item">TypeScript<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Node.js<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Express<span class="marquee-dot"></span></div>
+          <div class="marquee-item">React<span class="marquee-dot"></span></div>
+          <div class="marquee-item">WebSockets<span class="marquee-dot"></span></div>
+          <div class="marquee-item">MongoDB<span class="marquee-dot"></span></div>
+          <div class="marquee-item">REST APIs<span class="marquee-dot"></span></div>
           <div class="marquee-item">Flutter<span class="marquee-dot"></span></div>
           <div class="marquee-item">Dart<span class="marquee-dot"></span></div>
           <div class="marquee-item">Firebase<span class="marquee-dot"></span></div>
           <div class="marquee-item">Supabase<span class="marquee-dot"></span></div>
-          <div class="marquee-item">BLoC<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Provider<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Riverpod<span class="marquee-dot"></span></div>
-          <div class="marquee-item">REST APIs<span class="marquee-dot"></span></div>
-          <div class="marquee-item">React<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Node.js<span class="marquee-dot"></span></div>
-          <div class="marquee-item">MongoDB<span class="marquee-dot"></span></div>
-          <div class="marquee-item">n8n<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Docker<span class="marquee-dot"></span></div>
+          <div class="marquee-item">GitHub Actions<span class="marquee-dot"></span></div>
+          <div class="marquee-item">CI/CD<span class="marquee-dot"></span></div>
           <div class="marquee-item">LLM APIs<span class="marquee-dot"></span></div>
           <div class="marquee-item">RAG<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Docker<span class="marquee-dot"></span></div>
-          <div class="marquee-item">GCP<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Git<span class="marquee-dot"></span></div>
+          <div class="marquee-item">n8n<span class="marquee-dot"></span></div>
           <!-- Duplicate for infinite scroll -->
+          <div class="marquee-item">C++<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Data Structures &amp; Algorithms<span class="marquee-dot"></span></div>
+          <div class="marquee-item">System Design<span class="marquee-dot"></span></div>
+          <div class="marquee-item">TypeScript<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Node.js<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Express<span class="marquee-dot"></span></div>
+          <div class="marquee-item">React<span class="marquee-dot"></span></div>
+          <div class="marquee-item">WebSockets<span class="marquee-dot"></span></div>
+          <div class="marquee-item">MongoDB<span class="marquee-dot"></span></div>
+          <div class="marquee-item">REST APIs<span class="marquee-dot"></span></div>
           <div class="marquee-item">Flutter<span class="marquee-dot"></span></div>
           <div class="marquee-item">Dart<span class="marquee-dot"></span></div>
           <div class="marquee-item">Firebase<span class="marquee-dot"></span></div>
           <div class="marquee-item">Supabase<span class="marquee-dot"></span></div>
-          <div class="marquee-item">BLoC<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Provider<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Riverpod<span class="marquee-dot"></span></div>
-          <div class="marquee-item">REST APIs<span class="marquee-dot"></span></div>
-          <div class="marquee-item">React<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Node.js<span class="marquee-dot"></span></div>
-          <div class="marquee-item">MongoDB<span class="marquee-dot"></span></div>
-          <div class="marquee-item">n8n<span class="marquee-dot"></span></div>
+          <div class="marquee-item">Docker<span class="marquee-dot"></span></div>
+          <div class="marquee-item">GitHub Actions<span class="marquee-dot"></span></div>
+          <div class="marquee-item">CI/CD<span class="marquee-dot"></span></div>
           <div class="marquee-item">LLM APIs<span class="marquee-dot"></span></div>
           <div class="marquee-item">RAG<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Docker<span class="marquee-dot"></span></div>
-          <div class="marquee-item">GCP<span class="marquee-dot"></span></div>
-          <div class="marquee-item">Git<span class="marquee-dot"></span></div>
+          <div class="marquee-item">n8n<span class="marquee-dot"></span></div>
         </div>
       </div>
 
@@ -249,55 +393,36 @@
             <p class="section-label">Experience</p>
             <h2 class="section-title" id="experience-title">Where I've shipped</h2>
             <p class="section-subtitle">
-              Nearly 2 years across two companies — writing production code, not tutorials.
+              Nearly 2 years across two companies — production systems, measurable outcomes.
             </p>
           </div>
 
           <div class="timeline stagger">
 
-            <!-- Vishwaguru — Trainee -->
+            <!-- Vishwaguru Infotech -->
             <article class="timeline-item reveal">
               <div class="timeline-node" aria-hidden="true"></div>
-              <p class="timeline-period">Apr 2026 – Jun 2026</p>
+              <p class="timeline-period">Feb 2026 – Jun 2026</p>
               <h3 class="timeline-company">Vishwaguru Infotech</h3>
-              <p class="timeline-role">Flutter Developer Trainee</p>
+              <p class="timeline-role">Software Engineer Trainee</p>
               <span class="badge badge--green timeline-badge">
                 ↑ Promoted from intern in 30 days
               </span>
               <ul class="timeline-achievements" role="list">
                 <li class="timeline-achievement">
-                  Promoted from intern to trainee within one month for <strong>consistently shipping production-ready feature modules</strong>.
+                  Designed and built a <strong>full e-commerce application spanning 8+ screens</strong> — onboarding, authentication, catalogue, cart, and payments.
                 </li>
                 <li class="timeline-achievement">
-                  Engineered responsive UI components with Flutter widgets and Material Design, matching product design specs precisely.
+                  Integrated <strong>Firebase Auth, Razorpay, and Supabase</strong> for secure login and payment processing, and migrated the backend to Supabase behind a clean, structured JSON API layer.
                 </li>
                 <li class="timeline-achievement">
-                  Integrated REST APIs to enable dynamic data rendering across core app features.
+                  Built <strong>10+ reusable responsive UI components</strong> and integrated <strong>8+ REST APIs</strong>, using Flutter Slivers for advanced scrolling, adaptive light/dark theming, and l10n localization.
                 </li>
                 <li class="timeline-achievement">
-                  Partnered with senior engineers on sprint planning, code reviews, and bug triage.
-                </li>
-              </ul>
-            </article>
-
-            <!-- Vishwaguru — Intern -->
-            <article class="timeline-item reveal">
-              <div class="timeline-node" aria-hidden="true"></div>
-              <p class="timeline-period">Feb 2026 – Mar 2026</p>
-              <h3 class="timeline-company">Vishwaguru Infotech</h3>
-              <p class="timeline-role">Flutter Developer Intern</p>
-              <ul class="timeline-achievements" role="list">
-                <li class="timeline-achievement">
-                  Built a <strong>full-featured e-commerce app</strong> — onboarding, auth, catalogue, cart, payment — in Flutter and Dart.
+                  Promoted from intern to trainee within one month for consistently shipping production-ready modules.
                 </li>
                 <li class="timeline-achievement">
-                  Implemented Firebase Authentication and integrated Razorpay SDK for secure login and payment simulation.
-                </li>
-                <li class="timeline-achievement">
-                  Designed advanced scrollable UI with <strong>Flutter Slivers</strong>; added adaptive light/dark theming and l10n localization.
-                </li>
-                <li class="timeline-achievement">
-                  Architected a clean API layer using structured JSON parsing; migrated backend to Supabase.
+                  Tracked and delivered work through OpenProject alongside senior engineers, with sprint planning, code reviews, and bug triage.
                 </li>
               </ul>
             </article>
@@ -307,21 +432,22 @@
               <div class="timeline-node" aria-hidden="true"></div>
               <p class="timeline-period">Mar 2023 – Apr 2024</p>
               <h3 class="timeline-company">Centralogic Pvt Ltd</h3>
-              <p class="timeline-role">Flutter Developer</p>
+              <p class="timeline-role">Software Engineer</p>
               <ul class="timeline-achievements" role="list">
                 <li class="timeline-achievement">
-                  Delivered a <strong>Leave Management module</strong> for a production HRMS platform with multi-level approvals —
-                  reducing manual HR processing effort by <strong>40%</strong>.
+                  Delivered a <strong>Leave Management module</strong> for a production HRMS platform with multi-level approval workflows, reducing manual HR effort by <strong>40%</strong>.
                 </li>
                 <li class="timeline-achievement">
-                  Engineered a secure candidate assessment platform with anti-cheat mechanisms,
-                  supporting <strong>500+ concurrent users</strong>.
+                  Developed a secure candidate assessment platform with <strong>anti-cheat mechanisms</strong>, supporting <strong>500+ concurrent users</strong>.
                 </li>
                 <li class="timeline-achievement">
-                  Integrated <strong>15+ REST APIs</strong> into a hospitality booking application for real-time reservation sync.
+                  Integrated <strong>15+ REST APIs</strong> into a hospitality booking application for real-time reservation synchronization.
                 </li>
                 <li class="timeline-achievement">
-                  Maintained code quality through Git version control, peer code reviews, and Agile sprint delivery.
+                  Hardened API response handling to minimize data parsing errors and improve application stability.
+                </li>
+                <li class="timeline-achievement">
+                  Maintained code quality through Git workflows, peer code reviews, and Agile sprint delivery using Jira.
                 </li>
               </ul>
             </article>
@@ -339,103 +465,258 @@
             <p class="section-label">Projects</p>
             <h2 class="section-title" id="work-title">Things I've built</h2>
             <p class="section-subtitle">
-              End-to-end systems with real users, real constraints, and real decisions.
+              Systems with real constraints: custom data structures, real-time telemetry, and production workloads.
             </p>
           </div>
 
-          <!-- Featured: HRMS -->
-          <article class="card card--featured reveal" aria-labelledby="proj-hrms-title">
+          <!-- Featured: AI-Powered Code Review Assistant -->
+          <article class="card card--featured reveal" aria-labelledby="proj-codereview-title">
             <div class="card__content">
-              <p class="card__eyebrow">Featured · Centralogic Pvt Ltd</p>
-              <h3 class="card__title" id="proj-hrms-title">
-                HRMS Leave Management &amp;<br />Assessment Platform
+              <div style="display: flex; gap: var(--space-2); align-items: center; margin-bottom: var(--space-4);">
+                <span class="badge badge--accent" style="box-shadow: 0 0 14px rgba(99, 102, 241, 0.4);">★ STUDIO FLAGSHIP</span>
+                <span class="badge badge--violet">Node.js · OpenAI API · GitHub App</span>
+              </div>
+              <h3 class="card__title" id="proj-codereview-title">
+                AI-Powered Code Review Assistant
               </h3>
               <p class="card__description">
-                A production HRMS module handling multi-level leave approvals and a concurrent candidate
-                assessment system — not a side project. This ran in a live enterprise environment,
-                processed real HR decisions, and served over 500 simultaneous users.
-                Anti-cheat mechanisms, optimized API response handling, and Agile delivery cycles.
+                A GitHub App that analyzes pull requests and posts structured, line-anchored review comments using OpenAI's gpt-4o-mini.
+                Detects context-sensitive issues, such as <strong>race conditions and cross-file anti-patterns</strong>, that standard linting misses.
+                Engineered <strong>diff chunking and &plusmn;25-line context fetching</strong> to keep large PRs within LLM token limits.
+                Backed by a MongoDB and React/Vite dashboard visualizing issues by severity and category, secured with HMAC-verified webhooks.
               </p>
               <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--accent">Flutter</span>
-                <span class="badge badge--accent">Dart</span>
-                <span class="badge badge--accent">REST APIs</span>
-                <span class="badge badge--accent">BLoC</span>
-                <span class="badge badge--default">HRMS</span>
-                <span class="badge badge--default">Agile</span>
+                <span class="badge badge--accent">Node.js</span>
+                <span class="badge badge--accent">Express</span>
+                <span class="badge badge--accent">MongoDB</span>
+                <span class="badge badge--accent">React</span>
+                <span class="badge badge--default">OpenAI API</span>
+                <span class="badge badge--default">GitHub Actions</span>
+                <span class="badge badge--default">Vite</span>
               </div>
               <div class="card__links">
-                <span class="badge badge--violet">Enterprise — NDA</span>
+                <a href="https://github.com/devagarwal2503"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="card__link"
+                   aria-label="View AI-Powered Code Review Assistant on GitHub">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
+                  </svg>
+                  GitHub
+                </a>
+                <span class="badge badge--green">Open Source</span>
               </div>
             </div>
-            <div class="card__visual" aria-hidden="true">
-              <!-- Visual: abstract representation of the HRMS dashboard -->
-              <svg width="100%" height="100%" viewBox="0 0 480 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="480" height="300" fill="#0d0d1a"/>
-                <!-- Nav bar -->
-                <rect x="0" y="0" width="480" height="40" fill="#13131f" rx="0"/>
-                <circle cx="20" cy="20" r="6" fill="#6366f1" opacity="0.6"/>
-                <rect x="34" y="17" width="60" height="6" rx="3" fill="#475569"/>
-                <rect x="370" y="15" width="50" height="10" rx="5" fill="#6366f1" opacity="0.8"/>
-                <!-- Stats row -->
-                <rect x="20" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="32" y="68" width="40" height="8" rx="4" fill="#6366f1" opacity="0.4"/>
-                <text x="32" y="106" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="monospace">40%</text>
-                <rect x="32" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <rect x="136" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="148" y="68" width="40" height="8" rx="4" fill="#a78bfa" opacity="0.4"/>
-                <text x="148" y="106" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="monospace">500+</text>
-                <rect x="148" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <rect x="252" y="56" width="100" height="64" rx="8" fill="#13131f" stroke="#1e1e2e" stroke-width="1"/>
-                <rect x="264" y="68" width="40" height="8" rx="4" fill="#34d399" opacity="0.4"/>
-                <text x="264" y="106" fill="#f1f5f9" font-size="22" font-weight="bold" font-family="monospace">15+</text>
-                <rect x="264" y="112" width="72" height="5" rx="2.5" fill="#475569"/>
-                <!-- Table rows -->
-                <rect x="20" y="138" width="440" height="28" rx="4" fill="#13131f"/>
-                <rect x="32" y="148" width="80" height="8" rx="4" fill="#475569"/>
-                <rect x="200" y="148" width="50" height="8" rx="4" fill="#475569"/>
-                <rect x="370" y="145" width="60" height="14" rx="7" fill="#34d399" opacity="0.2"/>
-                <rect x="382" y="149" width="36" height="6" rx="3" fill="#34d399" opacity="0.7"/>
-                <rect x="20" y="174" width="440" height="28" rx="4" fill="#13131f" opacity="0.5"/>
-                <rect x="32" y="184" width="70" height="8" rx="4" fill="#2d3748"/>
-                <rect x="200" y="184" width="50" height="8" rx="4" fill="#2d3748"/>
-                <rect x="370" y="181" width="60" height="14" rx="7" fill="#6366f1" opacity="0.15"/>
-                <rect x="382" y="185" width="36" height="6" rx="3" fill="#6366f1" opacity="0.5"/>
-                <rect x="20" y="210" width="440" height="28" rx="4" fill="#13131f" opacity="0.3"/>
-                <rect x="32" y="220" width="90" height="8" rx="4" fill="#1e2535"/>
-                <rect x="200" y="220" width="50" height="8" rx="4" fill="#1e2535"/>
-                <rect x="370" y="217" width="60" height="14" rx="7" fill="#fbbf24" opacity="0.1"/>
-                <rect x="382" y="221" width="36" height="6" rx="3" fill="#fbbf24" opacity="0.4"/>
-                <!-- Accent line at bottom -->
-                <rect x="0" y="296" width="480" height="4" fill="url(#grad)"/>
-                <defs>
-                  <linearGradient id="grad" x1="0" y1="0" x2="480" y2="0">
-                    <stop offset="0%" stop-color="#6366f1"/>
-                    <stop offset="100%" stop-color="#a78bfa"/>
-                  </linearGradient>
-                </defs>
-              </svg>
+            <div class="card__visual" style="aspect-ratio: auto; min-height: 380px;">
+              <!-- Interactive AI Review Simulator Playground -->
+              <div id="ai-review-demo" class="interactive-demo-container">
+                <div class="demo-header">
+                  <div class="demo-header__left">
+                    <div class="demo-traffic-lights" aria-hidden="true">
+                      <span class="traffic-light traffic-light--red"></span>
+                      <span class="traffic-light traffic-light--yellow"></span>
+                      <span class="traffic-light traffic-light--green"></span>
+                    </div>
+                    <span class="demo-title">PR #42 Diff Inspector</span>
+                  </div>
+                  <select id="ai-file-select" class="demo-select" aria-label="Select file to inspect">
+                    <option value="auth_middleware.ts">auth_middleware.ts</option>
+                    <option value="load_balancer.cpp">load_balancer.cpp</option>
+                  </select>
+                </div>
+                <pre id="ai-code-viewer" class="demo-code-box" tabindex="0" aria-label="Code diff viewer"></pre>
+                <div class="demo-actions">
+                  <button id="ai-run-review-btn" class="demo-btn" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Simulate AI Review
+                  </button>
+                  <span id="ai-status-badge" class="badge badge--default">Ready</span>
+                </div>
+                <div id="ai-review-result" class="demo-result-area" aria-live="polite"></div>
+              </div>
             </div>
           </article>
 
           <!-- Project grid -->
           <div class="projects-grid stagger">
 
-            <!-- E-Commerce Mobile -->
+            <!-- PulseGrid — Load Balancer Visualizer -->
+            <article class="card reveal" aria-labelledby="proj-pulsegrid-title">
+              <p class="card__eyebrow">TypeScript · WebSocket · React · Vite</p>
+              <h3 class="card__title" id="proj-pulsegrid-title">PulseGrid — Load Balancer Visualizer</h3>
+              <p class="card__description">
+                A real-time load balancer simulator comparing five scheduling algorithms across a virtual server pool,
+                with live telemetry in React/Recharts. Built a custom <strong>Indexed Min-Heap (O(1) peek, O(log N) updates)</strong>
+                and a regression scheduler cutting variance by ~80% vs WRR, with 10Hz WebSocket broadcasts.
+              </p>
+
+              <!-- PulseGrid Live Simulator Widget -->
+              <div id="pulsegrid-demo" class="pg-demo-card">
+                <div class="pg-algo-toggle" role="group" aria-label="Select load balancing algorithm">
+                  <button type="button" class="pg-tab-btn active" data-algo="predictive">Predictive (Min-Heap)</button>
+                  <button type="button" class="pg-tab-btn" data-algo="wrr">Weighted Round Robin</button>
+                </div>
+                <div class="pg-server-grid" aria-label="Virtual Server Cluster Load Status">
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-01 (C++)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-02 (C++)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-03 (Go)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                  <div class="pg-server-item">
+                    <span class="pg-server-name">srv-04 (Rust)</span>
+                    <div class="pg-server-track"><div class="pg-server-bar"></div></div>
+                    <span class="pg-server-pct">0%</span>
+                  </div>
+                </div>
+                <div class="pg-status-bar">
+                  <span id="pg-variance-meter" class="term-cyan">Standard Deviation: σ = 3.15</span>
+                  <button type="button" id="pg-burst-btn" class="demo-btn" style="padding: 2px 10px; font-size: 11px;">
+                    ⚡ Dispatch 500 Requests
+                  </button>
+                </div>
+                <p id="pg-status-msg" style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px; font-family: var(--font-mono);"></p>
+              </div>
+
+              <div class="tag-list" style="margin-bottom: var(--space-6); margin-top: var(--space-4);">
+                <span class="badge badge--accent">TypeScript</span>
+                <span class="badge badge--accent">Node.js</span>
+                <span class="badge badge--accent">WebSocket</span>
+                <span class="badge badge--accent">React</span>
+                <span class="badge badge--default">Recharts</span>
+              </div>
+              <div class="card__links">
+                <a href="https://github.com/devagarwal2503"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="card__link"
+                   aria-label="View PulseGrid on GitHub">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
+                  </svg>
+                  GitHub
+                </a>
+                <span class="badge badge--default">2026</span>
+              </div>
+            </article>
+
+            <!-- HRMS Platform -->
+            <article class="card reveal" aria-labelledby="proj-hrms-title">
+              <p class="card__eyebrow">Centralogic Pvt Ltd · Flutter · REST APIs</p>
+              <h3 class="card__title" id="proj-hrms-title">HRMS Leave Management &amp; Assessment Platform</h3>
+              <p class="card__description">
+                Production modules for an enterprise HRMS and a concurrent candidate assessment system, delivered in Agile sprints.
+                Multi-level leave approval workflow cutting manual HR effort by <strong>40%</strong>,
+                anti-cheat assessment platform supporting <strong>500+ concurrent users</strong>, and 15+ REST APIs integrated.
+              </p>
+
+              <!-- HRMS Enterprise Pipeline & Telemetry Illustration Widget -->
+              <div id="hrms-demo" class="hrms-demo-card">
+                <div class="hrms-tab-toggle" role="group" aria-label="Select HRMS Platform Module">
+                  <button type="button" class="hrms-tab-btn active" data-hrms-tab="leave">Leave Workflow (-40% Time)</button>
+                  <button type="button" class="hrms-tab-btn" data-hrms-tab="assessment">Anti-Cheat Engine (500+ Users)</button>
+                </div>
+
+                <!-- Module 1: Multi-Tier Leave Approval Engine -->
+                <div id="hrms-panel-leave" class="hrms-panel">
+                  <div class="hrms-pipeline-steps">
+                    <div class="hrms-step is-complete" id="hrms-step-1">
+                      <span class="hrms-step-icon">✓</span>
+                      <div class="hrms-step-info">
+                        <span class="hrms-step-title">Leave Request</span>
+                        <span class="hrms-step-desc">Policy validated</span>
+                      </div>
+                    </div>
+                    <div class="hrms-step-arrow">→</div>
+                    <div class="hrms-step is-active" id="hrms-step-2">
+                      <span class="hrms-step-icon">⚡</span>
+                      <div class="hrms-step-info">
+                        <span class="hrms-step-title">L1 Approval</span>
+                        <span class="hrms-step-desc">Lead notified</span>
+                      </div>
+                    </div>
+                    <div class="hrms-step-arrow">→</div>
+                    <div class="hrms-step is-complete" id="hrms-step-3">
+                      <span class="hrms-step-icon">✓</span>
+                      <div class="hrms-step-info">
+                        <span class="hrms-step-title">HR &amp; Payroll</span>
+                        <span class="hrms-step-desc">Auto-synced</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hrms-status-bar">
+                    <span class="term-cyan">Velocity: <strong>40% Reduced HR Effort</strong></span>
+                    <button type="button" id="hrms-simulate-btn" class="demo-btn" style="padding: 2px 10px; font-size: 11px;">
+                      ✦ Simulate Flow
+                    </button>
+                  </div>
+                  <p id="hrms-status-msg" style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px; font-family: var(--font-mono);">Multi-level hierarchy auto-routes requests based on employee department.</p>
+                </div>
+
+                <!-- Module 2: Anti-Cheat Proctoring & 500+ Assessment Engine -->
+                <div id="hrms-panel-assessment" class="hrms-panel" style="display: none;">
+                  <div class="hrms-proctor-grid">
+                    <div class="hrms-metric-box">
+                      <span class="hrms-metric-label">Concurrent Candidates</span>
+                      <div class="hrms-metric-val-row">
+                        <span class="hrms-metric-val" id="hrms-user-count">524</span>
+                        <span class="cockpit-pulse-badge"><span class="cockpit-pulse-dot"></span> Active</span>
+                      </div>
+                    </div>
+                    <div class="hrms-metric-box">
+                      <span class="hrms-metric-label">Anti-Cheat Proctor Guard</span>
+                      <div class="hrms-metric-val-row">
+                        <span class="hrms-metric-val" style="color: var(--color-green);">SECURE</span>
+                        <span style="font-size: 10px; color: var(--color-text-muted);">0 violations</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hrms-status-bar">
+                    <span class="term-cyan">REST Endpoints: <strong>15/15 Synced</strong> (24ms)</span>
+                    <button type="button" id="hrms-ping-btn" class="demo-btn" style="padding: 2px 10px; font-size: 11px;">
+                      ⚡ Audit Session
+                    </button>
+                  </div>
+                  <p id="hrms-proctor-msg" style="font-size: 10px; color: var(--color-text-muted); margin-top: 6px; font-family: var(--font-mono);">Focus tracking &amp; tab isolation active across all 500+ concurrent instances.</p>
+                </div>
+              </div>
+
+              <div class="tag-list" style="margin-bottom: var(--space-6); margin-top: var(--space-4);">
+                <span class="badge badge--accent">Flutter</span>
+                <span class="badge badge--accent">Dart</span>
+                <span class="badge badge--accent">REST APIs</span>
+                <span class="badge badge--default">Agile</span>
+              </div>
+              <div class="card__links">
+                <span class="badge badge--violet">Enterprise — NDA</span>
+              </div>
+            </article>
+
+            <!-- E-Commerce Mobile App -->
             <article class="card reveal" aria-labelledby="proj-ecom-title">
               <p class="card__eyebrow">Flutter · Firebase · Supabase</p>
               <h3 class="card__title" id="proj-ecom-title">E-Commerce Mobile App</h3>
               <p class="card__description">
-                End-to-end commerce app covering onboarding, Firebase Auth, product listings, cart,
-                and Razorpay payment flows. Advanced Slivers UI, adaptive theming,
-                l10n localization, and a clean Supabase-backed API layer.
+                End-to-end commerce app built at Vishwaguru Infotech across 8+ screens covering onboarding, authentication, catalogue, cart, and Razorpay payments.
+                Engineered 10+ reusable responsive components and 8+ REST API integrations with Flutter Slivers and Supabase.
               </p>
               <div class="tag-list" style="margin-bottom: var(--space-6);">
                 <span class="badge badge--accent">Flutter</span>
                 <span class="badge badge--accent">Firebase</span>
                 <span class="badge badge--accent">Supabase</span>
                 <span class="badge badge--default">Razorpay</span>
-                <span class="badge badge--default">Slivers</span>
               </div>
               <div class="card__links">
                 <a href="https://github.com/devagarwal2503"
@@ -451,80 +732,18 @@
               </div>
             </article>
 
-            <!-- MERN E-Commerce -->
-            <article class="card reveal" aria-labelledby="proj-mern-title">
-              <p class="card__eyebrow">React · Node.js · MongoDB · Stripe</p>
-              <h3 class="card__title" id="proj-mern-title">Full-Stack E-Commerce Platform</h3>
-              <p class="card__description">
-                MERN stack storefront with React frontend, Node/Express REST APIs,
-                MongoDB data layer, and dual payment gateway integration (Stripe + Razorpay).
-                Admin dashboard for product, inventory, and order management. Deployed on Vercel.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--violet">React</span>
-                <span class="badge badge--violet">Node.js</span>
-                <span class="badge badge--violet">MongoDB</span>
-                <span class="badge badge--default">Stripe</span>
-                <span class="badge badge--default">Vercel</span>
-              </div>
-              <div class="card__links">
-                <a href="https://github.com/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="card__link"
-                   aria-label="View MERN E-Commerce Platform on GitHub">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
-                  </svg>
-                  GitHub
-                </a>
-              </div>
-            </article>
-
-            <!-- Divine Chats -->
-            <article class="card reveal" aria-labelledby="proj-chats-title">
-              <p class="card__eyebrow">Flutter · Dart · REST APIs</p>
-              <h3 class="card__title" id="proj-chats-title">Divine Chats — Real-Time Chat</h3>
-              <p class="card__description">
-                Cross-platform chat app with secure authentication, async REST API messaging,
-                and local caching for smooth performance on low-connectivity networks.
-                Originally built as a PHP/MySQL web app, then fully rebuilt in Flutter.
-              </p>
-              <div class="tag-list" style="margin-bottom: var(--space-6);">
-                <span class="badge badge--accent">Flutter</span>
-                <span class="badge badge--accent">Dart</span>
-                <span class="badge badge--default">REST APIs</span>
-                <span class="badge badge--default">PHP / MySQL</span>
-              </div>
-              <div class="card__links">
-                <a href="https://github.com/devagarwal2503"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="card__link"
-                   aria-label="View Divine Chats on GitHub">
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M7 0.5C3.41 0.5 0.5 3.41 0.5 7c0 2.87 1.86 5.3 4.44 6.16.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.4.04-.4.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.67.52-.14 1.08-.21 1.63-.21.55 0 1.11.07 1.63.21 1.24-.85 1.79-.67 1.79-.67.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.59.44 1.19v1.77c0 .17.12.37.44.31C11.64 12.3 13.5 9.87 13.5 7 13.5 3.41 10.59.5 7 .5z" fill="currentColor"/>
-                  </svg>
-                  GitHub
-                </a>
-                <span class="badge badge--default">2023</span>
-              </div>
-            </article>
-
-            <!-- AI Automation -->
+            <!-- AI Automation Agents -->
             <article class="card reveal" aria-labelledby="proj-ai-title">
               <p class="card__eyebrow">n8n · LLM APIs · RAG</p>
               <h3 class="card__title" id="proj-ai-title">AI Automation Agents</h3>
               <p class="card__description">
-                Email summarization pipeline using LLM APIs to process inboxes and generate
-                concise summaries. Automated outreach reply workflows using n8n.
-                Currently building RAG-based agents for knowledge retrieval and conversational automation.
+                Workflow automations that use LLMs to cut down repetitive email work, plus RAG-based agents in progress.
+                Email summarization pipeline processing 50+ incoming emails into concise summaries, and automated reply workflows reducing manual response time by an estimated 70%.
               </p>
               <div class="tag-list" style="margin-bottom: var(--space-6);">
                 <span class="badge badge--violet">n8n</span>
                 <span class="badge badge--violet">LLM APIs</span>
                 <span class="badge badge--violet">RAG</span>
-                <span class="badge badge--default">Workflow Automation</span>
               </div>
               <div class="card__links">
                 <span class="badge badge--amber">In Progress</span>
@@ -569,16 +788,16 @@
                 </div>
                 <div class="about-stat">
                   <div class="about-stat__number">
-                    <span data-count="3">0</span>
-                  </div>
-                  <p class="about-stat__label">Products shipped</p>
-                </div>
-                <div class="about-stat">
-                  <div class="about-stat__number">
                     <span data-count="500">0</span>
                     <span class="about-stat__suffix">+</span>
                   </div>
                   <p class="about-stat__label">Concurrent users</p>
+                </div>
+                <div class="about-stat">
+                  <div class="about-stat__number">
+                    <span data-count="5">0</span>
+                  </div>
+                  <p class="about-stat__label">Scheduling algorithms built</p>
                 </div>
                 <div class="about-stat">
                   <div class="about-stat__number">
@@ -591,30 +810,18 @@
 
             <!-- Right: narrative -->
             <div class="about-narrative reveal reveal--right">
-              <p>I build software that ships.</p>
+              <p>I build software that ships — and I care about why it works.</p>
               <p>
-                Not prototypes. Not tutorials.
-                <em>Production systems</em> used by real teams, handling real load.
-                At Centralogic, I delivered a Leave Management module that cut
-                HR processing effort by <strong>40%</strong> — in a team that
-                moved fast and expected the same from me.
+                At Centralogic, I delivered a Leave Management module that cut HR processing effort by <strong>40%</strong> and a candidate assessment platform serving <strong>500+ concurrent users</strong>. That's where I learned what production constraints actually feel like.
               </p>
               <p>
-                I was promoted from intern to trainee within one month at Vishwaguru
-                because I shipped working features, not excuses. That's the standard
-                I hold myself to.
+                Since then I've been deepening my fundamentals: DSA and system design in C++, and projects like <strong>PulseGrid</strong>, where I built a custom Indexed Min-Heap and a regression-based scheduler that cut load variance by about 80% against Weighted Round Robin.
               </p>
               <p>
-                Outside engineering, I coached badminton at the competitive level
-                for six years, running tournaments for <strong>100+ participants</strong>.
-                You learn more about communication, execution under pressure, and
-                managing different personalities on a court than in most
-                corporate training programs.
+                Outside engineering, I coached badminton at the competitive level for six years, running tournaments for <strong>100+ participants</strong>. It taught me communication, execution under pressure, and working with very different personalities.
               </p>
               <p>
-                I'm currently expanding into AI automation and full-stack web —
-                because the engineers who stay relevant don't specialize into corners.
-                They build a stack they can reason across.
+                I'm now targeting SDE roles at product-based companies, where I can apply both production experience and strong CS fundamentals.
               </p>
             </div>
           </div>
@@ -636,92 +843,88 @@
 
           <div class="bento-grid stagger">
 
-            <!-- Mobile -->
+            <!-- Core CS -->
             <div class="bento-tile reveal">
-              <p class="bento-tile__label">Mobile</p>
-              <p class="bento-tile__title">Flutter Ecosystem</p>
+              <p class="bento-tile__label">Core CS</p>
+              <p class="bento-tile__title">Fundamentals</p>
               <div class="bento-tile__skills">
-                <span class="bento-skill">Flutter</span>
-                <span class="bento-skill">Dart</span>
-                <span class="bento-skill">Android</span>
-                <span class="bento-skill">iOS</span>
-                <span class="bento-skill">Material Design</span>
-                <span class="bento-skill">Flutter Slivers</span>
-                <span class="bento-skill">Custom Widgets</span>
-                <span class="bento-skill">Adaptive Theming</span>
-                <span class="bento-skill">l10n</span>
+                <span class="bento-skill">Data Structures &amp; Algorithms</span>
+                <span class="bento-skill">OOP</span>
+                <span class="bento-skill">System Design Basics</span>
+                <span class="bento-skill">C++</span>
               </div>
             </div>
 
-            <!-- State Management -->
+            <!-- Languages -->
             <div class="bento-tile reveal">
-              <p class="bento-tile__label">State Management</p>
-              <p class="bento-tile__title">Architecture Patterns</p>
+              <p class="bento-tile__label">Languages</p>
+              <p class="bento-tile__title">Programming Languages</p>
               <div class="bento-tile__skills">
+                <span class="bento-skill">C++</span>
+                <span class="bento-skill">TypeScript</span>
+                <span class="bento-skill">JavaScript</span>
+                <span class="bento-skill">Dart</span>
+                <span class="bento-skill">Python</span>
+                <span class="bento-skill">SQL</span>
+              </div>
+            </div>
+
+            <!-- Backend & Real-Time -->
+            <div class="bento-tile reveal">
+              <p class="bento-tile__label">Backend &amp; Real-Time</p>
+              <p class="bento-tile__title">Services &amp; Data</p>
+              <div class="bento-tile__skills">
+                <span class="bento-skill">Node.js</span>
+                <span class="bento-skill">Express</span>
+                <span class="bento-skill">REST APIs</span>
+                <span class="bento-skill">WebSockets</span>
+                <span class="bento-skill">MongoDB</span>
+                <span class="bento-skill">Firebase</span>
+                <span class="bento-skill">Supabase</span>
+              </div>
+            </div>
+
+            <!-- Frontend & Mobile — wide tile -->
+            <div class="bento-tile bento-tile--wide reveal">
+              <p class="bento-tile__label">Frontend &amp; Mobile</p>
+              <p class="bento-tile__title">Client Side</p>
+              <div class="bento-tile__skills">
+                <span class="bento-skill">React</span>
+                <span class="bento-skill">Angular</span>
+                <span class="bento-skill">Flutter</span>
+                <span class="bento-skill">Vite</span>
+                <span class="bento-skill">Recharts</span>
                 <span class="bento-skill">BLoC</span>
                 <span class="bento-skill">Provider</span>
                 <span class="bento-skill">Riverpod</span>
-                <span class="bento-skill">GetX</span>
-                <span class="bento-skill">Clean Architecture</span>
-              </div>
-            </div>
-
-            <!-- Backend -->
-            <div class="bento-tile reveal">
-              <p class="bento-tile__label">Backend & APIs</p>
-              <p class="bento-tile__title">Data & Services</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">Firebase Auth</span>
-                <span class="bento-skill">Firestore</span>
-                <span class="bento-skill">Supabase</span>
-                <span class="bento-skill">REST APIs</span>
-                <span class="bento-skill">Razorpay</span>
-                <span class="bento-skill">Push Notifications</span>
-                <span class="bento-skill">JSON Parsing</span>
-              </div>
-            </div>
-
-            <!-- Full Stack — wide tile -->
-            <div class="bento-tile bento-tile--wide reveal">
-              <p class="bento-tile__label">Full Stack Web</p>
-              <p class="bento-tile__title">MERN Stack</p>
-              <div class="bento-tile__skills">
-                <span class="bento-skill">React</span>
-                <span class="bento-skill">Node.js</span>
-                <span class="bento-skill">Express.js</span>
-                <span class="bento-skill">MongoDB</span>
-                <span class="bento-skill">JavaScript</span>
-                <span class="bento-skill">Stripe</span>
-                <span class="bento-skill">Vercel</span>
               </div>
             </div>
 
             <!-- AI & Automation -->
             <div class="bento-tile reveal">
-              <p class="bento-tile__label">AI & Automation</p>
+              <p class="bento-tile__label">AI &amp; Automation</p>
               <p class="bento-tile__title">Intelligent Workflows</p>
               <div class="bento-tile__skills">
-                <span class="bento-skill">n8n</span>
-                <span class="bento-skill">LLM APIs</span>
+                <span class="bento-skill">LLM API Integration</span>
                 <span class="bento-skill">RAG Agents</span>
-                <span class="bento-skill">Email Automation</span>
-                <span class="bento-skill">Python</span>
+                <span class="bento-skill">n8n</span>
+                <span class="bento-skill">GitHub Apps &amp; Webhooks</span>
               </div>
             </div>
 
             <!-- DevOps & Tools -->
             <div class="bento-tile reveal">
-              <p class="bento-tile__label">DevOps & Tools</p>
-              <p class="bento-tile__title">Delivery Infrastructure</p>
+              <p class="bento-tile__label">DevOps &amp; Tools</p>
+              <p class="bento-tile__title">Delivery</p>
               <div class="bento-tile__skills">
                 <span class="bento-skill">Git</span>
+                <span class="bento-skill">GitHub Actions</span>
                 <span class="bento-skill">Docker</span>
-                <span class="bento-skill">GCP</span>
                 <span class="bento-skill">CI/CD</span>
-                <span class="bento-skill">SonarQube</span>
+                <span class="bento-skill">Linux</span>
                 <span class="bento-skill">Postman</span>
-                <span class="bento-skill">VS Code</span>
-                <span class="bento-skill">Android Studio</span>
+                <span class="bento-skill">Jira</span>
+                <span class="bento-skill">OpenProject</span>
               </div>
             </div>
 
@@ -746,9 +949,8 @@
                 Ready to<br />build something.
               </h2>
               <p class="contact-subtext">
-                Open to Flutter and full-stack roles. Pune-based, remote-ready.
-                If you're looking for an engineer who ships production code and
-                communicates clearly — let's talk.
+                Open to SDE roles at product-based companies. If you want an engineer with
+                production experience and solid CS fundamentals — let's talk.
               </p>
               <div data-magnetic data-magnetic-strength="0.2" class="btn-magnetic" style="display:inline-block">
                 <a href="mailto:agarwaldev626@gmail.com"
@@ -873,6 +1075,50 @@
         </div>
       </div>
     </footer>
+
+    <!-- ── Developer Command Palette (Cmd+K) ──────────────── -->
+    <div id="cmd-palette-modal" class="cmd-palette-modal" role="dialog" aria-modal="true" aria-label="Command Palette">
+      <div class="cmd-palette-backdrop" data-close-palette></div>
+      <div class="cmd-palette-box">
+        <div class="cmd-palette-input-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="cmd-palette-input" class="cmd-palette-input" placeholder="Type a command or jump to section..." autocomplete="off" spellcheck="false" />
+          <kbd class="dev-kbd">ESC</kbd>
+        </div>
+        <div id="cmd-palette-results" class="cmd-palette-results" role="listbox"></div>
+        <div class="cmd-palette-footer">
+          <span>Navigate <kbd class="dev-kbd">↑</kbd> <kbd class="dev-kbd">↓</kbd></span>
+          <span>Select <kbd class="dev-kbd">↵</kbd></span>
+          <span>Close <kbd class="dev-kbd">ESC</kbd></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Developer Interactive CLI Terminal Modal ────────── -->
+    <div id="terminal-modal" class="terminal-modal" role="dialog" aria-modal="true" aria-label="Developer Terminal">
+      <div class="terminal-backdrop" data-close-terminal></div>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="demo-traffic-lights" aria-hidden="true">
+            <span class="traffic-light traffic-light--red"></span>
+            <span class="traffic-light traffic-light--yellow"></span>
+            <span class="traffic-light traffic-light--green"></span>
+          </div>
+          <span class="terminal-header-title">dev@portfolio:~ (bash)</span>
+          <button type="button" id="terminal-close-btn" class="terminal-close-btn" aria-label="Close terminal">&times;</button>
+        </div>
+        <div id="terminal-output" class="terminal-body" tabindex="0" aria-live="polite"></div>
+        <div class="terminal-input-row">
+          <span class="term-prompt">dev@portfolio:~$</span>
+          <input type="text" id="terminal-input" class="terminal-cli-input" placeholder="type 'help' or 'skills'..." autocomplete="off" spellcheck="false" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Toast Notifications Container ──────────────────── -->
+    <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <!-- ── JS Modules ─────────────────────────────────────── -->
     <script type="module" src="js/main.js"></script>
